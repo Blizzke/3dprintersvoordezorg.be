@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'helpers',
         'passwords' => 'users',
     ],
 
@@ -72,7 +72,7 @@ return [
 
     'providers' => [
         'helpers' => [
-            'driver' => 'eloquent',
+            'driver' => 'helpers',
             'model' => App\Helper::class,
         ],
 

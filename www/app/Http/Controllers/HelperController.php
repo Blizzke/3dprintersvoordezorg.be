@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 
 use App\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Validation\ValidationException;
 
 class HelperController extends Controller
 {
+    public const HOME='/helper/dashboard';
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['register', 'login']);
+    }
+
     public function registrationForm()
     {
+        if (Auth::check()) {
+            return redirect()->intended(self::HOME);
+        }
+
         return view('helpers.register', ['countries' => Helper::COUNTRIES]);
     }
 
@@ -29,9 +41,48 @@ class HelperController extends Controller
         $input = $request->all();
 
         $user = Helper::create($input);
-        Auth::login($user, true);
 
-        //return ->with('success', 'User created successfully.');
+        $this->guard()->login($user, true);
+
+        return $this->sendLoginResponse($request);
+    }
+
+    public function loginForm()
+    {
+        return view('helpers.login');
+    }
+
+    public function dashboard()
+    {
+        return view('helpers.dashboard');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+
+        $credentials = $request->only('name', 'phone');
+        if ($this->guard()->attempt($credentials, $request->filled('remember')))  {
+            return $this->sendLoginResponse($request);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect('/');
     }
 
     protected function guard()
@@ -39,19 +90,19 @@ class HelperController extends Controller
         return Auth::guard('helpers');
     }
 
-    public function authenticationForm()
+    protected function sendLoginResponse(Request $request)
     {
-        return view('helpers.login');
+        $request->session()->regenerate();
+
+        return $request->wantsJson()
+                    ? new Response('', 204)
+                    : redirect()->intended(self::HOME);
     }
 
-    public function authenticate(Request $request)
+    protected function sendFailedLoginResponse(Request $request)
     {
-        $credentials = $request->only('name', 'phone');
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return redirect()->intended('dashboard');
-        }
+        throw ValidationException::withMessages([
+            'name' => [trans('auth.failed')],
+        ]);
     }
-
-
 }

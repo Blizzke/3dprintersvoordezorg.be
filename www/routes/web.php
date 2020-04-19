@@ -17,7 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/helper/register', 'HelperController@registrationForm');
+Route::get('/helper/register', 'HelperController@registrationForm')->name('register');
 Route::post('/helper/register', 'HelperController@register');
-Route::get('/helper/login', 'HelperController@authenticationForm')->name('login');
-Route::post('/helper/login', 'HelperController@authenticate');
+Route::get('/helper/login', 'HelperController@loginForm')->name('login');
+Route::post('/helper/login', 'HelperController@login');
+Route::get('/helper/dashboard', 'HelperController@dashboard');

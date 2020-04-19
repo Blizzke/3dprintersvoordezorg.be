@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  www:
+    build:
+      context: .
+    volumes:
+      - ../../www:/var/www/html
+    ports:
+      - 8000:8000
+    environment:
+      # Handy for command line debugging
+      - PHP_IDE_CONFIG=serverName=docker-container
+      - XDEBUG_CONFIG="remote_enable=1"
+  mysql:
+    image: mariadb/server
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+    ports:
+      - 3307:3306
+

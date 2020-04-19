@@ -5,25 +5,23 @@
 
         <title>Wij Helpen :: @yield('title')</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
 
-        <!-- Styles -->
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+       <!-- Fonts -->
+       <link rel="dns-prefetch" href="//fonts.gstatic.com">
+       <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+       <!-- Styles -->
+       <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                @endauth
-            </div>
-        @endif
+        <div class="top-right links">
+            <a href="{{ route('logout') }}">Logout</a>
+        </div>
 
         @section('sidebar')
-            This is the master sidebar.
         @show
 
         <div class="container">

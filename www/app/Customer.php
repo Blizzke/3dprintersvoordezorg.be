@@ -25,16 +25,20 @@ class Customer extends Model
         parent::booted();
     }
 
-    public function getCountry($value)
+    public function getCountryAttribute($value)
     {
         return self::COUNTRIES[$value];
     }
 
-    public function setCountry($value)
+    public function setCountryAttribute($value)
     {
         $this->attributes['country_id'] = self::COUNTRIES[$value];
     }
 
+    public function getLocationAttribute()
+    {
+        return implode(' ', [$this->zip, $this->city]);
+    }
 
 }
 

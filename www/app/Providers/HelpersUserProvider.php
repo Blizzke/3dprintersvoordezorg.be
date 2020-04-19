@@ -20,7 +20,7 @@ class HelpersUserProvider extends EloquentUserProvider
 
     public function validateCredentials(UserContract $user, array $credentials)
     {
-        return strtolower($user->name) == strtolower($credentials['name']) &&
+        return strtolower($user->name) === strtolower($credentials['name']) &&
             in_array($credentials['phone'], [$user->phone, $user->mobile]);
     }
 }

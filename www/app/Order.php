@@ -3,11 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
-    public const STATUSES = [0 => 'nieuw', 1 => 'geaccepteerd', 2 => 'in productie', 3 => 'afgewerkt', 4 => 'geleverd', 5 => 'geannuleerd'];
+    public const STATUSES = [0 => 'nieuw', 1 => 'toegewezen', 2 => 'in productie', 3 => 'te leveren', 4 => 'afgewerkt,', 5 => 'geannuleerd'];
+
+    public static function id_to_status($status)
+    {
+        return self::STATUSES[$status];
+    }
+
+    public static function status_to_id($status)
+    {
+        return array_flip(self::STATUSES)[$status];
+    }
 
     protected static function booted()
     {
@@ -35,12 +45,22 @@ class Order extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function getIsMineAttribute()
+    {
+        return $this->helper_id == Auth::user()->id;
+    }
+
+    public function getIsFinishedAttribute()
+    {
+        return $this->status_id >= 4;
+    }
+
     public function statuses()
     {
         return $this->hasMany(OrderStatus::class, 'order_id');
     }
 
-    public function setStatus($value)
+    public function setStatusAttribute($value)
     {
         if (!is_int($value)) {
             $value = self::STATUSES[$value];
@@ -48,33 +68,23 @@ class Order extends Model
         $this->attributes['status_id'] = $value;
     }
 
-    public function getStatus(): string
+    public function getStatusAttribute(): string
     {
         return self::STATUSES[$this->status_id];
     }
 
-    public static function id_to_status($status)
+    public function scopeNew($query)
     {
-        return self::STATUSES[$status];
+        return $query->where('status_id', 0);
     }
 
-    public static function status_to_id($status)
+    public function scopeInProgress($query)
     {
-        return array_flip(self::STATUSES)[$status];
+        return $query->whereIn('status_id', [1, 2, 3]);
     }
 
-    public function setFillable(array $fillable): void
+    public function scopeYours($query)
     {
-        $this->fillable = $fillable;
+        return $query->where('helper_id', Auth::user()->id);
     }
-
-    # Generic order placed
-    # id
-    # status: new / accepted / finished / canceled
-    # timestamp
-    # customer-id
-    # accepting user (facilitator)
-    # item-id (fk)
-    # amount
-    # comments
 }

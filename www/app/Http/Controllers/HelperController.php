@@ -11,11 +11,11 @@ use Illuminate\Validation\ValidationException;
 
 class HelperController extends Controller
 {
-    public const HOME='/helper/dashboard';
+    public const HOME = '/helper/dashboard';
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['register', 'login']);
+        $this->middleware('auth')->except(['registrationForm', 'register', 'loginForm', 'login']);
     }
 
     public function registrationForm()
@@ -47,14 +47,23 @@ class HelperController extends Controller
         return $this->sendLoginResponse($request);
     }
 
+    protected function guard()
+    {
+        return Auth::guard('helpers');
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        return $request->wantsJson()
+            ? new Response('', 204)
+            : redirect()->intended(self::HOME);
+    }
+
     public function loginForm()
     {
         return view('helpers.login');
-    }
-
-    public function dashboard()
-    {
-        return view('helpers.dashboard');
     }
 
     public function login(Request $request)
@@ -65,11 +74,23 @@ class HelperController extends Controller
         ]);
 
         $credentials = $request->only('name', 'phone');
-        if ($this->guard()->attempt($credentials, $request->filled('remember')))  {
+        if ($this->guard()->attempt($credentials, $request->filled('remember'))) {
             return $this->sendLoginResponse($request);
         }
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'name' => [trans('auth.failed')],
+        ]);
+    }
+
+    public function dashboard()
+    {
+        return view('helpers.dashboard');
     }
 
     public function logout(Request $request)
@@ -83,26 +104,5 @@ class HelperController extends Controller
         return $request->wantsJson()
             ? new Response('', 204)
             : redirect('/');
-    }
-
-    protected function guard()
-    {
-        return Auth::guard('helpers');
-    }
-
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-        return $request->wantsJson()
-                    ? new Response('', 204)
-                    : redirect()->intended(self::HOME);
-    }
-
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        throw ValidationException::withMessages([
-            'name' => [trans('auth.failed')],
-        ]);
     }
 }

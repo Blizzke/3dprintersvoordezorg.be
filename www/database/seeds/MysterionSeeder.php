@@ -86,8 +86,7 @@ class MysterionSeeder extends Seeder
     {
         $customer_map = [
             'id' => 'id',
-            'type' => 'type',
-            'sector' => 'sector',
+            'type' => 'sector',
             'name' => 'name',
             'street' => 'street',
             'number' => 'number',
@@ -162,6 +161,7 @@ class MysterionSeeder extends Seeder
                 // Accepted order
                 $timestamp = $row['accepted'];
                 $this->_status($order, 1, $row['accepted']);
+                $order->created_at = $this->_status($order, 1, $row['accepted'])->created_at;
 
                 if (!empty($row['started'])) {
                     $this->_status($order, 2, $timestamp = $row['started']);
@@ -189,9 +189,8 @@ class MysterionSeeder extends Seeder
                     $status->comment = $row['comment_asker'];
                     $status->saveOrFail(['timestamps' => false]);
                 }
-
-
-                $order->save();
+                $order->updated_at = DateTime::createFromFormat('YmdHi', $timestamp);
+                $order->save(['timestamps' => false]);
             } catch (Exception $e) {
                 echo "Failed on row: ", json_encode($row), "\n";
                 throw($e);
@@ -220,6 +219,7 @@ class MysterionSeeder extends Seeder
         $order_status->type = 'status';
         $order_status->status_id = $status;
         $order_status->saveOrFail(['timestamps' => false]);
+        return $order_status;
     }
 
     private function _production($order, $timestamp)
@@ -228,5 +228,6 @@ class MysterionSeeder extends Seeder
         $order_status->type = 'quantity';
         $order_status->quantity = $order->quantity;
         $order_status->saveOrFail(['timestamps' => false]);
+        return $order_status;
     }
 }

@@ -40,12 +40,12 @@ class Helper extends Model implements AuthenticatableContract
         'email_verified_at' => 'datetime',
     ];
 
-    public function getCountry($value)
+    public function getCountryAttribute($value)
     {
         return self::COUNTRIES[$value];
     }
 
-    public function setCountry($value)
+    public function setCountryAttribute($value)
     {
         $this->attributes['country_id'] = self::COUNTRIES[$value];
     }

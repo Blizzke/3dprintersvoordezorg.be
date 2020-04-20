@@ -10,7 +10,7 @@ use Illuminate\Auth\Authenticatable;
 
 class Helper extends Model implements AuthenticatableContract
 {
-    public const COUNTRIES = [1 => 'Belgi&euml;', 2 => 'Nederland'];
+    public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
     use Notifiable, Authenticatable;
 
     /**

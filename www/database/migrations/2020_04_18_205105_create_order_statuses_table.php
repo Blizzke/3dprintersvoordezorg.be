@@ -20,9 +20,10 @@ class CreateOrderStatusesTable extends Migration
             $table->string('type');
             $table->integer('customer_id')->unsigned()->nullable();
             $table->integer('helper_id')->unsigned()->nullable();
-            $table->integer('quantity')->default(0);
+            $table->integer('quantity')->nullable();
             $table->longText('comment')->nullable();
             $table->tinyInteger('status_id')->nullable();
+            $table->tinyInteger('is_internal')->default(0);
             $table->timestamps();
 
             $table->index(['order_id', 'type']);

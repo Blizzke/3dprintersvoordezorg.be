@@ -22,4 +22,7 @@ Route::post('/helper/register', 'HelperController@register');
 Route::get('/helper/login', 'HelperController@loginForm')->name('login');
 Route::post('/helper/login', 'HelperController@login');
 Route::get('/helper/logout', 'HelperController@logout')->name('logout');
-Route::get('/helper/dashboard', 'HelperController@dashboard');
+Route::get('/helper/dashboard', 'HelperController@dashboard')->name('dashboard');
+
+Route::get('/helper/order/{order}/release', 'HelperController@dashboard')->name('order-release');
+Route::get('/helper/order/{order}/accept', 'HelperController@dashboard')->name('order-accept');

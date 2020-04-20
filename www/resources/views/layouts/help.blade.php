@@ -7,14 +7,15 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-       <!-- Fonts -->
-       <link rel="dns-prefetch" href="//fonts.gstatic.com">
-       <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <link href="//fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-       <!-- Styles -->
-       <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <!-- Styles -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="top-right links">
@@ -28,5 +29,15 @@
             @yield('content')
         </div>
     </body>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+          $('[data-confirm="1"]').click(function(e) {
+              // "tooltip" empties out the title attribute, so get value from data-original-title
+              if (!confirm($(this).data('original-title') + '. Ben je zeker?'))
+                  e.preventDefault();
+          })
+        })
+    </script>
 </html>
 

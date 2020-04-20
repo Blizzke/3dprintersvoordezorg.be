@@ -13,10 +13,11 @@ class ItemSeeder extends Seeder
     public function run()
     {
         $items = [
-            ['name' => 'mondmasker_hulp', 'price' => 0.1],
-            ['name' => 'safegrabber_rd', 'price' => 0.5],
-            ['name' => 'mask_typeIIr', 'price' => 1],
-            ['name' => 'faceshield', 'price' => 5],
+            ['type' => 'mondmasker_hulp', 'name' => 'Ear saver', 'price' => 0.1],
+            ['type' => 'safegrabber_rd', 'name' => 'Corona hook', 'price' => 0.5],
+            ['type' => 'mask_typeIIr_zorg', 'name' => 'IIR mondmasker (zorgverlening)', 'price' => 0.85, 'vat_ex' => 1, 'is_max' => 0, 'sector' => '|zorgverlening|'],
+            ['type' => 'mask_typeIIr', 'name' => 'IIR mondmasker', 'price' => 1, 'vat_ex' => 1, 'is_max' => 0],
+            ['type' => 'faceshield', 'name' => 'Gelaatsbeschermer', 'price' => 5],
         ];
 
         Item::unguard();

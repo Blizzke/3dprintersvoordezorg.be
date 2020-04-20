@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    public const COUNTRIES = [1 => 'Belgi&euml;', 2 => 'Nederland'];
+    public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
 
     protected static function booted()
     {
@@ -25,9 +25,9 @@ class Customer extends Model
         parent::booted();
     }
 
-    public function getCountryAttribute($value)
+    public function getCountryAttribute()
     {
-        return self::COUNTRIES[$value];
+        return self::COUNTRIES[$this->country_id];
     }
 
     public function setCountryAttribute($value)

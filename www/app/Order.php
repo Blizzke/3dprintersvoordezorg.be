@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
-    public const STATUSES = [0 => 'nieuw', 1 => 'toegewezen', 2 => 'in productie', 3 => 'te leveren', 4 => 'afgewerkt,', 5 => 'geannuleerd'];
+    public const STATUSES = [0 => 'Nieuw', 1 => 'Toegewezen', 2 => 'In productie', 3 => 'Te leveren', 4 => 'Afgewerkt', 5 => 'Geannuleerd'];
 
     public static function id_to_status($status)
     {
@@ -45,9 +45,32 @@ class Order extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function getCanCancelAttribute()
+    {
+        // Can cancel new orders or ones that are assigned to you and not finished
+        return $this->status_id === 0 or
+            ($this->is_mine && $this->status_id < 3);
+    }
+
+    public function getIsNewAttribute()
+    {
+        return $this->status_id === 0;
+    }
+
+
+    public function getCanReleaseAttribute()
+    {
+        return $this->is_mine && !$this->is_finished;
+    }
+
     public function getIsMineAttribute()
     {
         return $this->helper_id == Auth::user()->id;
+    }
+
+    public function getIsInProductionAttribute()
+    {
+        return $this->status_id === 2;
     }
 
     public function getIsFinishedAttribute()
@@ -57,7 +80,26 @@ class Order extends Model
 
     public function statuses()
     {
-        return $this->hasMany(OrderStatus::class, 'order_id');
+        return $this->hasMany(OrderStatus::class, 'order_id')->orderBy('order_statuses.id');
+    }
+
+    /**
+     * Create a new order status
+     * @param bool $customer If true, associated the customer with the status
+     * @param bool|\App\Helper|null $helper If filled, associate helper with the status. true to use the order $helper
+     * @return OrderStatus
+     */
+    public function newStatus($customer = false, $helper = null): OrderStatus
+    {
+        $order_status = new OrderStatus();
+        $order_status->order()->associate($this);
+        if ($customer) {
+            $order_status->customer()->associate($this->customer);
+        }
+        if ($helper) {
+            $order_status->helper()->associate(is_bool($helper) ? $this->helper : $helper);
+        }
+        return $order_status;
     }
 
     public function setStatusAttribute($value)

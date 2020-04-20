@@ -1,5 +1,5 @@
 <div class="well">
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
         <thead>
         <tr>
             @if(isset($show) && in_array('id', $show))
@@ -10,9 +10,6 @@
             <td>Naam</td>
             <td>Locatie</td>
             <td>Gevraagd</td>
-            @if(isset($show) && in_array('helper', $show))
-                <td>Door</td>
-            @endif
             @if(isset($show) && in_array('status', $show))
                 <td>Status</td>
             @endif

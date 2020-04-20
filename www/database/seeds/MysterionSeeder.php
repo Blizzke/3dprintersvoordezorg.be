@@ -103,7 +103,7 @@ class MysterionSeeder extends Seeder
             'number_requested' => 'quantity',
         ];
 
-        $items = Item::all()->keyBy('name');
+        $items = Item::all()->keyBy('type');
 
         $max_id = 0;
         foreach ($data as $row) {
@@ -112,7 +112,7 @@ class MysterionSeeder extends Seeder
             $max_id = max($max_id, (int)$row['id']);
 
             $this->_map($customer_map, $row, $customer);
-            $customer->country_id = $row['country'] === 'Belgie' ? 1 : 2;
+            $customer->country_id = $row['country'] === 'Nederland' ? 2 : 1;
             if (empty($customer->name)) {
                 // Can't throw away customers at this point so allow empty names on import
                 $customer->name = '[onbekend]';
@@ -160,7 +160,6 @@ class MysterionSeeder extends Seeder
                 $order->helper()->associate($helper);
                 // Accepted order
                 $timestamp = $row['accepted'];
-                $this->_status($order, 1, $row['accepted']);
                 $order->created_at = $this->_status($order, 1, $row['accepted'])->created_at;
 
                 if (!empty($row['started'])) {
@@ -198,16 +197,9 @@ class MysterionSeeder extends Seeder
         }
     }
 
-    private function _make_status($order, $timestamp, $customer = false, $helper = true): OrderStatus
+    private function _make_status(Order $order, $timestamp, $customer = false, $helper = true): OrderStatus
     {
-        $order_status = new OrderStatus();
-        $order_status->order()->associate($order);
-        if ($customer) {
-            $order_status->customer()->associate($order->customer);
-        }
-        if ($helper) {
-            $order_status->helper()->associate($order->helper);
-        }
+        $order_status = $order->newStatus($customer, $helper);
         $order_status->created_at = DateTime::createFromFormat('YmdHi', $timestamp);
         return $order_status;
     }

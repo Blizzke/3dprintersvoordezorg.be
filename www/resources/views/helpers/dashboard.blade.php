@@ -15,4 +15,19 @@
     @include('helpers.orders.in-progress')
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('[data-work="1"]').click(function(e) {
+            e.preventDefault()
+            value = prompt('Hoeveel items zijn er klaar?');
+            if (value) {
+                $.post($(this).attr('href'), { "_token": "{{ csrf_token() }}", "items": value }, function(result) {
+                    if (result && result.hasOwnProperty('redirect_to'))
+                        // Backend returns a json object if we ajax to "work", redirect to the url it returns
+                        top.location.href = result.redirect_to
+                });
+            }
+        });
+    });
+</script>
 @endsection

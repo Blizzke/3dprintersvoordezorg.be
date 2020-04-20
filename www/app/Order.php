@@ -129,4 +129,28 @@ class Order extends Model
     {
         return $query->where('helper_id', Auth::user()->id);
     }
+
+    public function assign(Helper $helper)
+    {
+        $this->helper()->associate($helper);
+        return $this->statusUpdateStatus(1, false, $helper);
+    }
+
+    public function release(Helper $helper = null)
+    {
+        $this->helper_id = null;
+        return $this->statusUpdateStatus(0, false, $helper);
+    }
+
+    public function statusUpdateStatus(int $newStatus, bool $customer = false, Helper $helper = null)
+    {
+        $this->status_id = $newStatus;
+        $this->save();
+
+        $status = $this->newStatus($customer, $helper);
+        $status->status_id = $this->status_id;
+        $status->save();
+        return $status;
+    }
+
 }

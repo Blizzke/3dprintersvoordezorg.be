@@ -47,7 +47,7 @@
         @endif
 
         @if($order->is_in_production)
-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Werk bijdragen">
+            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Werk toevoegen" data-work="1" href="{{route('order-work', ['order' => $order->identifier])}}">
               <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
             </button>
         @endif

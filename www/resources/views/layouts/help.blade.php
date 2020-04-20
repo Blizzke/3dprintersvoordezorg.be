@@ -29,7 +29,7 @@
             @yield('content')
         </div>
     </body>
-    <script>
+    <script type="text/javascript">
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
           $('[data-confirm="1"]').click(function(e) {

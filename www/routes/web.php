@@ -24,5 +24,6 @@ Route::post('/helper/login', 'HelperController@login');
 Route::get('/helper/logout', 'HelperController@logout')->name('logout');
 Route::get('/helper/dashboard', 'HelperController@dashboard')->name('dashboard');
 
-Route::get('/helper/order/{order}/release', 'HelperController@dashboard')->name('order-release');
-Route::get('/helper/order/{order}/accept', 'HelperController@dashboard')->name('order-accept');
+Route::get('/helper/order/{order}/accept', 'OrderController@accept')->name('order-accept');
+Route::get('/helper/order/{order}/release', 'OrderController@release')->name('order-release');
+Route::post('/helper/order/{order}/work', 'OrderController@work')->name('order-work');

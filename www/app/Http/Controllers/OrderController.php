@@ -4,82 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function accept($order)
     {
-        //
+        /** @var Order $order */
+        $order = Order::whereIdentifier($order)->firstOrFail();
+        $order->assign(Auth::user());
+        return redirect()->route('dashboard');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function release($order)
     {
-        //
+        /** @var Order $order */
+        $order = Order::whereIdentifier($order)->firstOrFail();
+        $order->release(Auth::user());
+        return redirect()->route('dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
+    public function work($order, Request $request)
     {
-        //
-    }
+        /** @var Order $order */
+        $order = Order::whereIdentifier($order)->firstOrFail();
+        if ($request->has('items')) {
+            $status = $order->newStatus(false, Auth::user());
+            $status->quantity = $request->get('items');
+            $status->save();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
+        if ($request->ajax())
+            // Don't return a redirect response for ajax, XHR tries to reload via ajax, kinda sux
+            return response()->json(['redirect_to' => route('dashboard')]);
+        return redirect()->route('dashboard');
     }
 }

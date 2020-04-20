@@ -36,9 +36,15 @@ Inhoud aanvraag:
     @endif
 
     @if($status->type === 'status')
-        <li>Status ging naar <b>{{\App\Order::id_to_status($status->status_id)}}</b> op <b>{{$status->created_at}}</b> ({{ $status->helper->name }})</li>
+        <li><i>Status</i> ging naar <b>{{\App\Order::id_to_status($status->status_id)}}</b> op <b>{{$status->created_at}}</b> ({{ $status->by ?? 'onbekend' }})</li>
     @elseif($status->type === 'quantity')
-        <li>Er werden <b>{{ $status->quantity }}</b> items afgewerkt op <b>{{$status->created_at}}</b> ({{ $status->helper->name }})</li>
+        <li>Er werden <b>{{ $status->quantity }}</b> items afgewerkt op <b>{{$status->created_at}}</b> ({{ $status->by ?? 'onbekend' }})</li>
+    @elseif($status->type === 'comment')
+        <li>Op <b>{{ $status->created_at }}</b> zei <b>{{ $status->by ?? 'onbekend' }}</b>:
+            <p>
+                {!! $status->comment !!}
+            </p>
+        </li>
     @endif
 
     @if($loop->last)

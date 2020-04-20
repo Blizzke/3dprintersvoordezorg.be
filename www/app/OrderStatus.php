@@ -27,4 +27,34 @@ class OrderStatus extends Model
     {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
+
+    public function getByAttribute()
+    {
+        if ($this->helper) {
+            return $this->helper->name;
+        }
+        if ($this->customer) {
+            return $this->customer->name;
+        }
+
+        return null;
+    }
+
+    public function setQuantityAttribute($quantity)
+    {
+        $this->attributes['quantity'] = (int) $quantity;
+        $this->type = 'quantity';
+    }
+
+    public function setCommentAttribute($comment)
+    {
+        $this->attributes['comment'] = $comment;
+        $this->type = 'comment';
+    }
+
+    public function setStatusIdAttribute($value)
+    {
+        $this->attributes['status_id'] = (int)$value;
+        $this->type = 'status';
+    }
 }

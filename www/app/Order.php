@@ -157,4 +157,10 @@ class Order extends Model
         return $this->statusUpdateStatus(0, false, $helper);
     }
 
+    public function cancel(Helper $helper = null)
+    {
+        $this->status_id = 5;
+        $this->save();
+        return $this->statusUpdateStatus($this->status_id, false, $helper);
+    }
 }

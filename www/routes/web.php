@@ -26,6 +26,7 @@ Route::get('/helper/dashboard', 'HelperController@dashboard')->name('dashboard')
 
 Route::get('/helper/order/{order}/accept', 'OrderController@accept')->name('order-accept');
 Route::get('/helper/order/{order}/release', 'OrderController@release')->name('order-release');
+Route::get('/helper/order/{order}/cancel', 'OrderController@cancel')->name('order-cancel');
 Route::post('/helper/order/{order}/work', 'OrderController@work')->name('order-work');
 
 Route::get('/order/{order}', 'OrderController@view')->name('order');

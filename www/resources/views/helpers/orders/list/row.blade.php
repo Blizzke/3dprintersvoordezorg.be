@@ -60,10 +60,11 @@
         @endif
 
         @if($order->can_cancel)
-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Annuleren (afsluiten)">
+            <a type="button" class="btn btn-default" data-toggle="tooltip" data-confirm="1" data-placement="bottom" title="Annuleren (afsluiten)" href="{{route('order-cancel', ['order' => $order->identifier])}}">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </button>
+            </a>
         @endif
+
         <a type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Ga naar orderpagina" href="{{route('order', ['order' => $order->identifier])}}">
           <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
         </a>

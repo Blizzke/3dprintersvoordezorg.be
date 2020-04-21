@@ -27,6 +27,12 @@ class OrderController extends Controller
         return redirect()->route('dashboard');
     }
 
+    public function cancel(Order $order)
+    {
+        $order->cancel(Auth::user());
+        return redirect()->route('dashboard');
+    }
+
     public function work(Order $order, Request $request)
     {
         if ($request->has('items')) {

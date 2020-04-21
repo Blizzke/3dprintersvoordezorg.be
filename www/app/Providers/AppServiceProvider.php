@@ -3,12 +3,13 @@
 namespace App\Providers;
 
 use App\Customer;
-use App\Helper;
-use Illuminate\Support\Facades\Auth;
+use App\Order;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Schema\Builder;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,24 +34,23 @@ class AppServiceProvider extends ServiceProvider
         Builder::defaultStringLength(191);
 
         Route::bind('order', function ($value) {
-            return \App\Order::whereIdentifier($value)->with('customer', 'helper')->firstOrFail();
+            try {
+                return Order::whereIdentifier($value)->with('customer', 'helper')->firstOrFail();
+            } catch (ModelNotFoundException $e) {
+                throw new AccessDeniedHttpException('Ongeldige gegevens');
+            }
         });
 
         Route::bind('customer', function ($value) {
-            return Customer::whereIdentifier($value)->firstOrFail();
+            try {
+                return Customer::whereIdentifier($value)->firstOrFail();
+            } catch (ModelNotFoundException $e) {
+                throw new AccessDeniedHttpException('Ongeldige gegevens');
+            }
         });
 
         Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('d/m/Y H:i'); ?>";
         });
-
-        Blade::directive('is_helper', function () {
-            return Auth::user() instanceof Helper;
-        });
-
-        Blade::directive('is_customer', function () {
-            return Auth::user() instanceof Customer;
-        });
-
     }
 }

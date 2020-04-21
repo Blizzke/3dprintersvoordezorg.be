@@ -41,7 +41,7 @@
         </button>
 
         @if($order->is_mine && !$order->is_finished)
-            <a type="button" class="btn btn-default" data-confirm="1" data-toggle="tooltip" data-placement="bottom" title="Vrijgeven" href="{{route('order-release', ['order' => $order->identifier])}}">
+            <a type="button" class="btn btn-default" data-confirm="1" data-toggle="tooltip" data-placement="bottom" title="Vrijgeven voor opvolging door iemand anders" href="{{route('order-release', ['order' => $order->identifier])}}">
               <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
             </a>
         @endif

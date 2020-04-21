@@ -30,4 +30,5 @@ Route::get('/helper/order/{order}/cancel', 'OrderController@cancel')->name('orde
 Route::post('/helper/order/{order}/work', 'OrderController@work')->name('order-work');
 
 Route::get('/order/{order}', 'OrderController@view')->name('order');
-Route::get('/customer/{customer}/order/{order}', 'OrderController@customerLogin');
+Route::post('/order/{order}/comment', 'OrderController@addComment')->name('order-comment');
+Route::get('/customer/{customer}/order/{order}', 'OrderController@customerLogin')->name('order-customer');

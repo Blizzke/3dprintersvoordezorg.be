@@ -132,7 +132,19 @@ class MysterionSeeder extends Seeder
 
             $order->item()->associate($items[$row['type_requested']]);
             $order->customer()->associate($customer);
-            $order->save();
+
+            // link is the timestamp
+            $time = DateTime::createFromFormat('U', $row['link']);
+            $order->created_at = $time;
+
+            $order->save(['timestamps' => false]);
+
+            // Add new status
+            $status = $order->newStatus();
+            $status->type = 'status';
+            $status->status_id = 0;
+            $status->created_at= $time;
+            $status->save(['timestamps' => false]);
         }
 
         $max_id++;

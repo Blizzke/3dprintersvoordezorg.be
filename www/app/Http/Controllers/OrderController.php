@@ -47,9 +47,19 @@ class OrderController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function view($order)
+    public function view(Order $order)
     {
-        return view('orders.details');
+        return view('orders.details', ['order' => $order]);
+    }
+
+    public function addComment(Order $order, Request $request)
+    {
+        $request->validate(['comment' => 'required']);
+
+        $status = $order->newStatus(is_customer(), !is_customer() ? Auth::user(): null);
+        $status->comment = $request->post('comment');
+        $status->save();
+        return redirect()->route('order', ['order' => $order->identifier]);
     }
 
     public function customerLogin($customer, $order)

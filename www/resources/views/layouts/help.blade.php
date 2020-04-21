@@ -3,7 +3,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Wij Helpen :: @yield('title')</title>
+        <title>3d printers voor de zorg :: @yield('title')</title>
 
         <!-- Scripts -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -18,10 +18,6 @@
         <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
     </head>
     <body>
-        <div class="top-right links">
-            <a href="{{ route('logout') }}">Logout</a>
-        </div>
-
         @section('sidebar')
         @show
 

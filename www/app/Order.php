@@ -154,6 +154,7 @@ class Order extends Model
     public function release(Helper $helper = null)
     {
         $this->helper_id = null;
+        $this->save();
         return $this->statusUpdateStatus(0, false, $helper);
     }
 

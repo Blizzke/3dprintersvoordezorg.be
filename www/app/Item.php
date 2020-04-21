@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    protected $casts = [
+        'is_max' => 'boolean',
+        'vat_ex' => 'vat_ex',
+    ];
+
     public function getVerbosePriceAttribute(): string
     {
         $parts = [];

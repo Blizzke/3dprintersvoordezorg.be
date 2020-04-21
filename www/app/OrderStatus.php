@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderStatus extends Model
 {
-    // order id
-    // user id
-    // quantity
-    // status
-    // comment
-    // internal (yes no)
+    protected $casts = [
+        // Online variant doesn't auto return as correct variable type
+        'status_id' => 'integer',
+        'quantity' => 'integer',
+        'is_internal' => 'boolean'
+    ];
 
     public function order()
     {

@@ -64,6 +64,9 @@
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
         @endif
+        <a type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Ga naar orderpagina" href="{{route('order', ['order' => $order->identifier])}}">
+          <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+        </a>
     </td>
 </tr>
 <tr class="collapse @if($loop->odd) active @endif" id="{{ $order_id }}">

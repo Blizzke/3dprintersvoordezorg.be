@@ -15,7 +15,7 @@ class HelperController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:helper')->except(['registrationForm', 'register', 'loginForm', 'login']);
+        $this->middleware('auth:helpers')->except(['registrationForm', 'register', 'loginForm', 'login']);
     }
 
     public function registrationForm()

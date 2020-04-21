@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Customer;
+use App\Helper;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -30,11 +33,20 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Route::bind('customer', function ($value) {
-            return \App\Customer::whereIdentifier($value)->firstOrFail();
+            return Customer::whereIdentifier($value)->firstOrFail();
         });
 
         Blade::directive('datetime', function ($expression) {
             return "<?php echo ($expression)->format('d/m/Y H:i'); ?>";
         });
+
+        Blade::directive('is_helper', function () {
+            return Auth::user() instanceof Helper;
+        });
+
+        Blade::directive('is_customer', function () {
+            return Auth::user() instanceof Customer;
+        });
+
     }
 }

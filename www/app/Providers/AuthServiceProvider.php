@@ -28,5 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         Auth::provider('helpers', function ($app, array $config) {
             return new HelpersUserProvider($app['hash'], $config['model']);
         });
+        Auth::provider('customers', function ($app, array $config) {
+            return new CustomersUserProvider($app['hash'], $config['model']);
+        });
     }
 }

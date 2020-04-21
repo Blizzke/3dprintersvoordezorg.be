@@ -67,7 +67,7 @@
     </td>
 </tr>
 <tr class="collapse @if($loop->odd) active @endif" id="{{ $order_id }}">
-    <td colspan="6">
-        @include('helpers.orders.detail', ['order' => $order])
+    <td colspan="@if(isset($show) && in_array('status', $show)) 7 @else 6 @endif">
+        @include('helpers.orders.list.detail', ['order' => $order])
     </td>
 </tr>

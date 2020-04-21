@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
 
-class Customer extends Model
+class Customer extends Model implements AuthenticatableContract
 {
     public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
+    use Authenticatable;
 
     protected static function booted()
     {
@@ -40,5 +43,9 @@ class Customer extends Model
         return implode(' ', [$this->zip, $this->city]);
     }
 
+    public function getAuthIdentifierName()
+    {
+        return 'identifier';
+    }
 }
 

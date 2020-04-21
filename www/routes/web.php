@@ -27,3 +27,6 @@ Route::get('/helper/dashboard', 'HelperController@dashboard')->name('dashboard')
 Route::get('/helper/order/{order}/accept', 'OrderController@accept')->name('order-accept');
 Route::get('/helper/order/{order}/release', 'OrderController@release')->name('order-release');
 Route::post('/helper/order/{order}/work', 'OrderController@work')->name('order-work');
+
+Route::get('/order/{order}', 'OrderController@view')->name('order');
+Route::get('/customer/{customer}/order/{order}', 'OrderController@customerLogin');

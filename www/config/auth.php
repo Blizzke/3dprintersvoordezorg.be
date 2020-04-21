@@ -36,14 +36,19 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+//        'web' => [
+//            'driver' => 'session',
+//            'provider' => 'users',
+//        ],
 
         'helpers' => [
             'driver' => 'session',
             'provider' => 'helpers',
+        ],
+
+        'customers' => [
+            'driver' => 'session',
+            'provider' => 'customers',
         ],
 
         'api' => [
@@ -74,6 +79,11 @@ return [
         'helpers' => [
             'driver' => 'helpers',
             'model' => App\Helper::class,
+        ],
+
+        'customers' => [
+            'driver' => 'customers',
+            'model' => App\Customer::class,
         ],
 
         // 'users' => [

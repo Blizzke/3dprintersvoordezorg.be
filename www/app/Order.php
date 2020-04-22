@@ -45,6 +45,11 @@ class Order extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function getPrettyTimeAttribute()
+    {
+        return pretty_time($this->created_at);
+    }
+
     public function getCanCancelAttribute()
     {
         // Can cancel new orders or ones that are assigned to you and not finished
@@ -80,6 +85,15 @@ class Order extends Model
     public function statuses()
     {
         return $this->hasMany(OrderStatus::class, 'order_id')->orderBy('order_statuses.id');
+    }
+
+    public function getQuantityDoneAttribute()
+    {
+        $total = 0;
+        foreach ($this->statuses->where('type', 'quantity') as $status) {
+            $total += $status->quantity;
+        }
+        return $total;
     }
 
     public function setStatusAttribute($value)

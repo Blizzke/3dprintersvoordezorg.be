@@ -134,7 +134,7 @@ class MysterionSeeder extends Seeder
             $order->customer()->associate($customer);
 
             // link is the timestamp
-            $time = DateTime::createFromFormat('U', $row['link']);
+            $time = \Carbon\Carbon::createFromFormat('U', $row['link'], config('app.timezone'));
             $order->created_at = $time;
 
             $order->save(['timestamps' => false]);
@@ -200,7 +200,7 @@ class MysterionSeeder extends Seeder
                     $status->comment = $row['comment_asker'];
                     $status->saveOrFail(['timestamps' => false]);
                 }
-                $order->updated_at = DateTime::createFromFormat('YmdHi', $timestamp);
+                $order->updated_at = \Carbon\Carbon::createFromFormat('YmdHi', $timestamp, config('app.timezone'));
                 $order->save(['timestamps' => false]);
             } catch (Exception $e) {
                 echo "Failed on row: ", json_encode($row), "\n";
@@ -212,7 +212,7 @@ class MysterionSeeder extends Seeder
     private function _make_status(Order $order, $timestamp, $customer = false, $helper = true): OrderStatus
     {
         $order_status = $order->newStatus($customer, $helper);
-        $order_status->created_at = DateTime::createFromFormat('YmdHi', $timestamp);
+        $order_status->created_at = \Carbon\Carbon::createFromFormat('YmdHi', $timestamp, config('app.timezone'));
         return $order_status;
     }
 

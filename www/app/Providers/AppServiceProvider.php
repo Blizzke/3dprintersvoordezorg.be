@@ -48,9 +48,5 @@ class AppServiceProvider extends ServiceProvider
                 throw new AccessDeniedHttpException('Ongeldige gegevens');
             }
         });
-
-        Blade::directive('datetime', function ($expression) {
-            return "<?php echo ($expression)->format('d/m/Y H:i'); ?>";
-        });
     }
 }

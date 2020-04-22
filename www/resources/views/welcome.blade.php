@@ -29,7 +29,7 @@
         </div>
 
         <div class="links">
-            <a class="link-button" href="{{ url('/zoeken') }}">Ik zoek materiaal</a>
+            <a class="link-button" href="{{ url('/order/new') }}">Ik zoek materiaal</a>
             <a class="link-button" href="{{ url('/helper/register') }}">Ik wil helpen</a>
         </div>
     </div>

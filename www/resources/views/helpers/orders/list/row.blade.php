@@ -6,7 +6,7 @@
     @if(isset($show) && in_array('id', $show))
         <td> {{ $order->id }}</td>
     @endif
-    <td>@datetime($order->created_at)</td>
+    <td>{{ $order->pretty_time }}</td>
     <td>{{ $order->customer->sector }}</td>
     <td>{{ $order->customer->name }}</td>
     <td>{{ $order->customer->location }}</td>

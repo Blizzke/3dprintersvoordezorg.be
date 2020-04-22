@@ -40,6 +40,11 @@ class OrderStatus extends Model
         return null;
     }
 
+    public function getPrettyTimeAttribute()
+    {
+        return pretty_time($this->created_at);
+    }
+
     public function setQuantityAttribute($quantity)
     {
         $this->attributes['quantity'] = (int) $quantity;

@@ -17,7 +17,11 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('type')->unique();
             $table->string('name')->unique();
+            $table->string('title');
+            $table->string('unit')->default('per stuk');
+            $table->text('description');
             $table->decimal('price')->nullable();
+            $table->integer('on_fp')->nullable();
             // Maximum price or actual price
             $table->tinyInteger('is_max')->default(1);
             // Price is without VAT?
@@ -26,6 +30,8 @@ class CreateItemsTable extends Migration
             $table->integer('vat')->default(21);
             // Filled with |<sector>|<sector>| to limit articles to specific sectors
             $table->string('sector')->nullable();
+            $table->longText('images'); // json, but mysql version doesn't support it
+            $table->longText('maker_info')->nullable(); // same thing
             $table->timestamps();
         });
     }

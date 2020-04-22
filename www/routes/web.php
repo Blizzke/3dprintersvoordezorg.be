@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@frontPage');
 
 Route::get('/helper/register', 'HelperController@registrationForm')->name('register');
 Route::post('/helper/register', 'HelperController@register');
@@ -29,6 +27,12 @@ Route::get('/helper/order/{order}/release', 'OrderController@release')->name('or
 Route::get('/helper/order/{order}/cancel', 'OrderController@cancel')->name('order-cancel');
 Route::post('/helper/order/{order}/work', 'OrderController@work')->name('order-work');
 
+Route::get('/order/new', 'OrderController@newOrderView');
+Route::post('/order/new', 'OrderController@newOrderForm');
+
 Route::get('/order/{order}', 'OrderController@view')->name('order');
 Route::post('/order/{order}/comment', 'OrderController@addComment')->name('order-comment');
+Route::get('/order/{order}/status', 'OrderController@updateStatus')->name('order-status');
+Route::post('/order/{order}/quantity', 'OrderController@addQuantity')->name('order-add-quantity');
 Route::get('/customer/{customer}/order/{order}', 'OrderController@customerLogin')->name('order-customer');
+

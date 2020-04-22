@@ -12,7 +12,8 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:helpers,customers')->except('customerLogin');
+        $this->middleware('auth:customers,helpers')
+            ->except('customerLogin', 'newOrderView', 'newOrderForm');
     }
 
     public function accept(Order $order)
@@ -58,18 +59,48 @@ class OrderController extends Controller
 
         $status = $order->newStatus(is_customer(), !is_customer() ? Auth::user(): null);
         $status->comment = $request->post('comment');
+        if ($request->has('is_internal'))
+            $status->is_internal = true;
+
+        $status->save();
+        return redirect()->route('order', ['order' => $order->identifier]);
+    }
+
+    public function updateStatus(Order $order, Request $request)
+    {
+        $request->validate(['status' => 'required|numeric']);
+        $order->statusUpdateStatus($request->get('status'), false, Auth::user());
+        return redirect()->route('order', ['order' => $order->identifier]);
+    }
+
+    public function addQuantity(Order $order, Request $request)
+    {
+        $request->validate(['quantity' => 'required|numeric']);
+
+        $status = $order->newStatus(false, Auth::user());
+        $status->type = 'quantity';
+        $status->quantity = $request->post('quantity');
         $status->save();
         return redirect()->route('order', ['order' => $order->identifier]);
     }
 
     public function customerLogin($customer, $order)
     {
-        // 127.0.0.1:8000/customer/3796438236/order/1586982646
         if ($customer->identifier != $order->customer->identifier)
             // Don't go to login page, that's for helpers
             throw new AuthenticationException('Foute ordergegevens', [], '/');
 
         Auth::guard('customers')->login($customer);
         return redirect()->route('order', ['order' => $order->identifier]);
+    }
+
+    public function newOrderView()
+    {
+        return view('orders.new', ['items' => \App\Item::query()->get()]);
+    }
+
+    public function newOrderForm(Request $request)
+    {
+
     }
 }

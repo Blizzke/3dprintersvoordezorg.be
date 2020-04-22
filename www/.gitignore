@@ -4,6 +4,7 @@
 /public/cgi-bin
 /storage/*.key
 /vendor
+.idea
 .env
 .env.backup
 .env.live

@@ -12,6 +12,7 @@ services:
       # Handy for command line debugging
       - PHP_IDE_CONFIG=serverName=docker-container
       - XDEBUG_CONFIG="remote_enable=1"
+    command: ['tail', '-f', '/dev/null']
   mysql:
     image: mariadb/server
     environment:

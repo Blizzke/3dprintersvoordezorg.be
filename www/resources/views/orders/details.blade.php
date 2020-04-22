@@ -10,8 +10,9 @@
 
 @if(is_customer())
     @if($order->is_new)
-    <p>We hebben je bestelling goed ontvangen. Intern proberen wij nu de persoon die het dichtste bij woont te vinden die dit voor u kan afhandelen.
-        U wordt ook rechtstreeks door deze persoon gecontacteerd voor het afspreken van de exacte kostprijs en hoe het materiaal bij u zal geraken.</p>
+    <p>We hebben je bestelling goed ontvangen. Intern proberen wij nu de persoon die het dichtste bij je woont te vinden.
+        Deze persoon zal de bestelling op zich nemen en je rechtstreeks contacteren voor het afspreken van de kostprijs en hoe het materiaal bij u zal geraken.</p>
+    <p>Pas op dat moment zal er aan de bestelling begonnen worden.</p>
     @endif
     <h2>Link</h2>
     <div class="well">
@@ -20,6 +21,7 @@
                 {{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}
             </a>
         </p>
+        <p>Je klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
     </div>
 @endif
 

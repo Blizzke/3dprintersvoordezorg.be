@@ -164,7 +164,7 @@ return [
         'lesson'                => 'les',
         'message'               => 'bericht',
         'minute'                => 'minuut',
-        'mobile'                => 'mobiel',
+        'mobile'                => 'GSM',
         'month'                 => 'maand',
         'name'                  => 'naam',
         'password'              => 'wachtwoord',
@@ -182,5 +182,8 @@ return [
         'title'                 => 'titel',
         'username'              => 'gebruikersnaam',
         'year'                  => 'jaar',
+        'quantity'              => 'hoeveelheid',
+        'zip'                   => 'postcode',
+        'customer_id'           => 'Klantnummer',
     ],
 ];

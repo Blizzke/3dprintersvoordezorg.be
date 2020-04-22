@@ -55,17 +55,17 @@ class ItemSeeder extends Seeder
                     'Supports' => 'geen',
                 ]
             ],
-            ['type' => 'mask_typeIIr_zorg', 'name' => 'IIR mondmasker (zorgverlening)', 'price' => 0.85, 'vat_ex' => 1, 'is_max' => 0, 'sector' => '|zorgverlening|',
+            ['type' => 'mask_typeIIr_zorg', 'name' => 'IIR mondmasker (zorgverlening)', 'price' => 42.5, 'vat_ex' => 1, 'is_max' => 0, 'sector' => '|zorgverlening|',
                 'title' => 'Chirurgisch masker type IIR (zorg)',
-                'description' => '<b>Alleen zorg en scholen!</b><br/>NIET individueel verpakt.<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.<br/> Factuur is mogelijk',
+                'description' => '0.85&euro;/stuk exbtw.<br/><b>Alleen zorg en scholen!</b> <br />.NIET individueel verpakt.<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.<br/> Factuur is mogelijk',
                 'unit' => 'per doos van 50 stuks',
                 'images' => [
                     'large'=> 'masktypeiir2_lg.jpg',
                 ],
             ],
-            ['type' => 'mask_typeIIr', 'name' => 'IIR mondmasker', 'price' => 1, 'vat_ex' => 1, 'is_max' => 0, 'on_fp' => 4,
+            ['type' => 'mask_typeIIr', 'name' => 'IIR mondmasker', 'price' => 50, 'vat_ex' => 1, 'is_max' => 0, 'on_fp' => 4,
                 'title' => 'Chirurgisch masker type IIR',
-                'description' => 'NIET individueel verpakt.<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.<br />Factuur is mogelijk',
+                'description' => '1&euro;/stuk exbtw.<br/>NIET individueel verpakt.<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.<br />Factuur is mogelijk',
                 'unit' => 'per doos van 50 stuks',
                 'images' => [
                     'large'=> 'masktypeiir2_lg.jpg',

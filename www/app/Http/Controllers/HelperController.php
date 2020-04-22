@@ -35,12 +35,11 @@ class HelperController extends Controller
             'zip' => 'required',
             'city' => 'required',
             'email' => 'nullable|email|unique:helpers',
-            'mobile' => 'required',
+            'phone' => 'required_without:mobile',
+            'mobile' => 'required_without:phone',
         ]);
 
-        $input = $request->all();
-
-        $user = Helper::create($input);
+        $user = Helper::create($request->all());
 
         $this->guard()->login($user, true);
 

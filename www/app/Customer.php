@@ -10,6 +10,7 @@ class Customer extends Model implements AuthenticatableContract
 {
     public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
     use Authenticatable;
+    protected $fillable = ['sector', 'name', 'phone', 'mobile', 'email', 'street', 'number', 'zip', 'city', 'country_id'];
 
     protected static function booted()
     {
@@ -20,7 +21,7 @@ class Customer extends Model implements AuthenticatableContract
 
             do {
                 # Unique identifier per customer so they can "login" later to add another request
-                $identifier = random_int(1000000000, 9999999999);
+                $identifier = random_int(1000000000, 2147483647);
             } while (self::whereIdentifier($identifier)->exists());
 
             $customer->identifier = $identifier;

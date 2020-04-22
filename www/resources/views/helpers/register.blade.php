@@ -21,60 +21,88 @@
             aanvraag af, zo simpel is het.</p>
     </div>
 
-    {!! Form::open(['url' => 'helper/register']) !!}
+    <form method="post" action="/helper/register" class="form-horizontal">
+        @csrf
         <div class="form-group">
-            <label for="name">Inlognaam</label>
-            <input id="name" name="name" type="text" class="@error('name') is-invalid @enderror"/>
-            @error('name')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="name">Inlognaam *</label>
+            <div class="col-sm-9">
+                <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}"/>
+                @error('name')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="display_name">Weergavenaam (zichtbaar)</label>
-            <input id="display_name" name="display_name"type="text" class="@error('display_name') is-invalid @enderror"/>
-            @error('display_name')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="display_name">Weergavenaam (zichtbaar) *</label>
+            <div class="col-sm-9">
+                <input id="display_name" name="display_name"type="text" class="form-control @error('display_name') is-invalid @enderror" value="{{old('display_name')}}"/>
+                @error('display_name')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="street">Straat</label>
-            <input id="street" name="street" type="text" class="@error('street') is-invalid @enderror"/>
-            @error('street')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="street">Straat</label>
+            <div class="col-sm-9">
+                <input id="street" name="street" type="text" class="form-control @error('street') is-invalid @enderror" value="{{old('street')}}"/>
+                @error('street')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="number">Nummer</label>
-            <input id="number" name="number" type="text" class="@error('number') is-invalid @enderror"/>
-            @error('number')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="number">Nummer</label>
+            <div class="col-sm-2">
+                <input id="number" name="number" type="text" class="form-control @error('number') is-invalid @enderror" value="{{old('nunber')}}"/>
+                @error('number')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="zip">Postcode</label>
-            <input id="zip" name="zip" type="text" class="@error('zip') is-invalid @enderror"/>
-            @error('zip')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="zip">Postcode* </label>
+            <div class="col-sm-2">
+                <input id="zip" name="zip" type="text" class="form-control @error('zip') is-invalid @enderror" value="{{old('zip')}}"/>
+                @error('zip')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="city">Gemeente</label>
-            <input id="city" name="city" type="text" class="@error('city') is-invalid @enderror"/>
-            @error('city')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="city">Gemeente *</label>
+            <div class="col-sm-5">
+                <input id="city" name="city" type="text" class="form-control @error('city') is-invalid @enderror" value="{{old('city')}}"/>
+                @error('city')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="country">Land</label>
-            {!! Form::select('country', $countries) !!}
-            @error('country')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="country_id">Land</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="country_id" name="country_id">
+                    <option value="1" selected>Belgi&euml;</option>
+                    <option value="2">Nederland</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <label for="email">E-mail</label>
-            <input id="email" name="email" type="text" class="@error('email') is-invalid @enderror"/>
-            @error('email')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="email">E-mail</label>
+            <div class="col-sm-9">
+                <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror value="{{old('email')}}""/>
+                @error('email')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
+        </div>
+        <div class="col-sm-12">
+            Vul ofwel uw telefoon ofwel uw gsm nummer in, deze wordt gebruikt om mee in te loggen samen met de inlognaam
         </div>
         <div class="form-group">
-            <label for="phone">Telefoon</label>
-            <input id="phone" name="phone" type="text" class="@error('phone') is-invalid @enderror"/>
-            @error('phone')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="phone">Telefoon</label>
+            <div class="col-sm-9">
+                <input id="phone" name="phone" type="text" class="form-control @error('phone') is-invalid @enderror" value="{{old('phone')}}"/>
+                @error('phone')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <label for="mobile">GSM</label>
-            <input id="mobile" name="mobile" type="text" class="@error('mobile') is-invalid @enderror"/>
-            @error('mobile')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            <label class="col-sm-3 control-label" for="mobile">GSM</label>
+            <div class="col-sm-9">
+                <input id="mobile" name="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" value="{{old('mobile')}}"/>
+                @error('mobile')<div class="alert alert-danger">{{ $message }}</div> @enderror
+            </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-success btn-submit">Registreer</button>
+            <div class="col-sm-12">
+                <button class="btn btn-success btn-submit">Registreer</button>
+            </div>
         </div>
-    {!! Form::close() !!}
+    </form>
 </div>
 @endsection

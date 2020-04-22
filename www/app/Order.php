@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Order extends Model
 {
     public const STATUSES = [0 => 'Nieuw', 1 => 'Toegewezen', 2 => 'In productie', 3 => 'Te leveren', 4 => 'Afgewerkt', 5 => 'Geannuleerd'];
+    protected $fillable = ['customer_id', 'item_id', 'for', 'quantity'];
     protected $casts = [
         // Online variant doesn't auto return as correct variable type
         'status_id' => 'integer',

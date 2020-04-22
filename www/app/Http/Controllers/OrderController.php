@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Item;
 use App\Order;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
@@ -101,6 +102,50 @@ class OrderController extends Controller
 
     public function newOrderForm(Request $request)
     {
+        $product = [
+            'item' => 'required|exists:items,name',
+            'quantity' => 'required|numeric|max:200',
+        ];
 
+        // Still here, if we don't have a customer, create one:
+        $input = $request->all();
+
+        /** @var Customer $customer */
+        if ($request->filled('customer_id')) {
+            // Customer ID was specified, validate against database
+            $request->validate(['customer_id' => 'required|exists:customers,identifier'] + $product);
+            $customer = Customer::whereIdentifier($request->post('customer_id'))->first();
+        }
+        else {
+            $request->validate([
+                'sector' => 'required',
+                'name' => 'required',
+                'zip' => 'required',
+                'phone' => 'required_without_all:mobile,email',
+                'mobile' => 'required_without_all:phone,email',
+                'email' => 'required_without_all:phone,mobile',
+            ] + $product);
+            $customer = Customer::create($input);
+        }
+
+        Auth::guard('customers')->login($customer);
+
+        /** @var Order $order */
+        // Now the order, since we create in one go and customer/item are required, mass assign them as well
+        $input['customer_id'] = $customer->id;
+        $input['item_id'] = Item::whereName($input['item'])->firstOrFail()->id;
+        $order = Order::create($input);
+
+        $order->statusUpdateStatus(0, true);
+        $order->save();
+
+        // Optional comment
+        if ($request->filled('comment')) {
+            $status = $order->newStatus(true);
+            $status->comment = $request->get('comment');
+            $status->save();
+        }
+
+        return redirect()->route('order', ['order' => $order->identifier]);
     }
 }

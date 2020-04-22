@@ -19,7 +19,7 @@ class Helper extends Model implements AuthenticatableContract
      * @var array
      */
     protected $fillable = [
-        'name', 'display_name', 'street', 'number', 'zip', 'city', 'country', 'email', 'phone', 'mobile', 'email',
+        'name', 'display_name', 'street', 'number', 'zip', 'city', 'country_id', 'email', 'phone', 'mobile',
     ];
 
     /**

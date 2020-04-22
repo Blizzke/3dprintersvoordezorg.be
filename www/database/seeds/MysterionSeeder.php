@@ -95,10 +95,10 @@ class MysterionSeeder extends Seeder
             'city' => 'city',
             'phone' => 'phone',
             'cellphone' => 'mobile',
-            'tav' => 'for',
         ];
 
         $order_map = [
+            'tav' => 'for',
             'link' => 'identifier',
             'number_requested' => 'quantity',
         ];

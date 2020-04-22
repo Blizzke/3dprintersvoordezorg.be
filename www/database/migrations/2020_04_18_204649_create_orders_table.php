@@ -15,13 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            # "type":"zorgverlening","sector":"","name":"Az Klina \/ daghospitaal",
-            # "type_requested":"mondmasker_hulp","number_requested":"50",
-            # "comments":"",
-            #"phone":"","cellphone":"","email":"Natasha.deheel@hotmail.com","other_contact":"","tav":"Natasha De Heel"
-            #,"street":"Augustijnslei","number":"100","zip":"2930","city":"Brasschaat","done":"1","confirmed":"1","country":"","latitude":null,"longitude":null},
             $table->string('identifier');
             $table->integer('customer_id')->unsigned();
+            $table->string('for')->nullable();
             $table->integer('item_id')->unsigned();
             $table->integer('quantity')->unsigned();
             $table->integer('helper_id')->unsigned()->nullable();

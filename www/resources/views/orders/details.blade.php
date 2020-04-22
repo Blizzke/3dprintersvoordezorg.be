@@ -103,14 +103,15 @@
     <h2>Aanvrager:</h2>
     <div class="well">
         {{ $customer->name }} ({{ $customer->sector }})<br />
-        @if($customer->for)
-            tav {{$customer->for}}<br/>
+        @if($order->for)
+            tav {{$order->for}}<br/>
         @endif
         {{ $customer->street }} {{ $customer->number }}<br />
         {{ $customer->zip }} {{ $customer->city }}, {{ $customer->country }}<br />
         @if($customer->phone) Telefoon: {{$customer->phone}}<br />@endif
         @if($customer->mobile) GSM: {{$customer->mobile}}<br />@endif
         @if($customer->email) E-mail: <a href="mailto:{{$customer->email}}?subject=Je aanvraag bij 3dprintersvoordezorg">{{$customer->email}}</a><br />@endif
+        Klant nummer: {{$customer->identifier}}
     </div>
 
 @endif

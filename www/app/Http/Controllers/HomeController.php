@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
+
 class HomeController extends Controller
 {
-    public function frontpage()
+    public function frontPage()
     {
-        $items = \App\Item::whereNotNull('on_fp')->orderBy('on_fp');
+        $items = Item::whereNotNull('on_fp')->orderBy('on_fp')->get();
         return view('welcome', ['items' => $items]);
     }
 }

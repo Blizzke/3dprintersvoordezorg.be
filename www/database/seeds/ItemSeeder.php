@@ -27,7 +27,7 @@ class ItemSeeder extends Seeder
                     'Supports' => 'geen',
                 ]
             ],
-            ['type' => 'mondmasker_hulp', 'name' => 'Ear saver', 'price' => 0.1, 'on_fp' => 2,
+            ['type' => 'mondmasker_hulp', 'name' => 'Ear saver', 'price' => 0.2, 'on_fp' => 2,
                 'title' => 'Mondmasker bevestiging',
                 'description' => 'Om de stress weg te nemen van je oren.',
                 'images' => [

@@ -110,7 +110,7 @@
                 @foreach($items as $item)
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3 mb-lg-0">
                         <div class="post-entry">
-                            <a href="{{ url('/order/new') }}" class="mb-3 img-wrap">
+                            <a href="{{$item->image('large')}}" data-fancybox="images" class="mb-3 img-wrap">
                                 <img src="{{$item->image('large')}}" alt="{{$item->title}}" class="img-fluid">
                             </a>
                             <h3><a href="{{ url('/order/new') }}">{{$item->title}}</a></h3>

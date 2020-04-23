@@ -157,7 +157,7 @@
                                             <b>{{$item->title}}</b><br/>
                                             Bestelhoeveelheid/Prijs: {{$item->verbose_price}} {{ $item->unit }}<br/>
                                             {!! $item->description !!}<br/>
-                                            <a href="{{$item->image()}}" data-toggle="lightbox"
+                                            <a href="{{$item->image()}}" data-fancybox="images"
                                                data-title="{{$item->title}}">
                                                 <img src="{{$item->image('small')}}" height="100" alt="{{$item->title}}"
                                                      class=""/>

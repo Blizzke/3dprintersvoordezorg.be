@@ -1,70 +1,155 @@
 @extends('layouts.request')
 @section('title', 'Welkom')
 @section('content')
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ route('dashboard') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-            @endauth
-        </div>
-    @endif
 
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <h1>3D Printers tegen Corona</h1>
-        </div>
-    <div class="row">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="jumbotron">
-                <p>Met tientallen vrijwilligers helpen wij graag een handje mee in deze moeilijke tijden. Via deze site bieden we tal van hulpstukken aan om mensen bij te staan in hun strijd tegen COVID-19.</p>
-
-                <p>Ondanks het feit dat we deze items niet gratis kunnen aanbieden wegens de steeds hoger oplopende materiaalkosten,
-                    maken we hierop geen winst. De bijdrage die we vragen wordt terug geinvesteerd in nieuw materiaal, zodat alle vrijwilligers jullie kunnen blijven verder helpen.</p>
-
-                <p>Door verder te gaan via "ik zoek materiaal" kun je een aanvraag indienen. Hierna wordt je rechtstreeks gecontacteerd door iemand uit zo dicht mogelijk uit jouw buurt om de nodige details af te spreken.</p>
-
-                <p>Voor klachten en vragen kan je rechtstreeks contact opnemen <a href="http://www.m.me/101001594912920" target="_blank">messenger</a> (graag geen Spam, we doen dit allemaal als vrijwillger)</p>
-            </div>
-        <div>
-    </div>
-
-    <div class="row margin-top-20">
-        <div class="col-sm-12">
-            <div class="well">
-                <p>We hebben net een nieuwe site online gezet die we de komende dagen nog wat meer zullen aankleden.</p>
-                <p>Het was gewoon belangrijk dat we zsm een vlotter bestel systeem hadden, vandaar de wat kale look.</p>
-                <p>Je bent wel degelijk op de juiste plek!</p>
+    <div class="block-31" style="position: relative;">
+        <div class="owl-carousel loop-block-31 ">
+            <div class="block-30 block-30-sm item" style="background-image: url('/images/printer1.jpg');" data-stellar-background-ratio="0.5">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center text-center">
+                        <div class="col-md-7">
+                            <h2 class="heading mb-5">3D Printers tegen Corona</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-3 col-sm-offset-3">
-            <a class="btn btn-lg btn-success" href="{{ url('/order/new') }}">Ik zoek materiaal</a>
-        </div>
-        <div class="col-sm-3 col-sm-offset-1">
-            <a class="btn btn-lg btn-success" href="{{ url('/helper/register') }}">Ik wil helpen</a>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center">
+        We hebben een <strong>nieuwe, gebruiksvriendelijkere site</strong> online gezet die we de komende dagen nog wat meer zullen updaten.
+        Je bent wel degelijk op de <strong>juiste plek</strong>!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="site-section section-counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 pr-5">
+                    <div class="block-48">
+                        <span class="block-48-text-1">Reeds</span>
+                        <div class="block-48-counter ftco-number" data-number="2927">0</div>
+                        <span class="block-48-text-1 mb-4 d-block">afgeleverd, 537 worden geprint door</span>
+                        <div class="block-48-counter ftco-number" data-number="70">0</div>
+                        <span class="block-48-text-1 mb-4 d-block">vrijwilligers en 52 stuks staan nog in de wachtrij sinds gisteren.</span>
+                        <p class="mb-0"><a href="{{ url('/helper/register') }}" class="btn btn-white px-3 py-2">Ik wil helpen</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6 welcome-text">
+                    <h2 class="display-4 mb-3">Wie zijn we?</h2>
+                    <p class="lead">
+                        Met tientallen vrijwilligers helpen wij graag een handje mee in deze moeilijke tijden.
+                        Via deze site bieden we tal van hulpstukken aan om mensen bij te staan in hun strijd tegen COVID-19. <br><br>
+                        Ondanks het feit dat we deze items niet gratis kunnen aanbieden wegens de steeds hoger oplopende materiaalkosten, maken we hierop geen winst.
+                        De bijdrage die we vragen wordt terug geinvesteerd in nieuw materiaal, zodat alle vrijwilligers jullie kunnen blijven verder helpen.
+                    </p>
+                    <p class="mb-4">
+                        Door verder te gaan via "ik zoek materiaal" kun je een aanvraag indienen.
+                        Hierna wordt je rechtstreeks gecontacteerd door iemand uit zo dicht mogelijk uit jouw buurt om de nodige details af te spreken.
+                        Voor klachten en vragen kan je rechtstreeks contact opnemen messenger (graag geen Spam, we doen dit allemaal als vrijwillger)
+                    </p>
+                    <p class="mb-0"><a href="{{ url('/order/new') }}" class="btn btn-primary px-3 py-2">Ik zoek materiaal</a></p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row margin-top-20">
-        @foreach($items as $item)
-            <div class="col-sm-3">
-                <a href="{{$item->image('small')}}" class="thumbnail" data-toggle="lightbox" data-title="{{$item->title}}">
-                    <img src="{{$item->image('large')}}" alt="{{$item->title}}" />
-                </a>
+    <div class="site-section border-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="media block-6">
+                        <div class="icon"><span class="ion-ios-bulb"></span></div>
+                        <div class="media-body">
+                            <h3 class="heading">Onze missie</h3>
+                            <p>Met tientallen vrijwilligers helpen wij graag een handje mee in deze moeilijke tijden. Via deze site bieden we tal van hulpstukken aan om mensen bij te staan in hun strijd tegen COVID-19.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="media block-6">
+                        <div class="icon"><span class="ion-ios-cash"></span></div>
+                        <div class="media-body">
+                            <h3 class="heading">Doneer / Sponsor</h3>
+                            <p>Help ons een handje door te doneren of verbruiksmateriaal te sponsoren.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="media block-6">
+                        <div class="icon"><span class="ion-ios-contacts"></span></div>
+                        <div class="media-body">
+                            <h3 class="heading">Ik heb een 3D-printer en ik wil helpen</h3>
+                            <p>Heb je zelf een 3D printer die momenteel stil staat en nog wat extra filament, help ons dan, want je weet hoe traag printen gaat => maar printers = meer mensen geholpen</p>
+                            <p><a href="{{ url('/helper/register') }}" class="link-underline">Start met printen!</a></p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        @endforeach
-    </div>
-</div>
-<script type="text/javascript">
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-</script>
+        </div>
+    </div> <!-- .site-section -->
+
+    <div class="site-section fund-raisers bg-light">
+        <div class="container">
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2>Momenteel leveren we volgende hulpstukken</h2>
+                    <p class="lead">Heb je nog andere stukken die hulpzaam kunnen zijn om te 3D printen? Contacteer ons via <a href="http://www.m.me/101001594912920">messenger</a> en dan voegen we ze toe.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                @foreach($items as $item)
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3 mb-lg-0">
+                        <div class="post-entry">
+                            <a href="{{ url('/order/new') }}" class="mb-3 img-wrap">
+                                <img src="{{$item->image('large')}}" alt="{{$item->title}}" class="img-fluid">
+                            </a>
+                            <h3><a href="{{ url('/order/new') }}">{{$item->title}}</a></h3>
+                            <p><a href="{{ url('/order/new') }}" class="btn btn-primary">Bestel</a></p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div> <!-- .section -->
+
+    <div class="featured-section overlay-color-2" style="background-image: url('images/shields1.jpg');">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 mb-12 mb-md-0">
+                    <h2>Ik heb een 3D-printer en ik wil helpen</h2>
+                    <p>
+                        Heb je zelf een 3D printer die momenteel stil staat en nog wat extra filament,
+                        help ons dan, want je weet hoe traag printen gaat => maar printers = meer mensen geholpen<br><br>
+                        Eerst en vooral, deze website is enkel om mensen te helpen in deze corona tijden, aldus,
+                        er worden geen cookies gebruikt en er worden geen persoonlijke gegevens aan derden verstrekt<br><br>
+                        Schrijf jezelf hieronder in en je krijgt een lijst te zien van iedereen die hulpstukken wilt,
+                        hoeveel en dewelke, zodra je ingelogd bent kies je er gewoon 1 van de lijst,
+                        je bevestigt dat jij de maskers wilt maken en dan neem je rechtstreeks contact op
+                        met diegene voor wie je wilt maken, zo simpel is het.
+                    </p>
+
+                    <p class="mb-0"><a href="{{ url('/helper/register') }}" class="btn btn-white px-3 py-2">Ik wil helpen</a></p>
+                </div>
+
+                <div class="col-md-6 pl-md-5">
+
+
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- .featured-donate -->
+
+    <!-- loader -->
 @endsection

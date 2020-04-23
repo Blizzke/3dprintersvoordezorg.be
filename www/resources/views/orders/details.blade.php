@@ -14,16 +14,21 @@
         Deze persoon zal de bestelling op zich nemen en je rechtstreeks contacteren voor het afspreken van de kostprijs en hoe het materiaal bij u zal geraken.</p>
     <p>Pas op dat moment zal er aan de bestelling begonnen worden.</p>
     @endif
+@endif
     <h2>Link</h2>
     <div class="well">
-        <p>Je kan deze pagina in de toekomst altijd terug bezoeken via deze link:
+    @if(is_customer())
+        <p>Je kan deze pagina in de toekomst altijd terug bezoeken via deze link:</p>
+    @else
+        <p>De klant kan deze pagina in de toekomst altijd terug bezoeken via deze link:</p>
+    @endif
+        <p>
             <a href="{{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}">
                 {{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}
             </a>
         </p>
-        <p>Je klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
+        <p>Het klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
     </div>
-@endif
 
 @foreach($order->statuses as $status)
     @if($loop->first)

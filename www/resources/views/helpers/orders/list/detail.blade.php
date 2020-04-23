@@ -24,9 +24,10 @@
 Inhoud aanvraag:
 <div class="well">
     <p>{{ $order->quantity }}&times; {{ $item->name }} ({{$item->verbose_price}} per stuk)</p>
-    <p>De vermeldde prijzen zijn de maximum prijzen indien dit expliciet vermeld staat.
-        Dat wil zeggen dat het je eigen keuze is of je deze prijs wilt vragen of minder.
-        Tenzij anders vermeld zijn de prijzen inclusief BTW.</p>
+    @if($item->is_max)
+        <p>De vermelde prijs is een maximum prijs. Je kan naar keus minder vragen, maar nooit meer</p>.
+    @endif
+    <p>Deze prijs is <b>{{ $item->vat_ex ? 'exclusief' : 'inclusief' }}</b> btw!</p>
 </div>
 
 @foreach($order->statuses as $status)

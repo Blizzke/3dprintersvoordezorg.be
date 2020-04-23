@@ -140,5 +140,12 @@
 @endif
 </div>
 
-
+@if(is_helper() && $order->is_new)
+    <h2>Uitvoeren:</h2>
+    <div class="well">
+        <a type="button" class="btn btn-success" href="{{route('order-accept', ['order' => $order->identifier, 'details' => 1])}}">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Ik ga deze uitvoeren
+        </a>
+    </div>
+@endif
 @endsection

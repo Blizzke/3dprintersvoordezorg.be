@@ -17,9 +17,13 @@ class OrderController extends Controller
             ->except('customerLogin', 'newOrderView', 'newOrderForm');
     }
 
-    public function accept(Order $order)
+    public function accept(Order $order, Request $request)
     {
         $order->assign(Auth::user());
+        if ($request->filled('details') && $request->get('details') == 1) {
+            // Redirect to the order details page instead of dashboard
+            return redirect()->route('order', ['order' => $order->identifier]);
+        }
         return redirect()->route('dashboard');
     }
 

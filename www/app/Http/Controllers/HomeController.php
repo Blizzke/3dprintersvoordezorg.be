@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $items = Item::whereNotNull('on_fp')->orderBy('on_fp')->get();
 
-        $printed = OrderStatus::selectRaw('sum(quantity) AS sum')->whereIn('order_id', function($q) {
+        $printed = OrderStatus::selectRaw('sum(quantity) AS sum')->whereIn('order_id', function ($q) {
             $q->from('orders')->select('id')->where('status_id', 4);
         })->firstOrFail()['sum'];
 

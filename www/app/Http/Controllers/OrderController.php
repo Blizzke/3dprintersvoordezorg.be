@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:customers,helpers')
+        $this->middleware('auth:helpers,customers')
             ->except('customerLogin', 'newOrderView', 'newOrderForm');
     }
 
@@ -146,6 +146,43 @@ class OrderController extends Controller
             $status->save();
         }
 
+        $this->notifyDiscord($order);
         return redirect()->route('order', ['order' => $order->identifier]);
+    }
+
+    private function notifyDiscord(Order $order)
+    {
+        $hookUrl = env('DISCORD_ORDER_HOOK');
+        if ($hookUrl) {
+
+            $curl = curl_init($hookUrl);
+            // Return, don't echo...
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            // Discord always expects form-data
+            curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            // And a post
+            curl_setopt($curl, CURLOPT_POST, 1);
+
+            $orderUrl = route('order', ['order' => $order->identifier]);
+            $order = <<<EOD
+__**Nieuwe bestelling: {$order->customer->zip}**__ - $orderUrl
+```
+Gemeente: {$order->customer->zip} {$order->customer->city}
+
+Naam: {$order->customer->name}
+
+Aantal: {$order->quantity}
+
+Type: {$order->item->title}
+```
+EOD;
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $query = json_encode(['content' => $order]));
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($curl, CURLOPT_HEADER, 0);
+            curl_exec($curl);
+            curl_close($curl);
+        }
+
+        return '';
     }
 }

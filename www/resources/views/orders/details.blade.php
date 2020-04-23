@@ -128,7 +128,10 @@
     <p>{{ $order->quantity }}&times; {{ $item->name }} ({{$item->verbose_price}} per stuk)</p>
 @if(is_helper())
     @if($order->is_mine)
-        <p>De vermelde prijzen zijn de maximum prijzen indien dit expliciet vermeld staat, je kan naar keus minder vragen ook. Tenzij anders vermeld zijn de prijzen inclusief BTW.</p>
+        @if($item->is_max)
+            <p>De vermelde prijs is een maximum prijs. Je kan naar keus minder vragen, maar nooit meer</p>.
+        @endif
+        <p>Deze prijs is <b>{{ $item->vat_ex ? 'exclusief' : 'inclusief' }}</b> btw!</p>
     @endif
 @elseif($item->is_max)
     <p>De bovenvermeldde prijs is de maximum prijs (exclusief verzending indien nodig) die hiervoor betaald zal moeten worden.<br />

@@ -14,16 +14,21 @@
         Deze persoon zal de bestelling op zich nemen en je rechtstreeks contacteren voor het afspreken van de kostprijs en hoe het materiaal bij u zal geraken.</p>
     <p>Pas op dat moment zal er aan de bestelling begonnen worden.</p>
     @endif
+@endif
     <h2>Link</h2>
     <div class="well">
-        <p>Je kan deze pagina in de toekomst altijd terug bezoeken via deze link:
+    @if(is_customer())
+        <p>Je kan deze pagina in de toekomst altijd terug bezoeken via deze link:</p>
+    @else
+        <p>De klant kan deze pagina in de toekomst altijd terug bezoeken via deze link:</p>
+    @endif
+        <p>
             <a href="{{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}">
                 {{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}
             </a>
         </p>
-        <p>Je klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
+        <p>Het klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
     </div>
-@endif
 
 @foreach($order->statuses as $status)
     @if($loop->first)
@@ -123,7 +128,10 @@
     <p>{{ $order->quantity }}&times; {{ $item->name }} ({{$item->verbose_price}} per stuk)</p>
 @if(is_helper())
     @if($order->is_mine)
-        <p>De vermelde prijzen zijn de maximum prijzen indien dit expliciet vermeld staat, je kan naar keus minder vragen ook. Tenzij anders vermeld zijn de prijzen inclusief BTW.</p>
+        @if($item->is_max)
+            <p>De vermelde prijs is een maximum prijs. Je kan naar keus minder vragen, maar nooit meer</p>.
+        @endif
+        <p>Deze prijs is <b>{{ $item->vat_ex ? 'exclusief' : 'inclusief' }}</b> btw!</p>
     @endif
 @elseif($item->is_max)
     <p>De bovenvermeldde prijs is de maximum prijs (exclusief verzending indien nodig) die hiervoor betaald zal moeten worden.<br />

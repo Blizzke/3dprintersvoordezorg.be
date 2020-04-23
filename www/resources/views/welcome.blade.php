@@ -30,10 +30,10 @@
                 <div class="col-md-6 pr-5">
                     <div class="block-48">
                         <span class="block-48-text-1">Reeds</span>
-                        <div class="block-48-counter ftco-number" data-number="2927">0</div>
-                        <span class="block-48-text-1 mb-4 d-block">afgeleverd, 537 worden geprint door</span>
-                        <div class="block-48-counter ftco-number" data-number="70">0</div>
-                        <span class="block-48-text-1 mb-4 d-block">vrijwilligers en 52 stuks staan nog in de wachtrij sinds gisteren.</span>
+                        <div class="block-48-counter ftco-number" data-number="{{$printed}}">0</div>
+                        <span class="block-48-text-1 mb-4 d-block">afgeleverd, {{$printing}} worden geprint door</span>
+                        <div class="block-48-counter ftco-number" data-number="{{$helpers}}">0</div>
+                        <span class="block-48-text-1 mb-4 d-block">vrijwilligers. {{$wait}} stuks staan nog in de wachtrij sinds gisteren.</span>
                         <p class="mb-0"><a href="{{ url('/helper/register') }}" class="btn btn-white px-3 py-2">Ik wil helpen</a></p>
                     </div>
                 </div>

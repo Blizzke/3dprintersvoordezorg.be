@@ -33,13 +33,17 @@ trait GeoLocationMixin
 
     public static function getGeoList()
     {
+        // Cache::forget(get_called_class() . '_geo_list');
         return Cache::remember(get_called_class() . '_geo_list', 3600, function() {
             $markers = [];
 
             foreach (static::cursor() as $user) {
-                $loc = $user->geo_coordinates_string;
-                if ($loc) {
-                    $markers[] = ['location' => $loc, 'name' => $user->title, 'id' => $user->id];
+                if ($loc = $user->geo_coordinates) {
+                    $markers[] = [
+                        'location' => $loc,
+                        'location_string' => $user->geo_coordinates_string,
+                        'name' => $user->title,
+                        'id' => $user->id];
                 }
             }
             return $markers;

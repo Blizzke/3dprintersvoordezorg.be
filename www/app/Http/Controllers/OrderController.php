@@ -55,6 +55,7 @@ class OrderController extends Controller
 
     public function view(Order $order)
     {
+        $this->notifyDiscord($order);
         if (Auth::user() instanceof \App\Helper) {
             return view('helpers.orders.details', ['order' => $order]);
         }
@@ -162,6 +163,14 @@ class OrderController extends Controller
         try {
             $hookUrl = env('DISCORD_ORDER_HOOK');
             if ($hookUrl) {
+                $closestHelpers = $order->closestHelpers();
+                $helperList = [];
+                if ($closestHelpers) {
+                    foreach ($closestHelpers as $helper) {
+                        $helperList[] = $helper['name'] . ' (' . number_format($helper['distance']/1000, 2) . 'km)';
+                    }
+                    $helperList = "\n\nDichtstbijzende helpers: " . implode(', ', $helperList);
+                }
 
                 $curl = curl_init($hookUrl);
                 // Return, don't echo...
@@ -181,7 +190,7 @@ Naam: {$order->customer->name} ({$order->customer->sector})
 
 Aantal: {$order->quantity}
 
-Type: {$order->item->title}
+Type: {$order->item->title}$helperList
 ```
 EOD;
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $query = json_encode(['content' => $order]));

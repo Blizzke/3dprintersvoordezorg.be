@@ -179,4 +179,27 @@ class Order extends Model
         $this->save();
         return $this->statusUpdateStatus($this->status_id, false, $helper);
     }
+
+    public function closestHelpers($limit = 5): ?array
+    {
+        $customer = $this->customer->geo_coordinates;
+        if (!$customer)
+            return null;
+
+        $customer = array_slice(array_values($customer), 0, 2);
+        $helpers = \App\Helper::getGeoList();
+        foreach($helpers as $index => $helper) {
+            try {
+                $location = array_slice(array_values($helper['location']), 0, 2);
+                $helpers[$index]['distance'] = haversineGreatCircleDistance(...$customer, ...$location);
+            }
+            catch(\Throwable $e) {
+                xdebug_break();
+            }
+        }
+
+        $helpers = collect($helpers)->sortBy('distance', SORT_NUMERIC);
+        return $helpers->take($limit)->toArray();
+    }
+
 }

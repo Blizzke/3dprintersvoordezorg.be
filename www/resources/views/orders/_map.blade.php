@@ -54,16 +54,16 @@
             });
 
             customer = L.marker({!! $order->customer->geo_coordinates_string !!}, {icon: greenIcon}).addTo(map)
-                .bindPopup('{{$order->customer->name}}') @if(is_helper()) .openPopup() @endif;
+                .bindPopup('{{$order->customer->title}}') @if(is_helper()) .openPopup() @endif;
 
             @if($order->is_new)
                 @foreach(\App\Helper::getGeoList() as $helper)
-                L.marker({!! $helper['location'] !!}, {icon: @if($helper['id'] == Auth::user()->id) goldIcon @else blueIcon @endif}).addTo(map)
+                L.marker({!! $helper['location_string'] !!}, {icon: @if($helper['id'] == Auth::user()->id) goldIcon @else blueIcon @endif}).addTo(map)
                     .bindPopup('{{$helper['name']}}');
                 @endforeach
             @else
                 maker = L.marker({!! $order->helper->geo_coordinates_string !!}, {icon: goldIcon}).addTo(map)
-                    .bindPopup('{{$order->helper->display_name}}') @if(is_customer()) .openPopup() @endif;
+                    .bindPopup('{{$order->helper->title}}') @if(is_customer()) .openPopup() @endif;
 
                 var group = new L.featureGroup([customer, maker]);
                 map.fitBounds(group.getBounds(), {"padding": [20, 40]});

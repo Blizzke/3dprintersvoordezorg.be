@@ -8,6 +8,8 @@ use Illuminate\Auth\Authenticatable;
 
 class Customer extends Model implements AuthenticatableContract
 {
+    use GeoLocationMixin;
+
     public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
     use Authenticatable;
     protected $fillable = ['sector', 'name', 'phone', 'mobile', 'email', 'street', 'number', 'zip', 'city', 'country_id'];
@@ -30,6 +32,11 @@ class Customer extends Model implements AuthenticatableContract
             $customer->identifier = $identifier;
         });
         parent::booted();
+    }
+
+    public function getTitleAttribute()
+    {
+        return $this->name;
     }
 
     public function getCountryAttribute()

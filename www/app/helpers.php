@@ -26,6 +26,16 @@ function pretty_time($time)
     return $carbon->format('d/m/Y H:i');
 }
 
+/**
+ * Updates the given models' geolocation field.
+ * If the query fails (not enough details or unknown) only the update timestamp will be saved to prevent
+ * server hammering.
+ *
+ * @param Helper|Customer $model
+ * @param string[] $fields  The fields to use to assemble the location query
+ * @param string $geo_attribute
+ * @return bool|null    null: no update has occurred, true/false: updated with result / with timestamp
+ */
 function update_model_geolocation($model, $fields = ['street', 'number', 'zip', 'city'], $geo_attribute = 'geolocation')
 {
     $current = $model->{$geo_attribute};
@@ -39,6 +49,21 @@ function update_model_geolocation($model, $fields = ['street', 'number', 'zip', 
         $query[] = $model->{$field};
     $query = implode(' ', array_filter($query));
 
+    $result = call_geo_api($query);
+    $return = true;
+    if (!$result) {
+        // No result but store the attempt anyway.
+        $return = false;
+        $result = ['Updated' => time()];
+    }
+    $model->{$geo_attribute} = $result;
+    $model->save();
+
+    return $return;
+}
+
+function call_geo_api($query)
+{
     $client = new GuzzleHttp\Client();
     /** @var \GuzzleHttp\Psr7\Response $res */
     $res = $client->request('GET', 'http://loc.geopunt.be/v4/Location', [
@@ -49,9 +74,7 @@ function update_model_geolocation($model, $fields = ['street', 'number', 'zip', 
         if ($result && isset($result['LocationResult'][0])) {
             $result = $result['LocationResult'][0];
             $result['Updated'] = time();
-            $model->{$geo_attribute} = $result;
-            $model->save();
-            return true;
+            return $result;
         }
     }
     return false;

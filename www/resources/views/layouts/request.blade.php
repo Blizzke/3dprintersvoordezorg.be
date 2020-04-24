@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="{{ url('/css/flaticon.css') }}">
         <link rel="stylesheet" href="{{ url('/css/icomoon.css') }}">
         <link rel="stylesheet" href="{{ url('/css/style.css') }}">
+        @stack('styles')
 
         <!-- jQuery -->
         <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -110,8 +111,7 @@
 
         <script src="{{ url('/js/aos.js') }}"></script>
         <script src="{{ url('/js/main.js') }}"></script>
-
-
+        @stack('javascript')
     </body>
 </html>
 

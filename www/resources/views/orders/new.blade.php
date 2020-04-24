@@ -1,5 +1,5 @@
 @extends('layouts.request')
-@section('title', "Items bestellen")
+@section('title', "Ik zoek materiaal")
 @section('content')
 
 
@@ -10,7 +10,7 @@
                 <div class="container">
                     <div class="row align-items-center justify-content-center text-center">
                         <div class="col-md-7">
-                            <h2 class="heading mb-5">Ik zoek materiaal</h2>
+                            <h2 class="heading mb-5">@yield('title')</h2>
                         </div>
                     </div>
                 </div>

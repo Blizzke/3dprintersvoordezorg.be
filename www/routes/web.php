@@ -31,6 +31,7 @@ Route::get('/order/new', 'OrderController@newOrderView');
 Route::post('/order/new', 'OrderController@newOrderForm');
 
 Route::get('/order/{order}', 'OrderController@view')->name('order');
+Route::get('/order/{order}/map', 'OrderController@viewMap');
 Route::post('/order/{order}/comment', 'OrderController@addComment')->name('order-comment');
 Route::get('/order/{order}/status', 'OrderController@updateStatus')->name('order-status');
 Route::post('/order/{order}/quantity', 'OrderController@addQuantity')->name('order-add-quantity');

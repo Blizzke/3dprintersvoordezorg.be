@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
 
-
 class Helper extends Model implements AuthenticatableContract
 {
     public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
-    use Notifiable, Authenticatable;
+    use Notifiable, Authenticatable, GeoLocationMixin;
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +39,11 @@ class Helper extends Model implements AuthenticatableContract
         'email_verified_at' => 'datetime',
         'geolocation' => 'array',
     ];
+
+    public function getTitleAttribute()
+    {
+        return $this->display_name;
+    }
 
     public function getCountryAttribute($value)
     {

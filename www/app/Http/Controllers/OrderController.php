@@ -55,6 +55,9 @@ class OrderController extends Controller
 
     public function view(Order $order)
     {
+        if (Auth::user() instanceof \App\Helper) {
+            return view('helpers.orders.details', ['order' => $order]);
+        }
         return view('orders.details', ['order' => $order]);
     }
 
@@ -190,5 +193,10 @@ EOD;
         }
         catch (\Throwable $e) {
         }
+    }
+
+    public function viewMap(Order $order)
+    {
+        return view('orders.map', ['order' => $order]);
     }
 }

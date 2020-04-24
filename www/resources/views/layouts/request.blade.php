@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="{{ url('/css/style.css') }}">
 
         <!-- jQuery -->
-        <script src="//code.jquery.com/jquery-3.5.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">

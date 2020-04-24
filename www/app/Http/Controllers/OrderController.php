@@ -55,7 +55,6 @@ class OrderController extends Controller
 
     public function view(Order $order)
     {
-        $this->notifyDiscord($order);
         if (Auth::user() instanceof \App\Helper) {
             return view('helpers.orders.details', ['order' => $order]);
         }

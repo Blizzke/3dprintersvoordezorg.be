@@ -30,6 +30,24 @@
         <p>Het klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
     </div>
 
+@if(is_helper())
+    <h2>Uitvoeren:</h2>
+    <div class="well">
+        @if ($order->is_new)
+        <a type="button" class="btn btn-success" href="{{route('order-accept', ['order' => $order->identifier, 'details' => 1])}}">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Ik ga deze uitvoeren
+        </a>
+        @else
+            <dl>
+            @foreach($item->maker_info as $name => $value)
+                    <dt>{{$name}}</dt><dd>{!! $value !!}</dd>
+            @endforeach
+            </dl>
+        @endif
+
+    </div>
+@endif
+
 @foreach($order->statuses as $status)
     @if($loop->first)
         <h2>Verloop bestelling:</h2>
@@ -139,13 +157,4 @@
     </p>
 @endif
 </div>
-
-@if(is_helper() && $order->is_new)
-    <h2>Uitvoeren:</h2>
-    <div class="well">
-        <a type="button" class="btn btn-success" href="{{route('order-accept', ['order' => $order->identifier, 'details' => 1])}}">
-            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Ik ga deze uitvoeren
-        </a>
-    </div>
-@endif
 @endsection

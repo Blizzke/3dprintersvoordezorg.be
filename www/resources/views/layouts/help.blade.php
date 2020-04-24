@@ -18,8 +18,13 @@
         <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
     </head>
     <body>
-        @section('sidebar')
-        @show
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a class='btn btn-primary' href="{{route('dashboard')}}">Bestellingen</a>
+                    <a class='btn btn-primary' href="https://discord.gg/T7mP48X" target="_blank">Discord (chat)</a></div>
+            </div>
+        </div>
 
         <div class="container">
             @yield('content')

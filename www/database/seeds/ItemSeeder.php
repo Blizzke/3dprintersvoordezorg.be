@@ -34,7 +34,7 @@ class ItemSeeder extends Seeder
                     'large'=> 'mondmasker_hulp_lg.jpg',
                 ],
                 'maker_info' => [
-                    'STL File' => '<a href="https://www.thingiverse.com/thing:4249113">hier</a>',
+                    'STL File' => '<a href="https://www.thingiverse.com/thing:4249113" target="_blank">hier (TV)</a> of <a href="files/earsaver.stl">hier (lokaal)</a>',
                     'Materiaal' => 'PLA of PLA flex (PETG indien niet voor 1 persoon)',
                     'Laagdikte' => '0.2mm (0.3mm werkt ook)',
                     'Infill' => '20%',
@@ -48,7 +48,7 @@ class ItemSeeder extends Seeder
                     'large'=> 'safegrabber_rd_lg.jpg',
                 ],
                 'maker_info' => [
-                    'STL File' => '<a href="/files/safegrabber_rd.stl">hier</a>',
+                    'STL File' => '<a href="https://www.prusaprinters.org/prints/26146-savegrabber-open-door-without-touching-the-handle-" target="_blank">hier (PP, rd variant)</a> of <a href="/files/safegrabber_rd.stl">hier (lokaal)</a>',
                     'Materiaal' => 'PLA, PETG of ABS (PETG is te ontsmetten)',
                     'Laagdikte' => '0.2mm - 0.4mm',
                     'Infill' => 'minimaal 30%',
@@ -75,7 +75,14 @@ class ItemSeeder extends Seeder
 
         Item::unguard();
         foreach ($items as $row) {
-            Item::create($row);
+            $item = Item::whereType($row['type'])->first();
+            if (!$item)
+                Item::create($row);
+            else
+                foreach ($row as $attribute => $value) {
+                    $item->{$attribute} = $value;
+                    $item->save();
+                }
         }
         Item::reguard();
     }

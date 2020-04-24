@@ -156,37 +156,39 @@ class OrderController extends Controller
 
     private function notifyDiscord(Order $order)
     {
-        $hookUrl = env('DISCORD_ORDER_HOOK');
-        if ($hookUrl) {
+        try {
+            $hookUrl = env('DISCORD_ORDER_HOOK');
+            if ($hookUrl) {
 
-            $curl = curl_init($hookUrl);
-            // Return, don't echo...
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            // Discord always expects form-data
-            curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-            // And a post
-            curl_setopt($curl, CURLOPT_POST, 1);
+                $curl = curl_init($hookUrl);
+                // Return, don't echo...
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                // Discord always expects form-data
+                curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+                // And a post
+                curl_setopt($curl, CURLOPT_POST, 1);
 
-            $orderUrl = route('order', ['order' => $order->identifier]);
-            $order = <<<EOD
+                $orderUrl = route('order', ['order' => $order->identifier]);
+                $order = <<<EOD
 __**Nieuwe bestelling: {$order->customer->zip}**__ - $orderUrl
 ```
 Gemeente: {$order->customer->zip} {$order->customer->city}
 
-Naam: {$order->customer->name}
+Naam: {$order->customer->name} ({$order->customer->sector})
 
 Aantal: {$order->quantity}
 
 Type: {$order->item->title}
 ```
 EOD;
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $query = json_encode(['content' => $order]));
-            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-            curl_setopt($curl, CURLOPT_HEADER, 0);
-            curl_exec($curl);
-            curl_close($curl);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $query = json_encode(['content' => $order]));
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($curl, CURLOPT_HEADER, 0);
+                curl_exec($curl);
+                curl_close($curl);
+            }
         }
-
-        return '';
+        catch (\Throwable $e) {
+        }
     }
 }

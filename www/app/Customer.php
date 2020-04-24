@@ -11,6 +11,9 @@ class Customer extends Model implements AuthenticatableContract
     public const COUNTRIES = [1 => 'België', 2 => 'Nederland'];
     use Authenticatable;
     protected $fillable = ['sector', 'name', 'phone', 'mobile', 'email', 'street', 'number', 'zip', 'city', 'country_id'];
+    protected $casts = [
+        'geolocation' => 'array',
+    ];
 
     protected static function booted()
     {

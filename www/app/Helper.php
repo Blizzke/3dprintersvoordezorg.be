@@ -38,6 +38,7 @@ class Helper extends Model implements AuthenticatableContract
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'geolocation' => 'array',
     ];
 
     public function getCountryAttribute($value)

@@ -57,9 +57,9 @@
                 .bindPopup('{{$order->customer->title}}') @if(is_helper()) .openPopup() @endif;
 
             @if($order->is_new)
-                @foreach(\App\Helper::getGeoList() as $helper)
+                @foreach(\App\Helper::getGeoList($order->customer->geo_coordinates) as $helper)
                 L.marker({!! $helper['location_string'] !!}, {icon: @if($helper['id'] == Auth::user()->id) goldIcon @else blueIcon @endif}).addTo(map)
-                    .bindPopup('{{$helper['name']}}');
+                    .bindPopup('{{$helper['name']}} ({{$helper['distance']}})');
                 @endforeach
             @else
                 maker = L.marker({!! $order->helper->geo_coordinates_string !!}, {icon: goldIcon}).addTo(map)

@@ -186,20 +186,7 @@ class Order extends Model
         if (!$customer)
             return null;
 
-        $customer = array_slice(array_values($customer), 0, 2);
-        $helpers = \App\Helper::getGeoList();
-        foreach($helpers as $index => $helper) {
-            try {
-                $location = array_slice(array_values($helper['location']), 0, 2);
-                $helpers[$index]['distance'] = haversineGreatCircleDistance(...$customer, ...$location);
-            }
-            catch(\Throwable $e) {
-                xdebug_break();
-            }
-        }
-
-        $helpers = collect($helpers)->sortBy('distance', SORT_NUMERIC);
-        return $helpers->take($limit)->toArray();
+        return array_slice(\App\Helper::getGeoList($customer), 0, $limit);
     }
 
 }

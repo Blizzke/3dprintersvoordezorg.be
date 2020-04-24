@@ -166,7 +166,7 @@ class OrderController extends Controller
                 $helperList = [];
                 if ($closestHelpers) {
                     foreach ($closestHelpers as $helper) {
-                        $helperList[] = $helper['name'] . ' (' . number_format($helper['distance']/1000, 2) . 'km)';
+                        $helperList[] = $helper['name'] . ' (' . $helper['distance'] . ')';
                     }
                     $helperList = "\n\nDichtstbijzende helpers: " . implode(', ', $helperList);
                 }

@@ -31,10 +31,10 @@ trait GeoLocationMixin
         return $this->getGeoCoordinatesAttribute() !== null;
     }
 
-    public static function getGeoList()
+    public static function getGeoList(array $distance_from = null)
     {
         // Cache::forget(get_called_class() . '_geo_list');
-        return Cache::remember(get_called_class() . '_geo_list', 3600, function() {
+        $users = Cache::remember(get_called_class() . '_geo_list', 3600, function() {
             $markers = [];
 
             foreach (static::cursor() as $user) {
@@ -48,5 +48,17 @@ trait GeoLocationMixin
             }
             return $markers;
         });
+
+        if ($distance_from) {
+            $distance_from = array_slice(array_values($distance_from), 0, 2);
+
+            foreach($users as $index => $user) {
+                $location = array_slice(array_values($user['location']), 0, 2);
+                $users[$index]['distance'] = number_format(haversineGreatCircleDistance(...$distance_from, ...$location)/1000, 2) . 'km';
+            }
+            $users = collect($users)->sortBy('distance', SORT_NUMERIC)->toArray();
+        }
+
+        return $users;
     }
 }

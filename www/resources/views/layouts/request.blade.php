@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/4.1.0//css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
     <link rel="stylesheet" href="{{ url('/css/aos.css') }}">
     <link rel="stylesheet" href="{{ url('/css/flaticon.css') }}">

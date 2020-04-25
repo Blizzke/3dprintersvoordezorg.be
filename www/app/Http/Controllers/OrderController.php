@@ -144,8 +144,7 @@ class OrderController extends Controller
         /** @var Order $order */
         // Now the order, since we create in one go and customer/item are required, mass assign them as well
         $input['customer_id'] = $customer->id;
-        $input['item_id'] = Item::whereName($input['item'])->firstOrFail()->id;
-
+        
         $orders = 0;
         foreach ($input['quantity'] as $item => $quantity) {
             if (!$quantity)

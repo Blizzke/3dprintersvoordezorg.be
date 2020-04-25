@@ -21,12 +21,9 @@
             <div class="col-sm-12">
                 <div class="alert alert-warning" role="alert" style="margin-top: 20px;">
                     <h4 class="alert-heading">Opgelet</h4>
-                    <p>
-                        Orders die bestaan uit verschillende items worden steeds opgesplitst in meerdere orders.
-                    </p>
                     <hr>
                     <p class="mb-0">
-                        Orders die bestaan uit verschillende items worden steeds opgesplitst in meerdere orders.
+                        Orders die bestaan uit verschillende items worden steeds opgesplitst in meerdere orders.<br>
                         We doen dit omdat niet al onze helpers alle items kunnen leveren.
                         Het zou dus kunnen dat je voor een order met verschillende items wordt gecontacteerd door verschillende helpers.
                         Een overzicht kan je hieronder vinden.

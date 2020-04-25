@@ -33,8 +33,6 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
     <link rel="stylesheet" href="{{ url('/css/aos.css') }}">
-    <link rel="stylesheet" href="{{ url('/css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ url('/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ url('/css/style.css') }}">
     @stack('styles')
 

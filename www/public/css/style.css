@@ -1083,7 +1083,8 @@ textarea.form-control {
 
 .block-6 .icon {
   margin-right: 30px;
-  color: #f7ca44; }
+  color: #f7ca44;
+    font-size: 2rem;}
   .block-6 .icon span:before {
     font-size: 50px; }
   .block-6 .icon span.bg-after:after {

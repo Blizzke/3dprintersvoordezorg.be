@@ -62,7 +62,7 @@
 
                 <div class="col-md-4">
                     <div class="media block-6">
-                        <div class="icon"><span class="ion-ios-bulb"></span></div>
+                        <div class="icon"><i class="fas fa-lightbulb"></i></div>
                         <div class="media-body">
                             <h3 class="heading">Onze missie</h3>
                             <p>Met tientallen vrijwilligers helpen wij graag een handje mee in deze moeilijke tijden. Via deze site bieden we tal van hulpstukken aan om mensen bij te staan in hun strijd tegen COVID-19.</p>
@@ -72,7 +72,7 @@
 
                 <div class="col-md-4">
                     <div class="media block-6">
-                        <div class="icon"><span class="ion-ios-cash"></span></div>
+                        <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
                         <div class="media-body">
                             <h3 class="heading">Doneer / Sponsor</h3>
                             <p>Help ons een handje door te doneren of verbruiksmateriaal te sponsoren.</p>
@@ -82,7 +82,7 @@
 
                 <div class="col-md-4">
                     <div class="media block-6">
-                        <div class="icon"><span class="ion-ios-contacts"></span></div>
+                        <div class="icon"><i class="fas fa-user-friends"></i></div>
                         <div class="media-body">
                             <h3 class="heading">Ik heb een 3D-printer en ik wil helpen</h3>
                             <p>Heb je zelf een 3D printer die momenteel stil staat en nog wat extra filament, help ons dan, want je weet hoe traag printen gaat => maar printers = meer mensen geholpen</p>

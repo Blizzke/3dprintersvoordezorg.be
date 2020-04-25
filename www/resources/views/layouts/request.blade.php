@@ -6,6 +6,13 @@
 
     <title>3d printers voor de zorg :: @yield('title', 'Welkom')</title>
 
+    <link rel="shortcut icon" href="{{ url('/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url('/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('/images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('/images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('/images/favicon-16x16.png') }}">
+    <link rel="mask-icon" href="{{ url('/images/safari-pinned-tab.svg') }}" color="#5bbad5">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,500|Dosis:400,700" rel="stylesheet">
 

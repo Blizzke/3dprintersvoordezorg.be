@@ -33,7 +33,7 @@
         </div>
         <div class="row">
             @foreach($customer->orders as $order)
-                <div class="col-sm-3">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 .col-xl-3">
                     <div class="card" style="margin-bottom: 20px;">
                         <div class="card-header">
                             Bestelling {{$order->identifier}}

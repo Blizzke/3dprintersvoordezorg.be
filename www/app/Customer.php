@@ -34,6 +34,11 @@ class Customer extends Model implements AuthenticatableContract
         parent::booted();
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'customer_id');
+    }
+
     public function getTitleAttribute()
     {
         return $this->name;

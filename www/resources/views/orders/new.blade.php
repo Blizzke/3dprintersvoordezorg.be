@@ -111,8 +111,7 @@
                                 <input type="text" name="phone" id="phone"
                                        class="form-control @error('phone') is-invalid @enderror"
                                        value="{{ old('phone') }}"/>
-                                @error('phone')
-                                <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                @error('phone')<div class="alert alert-danger">{{ $message }}</div> @enderror
                             </div>
                         </div>
                         <div class="form-group row">
@@ -121,8 +120,7 @@
                                 <input type="text" name="mobile" id="mobile"
                                        class="form-control @error('mobile') is-invalid @enderror"
                                        value="{{ old('mobile') }}"/>
-                                @error('mobile')
-                                <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                @error('mobile')<div class="alert alert-danger">{{ $message }}</div> @enderror
                             </div>
                         </div>
                         <div class="form-group row">
@@ -131,52 +129,48 @@
                                 <input type="text" name="email" id="email"
                                        class="form-control @error('email') is-invalid @enderror"
                                        value="{{ old('email') }}"/>
-                                @error('email')
-                                <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                @error('email')<div class="alert alert-danger">{{ $message }}</div> @enderror
                             </div>
                         </div>
 
                         <h2>Item</h2>
 
                         <div class="col-sm-12">
+                            <div class="well">
                             <p>Door de oplopende materiaalkost zien we ons genoodzaakt een vergoeding aan te rekenen om
                                 ons toe te laten nieuw materiaal aan te schaffen.</p>
-                            <p>Wanneer er "maximum" vermeld staat wil dat zeggen dat de kostprijs nooit meer zal zijn,
+                            <p>Wanneer er "<i>maximum</i>" vermeld staat wil dat zeggen dat de kostprijs nooit meer zal zijn,
                                 maar mogelijk wel minder.<br/>
-                                Het hangt van kost af van de persoon die je bestelling zal behandelen en wordt eerst
-                                overeengekomen voor er tot productie wordt overgegaan.</p>
+                                De effectieve prijs <b>wordt eerst overeengekomen</b> voor er geprint wordt,
+                                want deze hangt af van de kosten van de persoon die je bestelling zal behandelen. <p>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 control-label" for="item">Ik zou graag willen *</label>
                             <div class="col-sm-9">
+                                <div class="container">
+                                @error('quantity')<div class="alert alert-danger">{{ $message }}</div> @enderror
                                 @foreach($items as $item)
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="item"
-                                                   value="{{$item->name}}" {{ old('item')==$item->name ? 'checked' : '' }}>
-                                            <b>{{$item->title}}</b><br/>
-                                            Bestelhoeveelheid/Prijs: {{$item->verbose_price}} {{ $item->unit }}<br/>
-                                            {!! $item->description !!}<br/>
+                                    <div class="row" style="margin-bottom: 2em;">
+                                        <div class="col-sm-2">
+                                            <input type="text" name="quantity[{{$item->type}}]" id="{{$item->name}}" class="form-control" placeholder="0" value="{{old("quantity.{$item->type}")}}"/>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <label for="{{$item->type}}"><h3>{{$item->title}}</h3></label><br/>
+                                            <dl class="dl-horizontal">
+                                                <dt>Bestelhoeveelheid/Prijs</dt><dd>{{$item->verbose_price}} {{ $item->unit }}</dd>
+                                                <dt>Beschrijving</dt><dd>{!! $item->description !!}</dd>
+                                            </dl>
                                             <a href="{{$item->image()}}" data-fancybox="images"
                                                data-title="{{$item->title}}">
                                                 <img src="{{$item->image('small')}}" height="100" alt="{{$item->title}}"
                                                      class=""/>
                                             </a>
-                                        </label>
+
+                                        </div>
                                     </div>
                                 @endforeach
-                                @error('item')
-                                <div class="alert alert-danger">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-3 control-label" for="quantity">Aantal *</label>
-                            <div class="col-sm-2">
-                                <input type="text" name="quantity" id="quantity"
-                                       class="form-control @error('quantity') is-invalid @enderror"
-                                       value="{{ old('quantity') }}"/>
-                                @error('quantity')
-                                <div class="alert alert-danger">{{ $message }}</div> @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -198,7 +192,6 @@
                             </div>
                         </div>
                     </form>
-
             </div>
         </div>
     </div>

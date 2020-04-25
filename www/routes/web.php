@@ -35,5 +35,6 @@ Route::get('/order/{order}/map', 'OrderController@viewMap');
 Route::post('/order/{order}/comment', 'OrderController@addComment')->name('order-comment');
 Route::get('/order/{order}/status', 'OrderController@updateStatus')->name('order-status');
 Route::post('/order/{order}/quantity', 'OrderController@addQuantity')->name('order-add-quantity');
+Route::get('/customer/{customer}', 'OrderController@orderOverview')->name('customer');
 Route::get('/customer/{customer}/order/{order}', 'OrderController@customerLogin')->name('order-customer');
 

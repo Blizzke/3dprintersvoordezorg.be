@@ -8,13 +8,14 @@ use App\Order;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:helpers,customers')
-            ->except('customerLogin', 'newOrderView', 'newOrderForm');
+            ->except('customerLogin', 'orderOverview', 'newOrderView', 'newOrderForm');
     }
 
     public function accept(Order $order, Request $request)
@@ -109,9 +110,12 @@ class OrderController extends Controller
 
     public function newOrderForm(Request $request)
     {
+        Validator::extend('products_ordered', function ($attribute, $value, $parameters, $validator) {
+             return count(array_filter($value, function($var) use ($parameters) { return ( $var && (int)$var >= (int)$parameters[0]); }));
+        });
+
         $product = [
-            'item' => 'required|exists:items,name',
-            'quantity' => 'required|numeric|max:200',
+            'quantity'   => 'products_ordered:1',
         ];
 
         // Still here, if we don't have a customer, create one:
@@ -120,7 +124,7 @@ class OrderController extends Controller
         /** @var Customer $customer */
         if ($request->filled('customer_id')) {
             // Customer ID was specified, validate against database
-            $request->validate(['customer_id' => 'required|exists:customers,identifier'] + $product);
+            $request->validate(['customer_id' => 'required|exists:customers,identifier'] + $product, ['products_ordered' => 'Gelieve minstens 1 product te bestellen']);
             $customer = Customer::whereIdentifier($request->post('customer_id'))->first();
         }
         else {
@@ -131,7 +135,7 @@ class OrderController extends Controller
                 'phone' => 'required_without_all:mobile,email',
                 'mobile' => 'required_without_all:phone,email',
                 'email' => 'required_without_all:phone,mobile',
-            ] + $product);
+            ] + $product, ['products_ordered' => 'Gelieve minstens 1 product te bestellen']);
             $customer = Customer::create($input);
         }
 
@@ -141,20 +145,45 @@ class OrderController extends Controller
         // Now the order, since we create in one go and customer/item are required, mass assign them as well
         $input['customer_id'] = $customer->id;
         $input['item_id'] = Item::whereName($input['item'])->firstOrFail()->id;
-        $order = Order::create($input);
 
-        $order->statusUpdateStatus(0, true);
-        $order->save();
+        $orders = 0;
+        foreach ($input['quantity'] as $item => $quantity) {
+            if (!$quantity)
+                // Laravel adds "nulls" so skip those
+                continue;
 
-        // Optional comment
-        if ($request->filled('comment')) {
-            $status = $order->newStatus(true);
-            $status->comment = $request->get('comment');
-            $status->save();
+            $order = new Order();
+            $order->fill($input);
+
+            $item = Item::whereType($item)->firstOrFail();
+            $order->item()->associate($item);
+            $order->quantity = $quantity;
+
+            $order->statusUpdateStatus(0, true);
+            $order->save();
+
+            // Optional comment
+            if ($request->filled('comment')) {
+                $status = $order->newStatus(true);
+                $status->comment = $request->get('comment');
+                $status->save();
+            }
+
+            $this->notifyDiscord($order);
+            $orders ++;
         }
 
-        $this->notifyDiscord($order);
-        return redirect()->route('order', ['order' => $order->identifier]);
+        if ($orders === 1) {
+            // 1 order, go directly to order details
+            return redirect()->route('order', ['order' => $order->identifier]);
+        }
+        // Redirect to order overview page
+        return redirect()->route('customer', ['customer' => $customer->identifier]);
+    }
+
+    public function orderOverview(Customer $customer)
+    {
+        return view('orders.list', ['customer' => $customer]);
     }
 
     private function notifyDiscord(Order $order)

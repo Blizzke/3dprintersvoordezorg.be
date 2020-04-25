@@ -13,9 +13,9 @@ class ItemSeeder extends Seeder
     public function run()
     {
         $items = [
-            ['type' => 'faceshield', 'name' => 'Gelaatsbeschermer', 'price' => 5, 'on_fp' => 1,
+            ['type' => 'faceshield', 'name' => 'Gelaatsbeschermer', 'price' => 3.5, 'on_fp' => 1,
                 'title' => 'Gelaatsbeschermer/Spatmasker',
-                'description' => 'Wordt geprint in PETG met een A4 lamineerhoes of overhead transparant.<br> Bevestiging met knoopsgatrekker.<br/>Effectieve model kan afwijken van foto.',
+                'description' => 'Wordt geprint in PETG met een A4 lamineerhoes of overhead transparant.<br>Voor model van foto: Bevestiging met knoopsgatrekker.<br/>Effectieve model kan afwijken van foto.',
                 'images' => [
                     'large'=> 'faceshield_lg.jpg',
                 ],
@@ -57,7 +57,7 @@ class ItemSeeder extends Seeder
             ],
             ['type' => 'mask_typeIIr_zorg', 'name' => 'IIR mondmasker (zorgverlening)', 'price' => 42.5, 'vat_ex' => 1, 'is_max' => 0, 'sector' => '|zorgverlening|',
                 'title' => 'Chirurgisch masker type IIR (zorg)',
-                'description' => '0.85&euro;/stuk exbtw.<br/><b>Alleen zorg en scholen!</b> <br />.NIET individueel verpakt.<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.<br/> Factuur is mogelijk',
+                'description' => '<b>Alleen voor zorg en scholen!</b> 0.85&euro;/stuk exbtw. NIET individueel verpakt. Factuur is mogelijk<br />Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.',
                 'unit' => 'per doos van 50 stuks',
                 'images' => [
                     'large'=> 'masktypeiir2_lg.jpg',
@@ -65,7 +65,7 @@ class ItemSeeder extends Seeder
             ],
             ['type' => 'mask_typeIIr', 'name' => 'IIR mondmasker', 'price' => 50, 'vat_ex' => 1, 'is_max' => 0, 'on_fp' => 4,
                 'title' => 'Chirurgisch masker type IIR',
-                'description' => '1&euro;/stuk exbtw.<br/>NIET individueel verpakt.<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.<br />Factuur is mogelijk',
+                'description' => '1&euro;/stuk exbtw. NIET individueel verpakt. Factuur is mogelijk<br/>Technische fiche <a href="/files/masktypeiir.pdf">hier</a>.',
                 'unit' => 'per doos van 50 stuks',
                 'images' => [
                     'large'=> 'masktypeiir2_lg.jpg',

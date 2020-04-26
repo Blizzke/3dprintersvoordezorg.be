@@ -122,7 +122,7 @@ class Order extends Model
 
     public function scopeYours($query)
     {
-        return $query->where('helper_id', Auth::user()->id);
+        return $query->where('helper_id', Auth::user()->id)->orderBy('status_id');
     }
 
     public function assign(Helper $helper)

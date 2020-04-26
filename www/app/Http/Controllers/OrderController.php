@@ -110,21 +110,47 @@ class OrderController extends Controller
 
     public function newOrderForm(Request $request)
     {
+        $input = $request->all();
+
         Validator::extend('products_ordered', function ($attribute, $value, $parameters, $validator) {
              return count(array_filter($value, function($var) use ($parameters) { return ( $var && (int)$var >= (int)$parameters[0]); }));
         });
 
-        $product = [
-            'quantity'   => 'products_ordered:1',
-        ];
+        Validator::extend('sector_limits', function ($attribute, $value, $parameters, $validator) use ($input) {
+            $sector = isset($input['sector']) ? $input['sector'] : null;
+            if (isset($input['customer_id'])) {
+                // Pre-existing customer, fetch it and its sector
+                $customer = Customer::select('sector')->whereIdentifier($input['customer_id'])->first();
+                if ($customer) {
+                    $sector = $customer->sector;
+                }
+            }
 
-        // Still here, if we don't have a customer, create one:
-        $input = $request->all();
+            $items = Item::select('type', 'sector')->get();
+            foreach ($items as $item) {
+                if (!$value[$item->type] || !$item->sector)
+                    // No products of this type ordered or not limited by sector
+                    continue;
+
+                if (!$sector || strpos($item->sector, "|$sector|") === false)
+                    // The sector is not in the allowed sectors
+                    return false;
+            }
+            return true;
+        });
+
+        $product = [
+            'quantity'   => 'products_ordered:1|sector_limits',
+        ];
+        $messages = [
+            'products_ordered' => 'Gelieve minstens 1 product te bestellen',
+            'sector_limits' => 'Eén of meer van de producten die je besteld zijn gelimiteerd op klanten-sector'
+        ];
 
         /** @var Customer $customer */
         if ($request->filled('customer_id')) {
             // Customer ID was specified, validate against database
-            $request->validate(['customer_id' => 'required|exists:customers,identifier'] + $product, ['products_ordered' => 'Gelieve minstens 1 product te bestellen']);
+            $request->validate(['customer_id' => 'required|exists:customers,identifier'] + $product, $messages);
             $customer = Customer::whereIdentifier($request->post('customer_id'))->first();
         }
         else {
@@ -135,7 +161,7 @@ class OrderController extends Controller
                 'phone' => 'required_without_all:mobile,email',
                 'mobile' => 'required_without_all:phone,email',
                 'email' => 'required_without_all:phone,mobile',
-            ] + $product, ['products_ordered' => 'Gelieve minstens 1 product te bestellen']);
+            ] + $product, $messages);
             $customer = Customer::create($input);
         }
 

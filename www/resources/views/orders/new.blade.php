@@ -144,10 +144,10 @@
                                 want deze hangt af van de kosten van de persoon die je bestelling zal behandelen. <p>
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                            @error('quantity')<div class="alert alert-danger">{{ $message }}</div> @enderror
+                        </div>
                         <div class="form-group row">
-
-
-                                @error('quantity')<div class="alert alert-danger">{{ $message }}</div> @enderror
                                 @foreach($items as $item)
                                     <div class="col-sm-4 d-flex align-items-stretch" style="margin-bottom: 2em;">
                                         <div class="card">

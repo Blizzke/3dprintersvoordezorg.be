@@ -48,7 +48,7 @@
     @elseif($status->type === 'comment')
         <li>Op <b>{{ $status->pretty_time }}</b> zei <b>{{ $status->by ?? 'onbekend' }}</b>:
             <p>
-                {!! $status->comment !!}
+                {!! nl2br($status->comment) !!}
             </p>
         </li>
     @endif

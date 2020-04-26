@@ -23,10 +23,9 @@
                     <h4 class="alert-heading">Opgelet</h4>
                     <hr>
                     <p class="mb-0">
-                        Orders die bestaan uit verschillende items worden steeds opgesplitst in meerdere orders.<br>
-                        We doen dit omdat niet al onze helpers alle items kunnen leveren.
-                        Het zou dus kunnen dat je voor een order met verschillende items wordt gecontacteerd door verschillende helpers.
-                        Een overzicht kan je hieronder vinden.
+                        Bestelling met verschillende items worden opgesplitst in meerdere orders, niet al onze helpers kunnen alle items maken/leveren.<br />
+                        Het is mogelijk dat je voor elk type item wordt gecontacteerd door een andere helper.<br />
+                        Een overzicht van je bestellingen kan je hieronder vinden.
                     </p>
                 </div>
             </div>
@@ -36,7 +35,7 @@
                 <div class="col-12 col-sm-12 col-md-6 col-lg-4 .col-xl-3">
                     <div class="card" style="margin-bottom: 20px;">
                         <div class="card-header">
-                            Bestelling {{$order->identifier}}
+                            {{$order->identifier}} ({{$order->pretty_time}})
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">

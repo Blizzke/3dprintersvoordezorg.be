@@ -21,8 +21,6 @@
     </div>
 </div>
 
-{{-- Link terug naar order overview? --}}
-
 <div class="site-section bg-light">
     <div class="container">
 
@@ -32,15 +30,17 @@
         <p>Pas op dat moment zal er aan de bestelling begonnen worden.</p>
         @endif
 
-        <h2>Link</h2>
+        <h2>Links</h2>
         <div class="well">
-            <p>Je kan deze pagina in de toekomst altijd terug bezoeken via deze link:</p>
-            <p>
-                <a href="{{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}">
-                    {{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}
-                </a>
-            </p>
-            <p>Je klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
+            <dl>
+                <dt>Naar deze bestelling</dt><dd><a href="{{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}">
+                        {{route('order-customer', ['customer' => $customer->identifier, 'order'=>$order->identifier])}}</a>
+                </dd>
+                <dt>Je bestellingsoverzicht</dt><dd><a href="{{route('customer', ['customer' => $customer->identifier])}}">
+                        {{route('customer', ['customer' => $customer->identifier])}}</a>
+                </dd>
+                <dt>Je klantennummer (voor volgende bestellingen)</dt><dd>{{ $customer->identifier }}</dd>
+            </dl>
         </div>
 
         <h2>Verloop bestelling:</h2>
@@ -58,7 +58,7 @@
             @elseif($status->type === 'comment' && !$status->is_internal)
                 <li>Op <b>{{ $status->pretty_time }}</b> zei <b>{{ $status->by ?? 'onbekend' }}</b>:
                     <p>
-                        {!! $status->comment !!}
+                        {!! nl2br($status->comment) !!}
                     </p>
                 </li>
             @endif

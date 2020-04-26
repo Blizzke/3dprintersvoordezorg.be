@@ -43,7 +43,7 @@ Inhoud aanvraag:
     @elseif($status->type === 'comment')
         <li>Op <b>{{ $status->created_at }}</b> zei <b>{{ $status->by ?? 'onbekend' }}</b>:
             <p>
-                {!! $status->comment !!}
+                {!! nl2br($status->comment) !!}
             </p>
         </li>
     @endif

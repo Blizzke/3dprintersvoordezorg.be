@@ -18,7 +18,6 @@
         </div>
     </div>
 
-
     <div class="site-section bg-light">
         <div class="container">
             <div class="row">
@@ -146,32 +145,33 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label" for="item">Ik zou graag willen *</label>
-                            <div class="col-sm-9">
-                                <div class="container">
+
+
                                 @error('quantity')<div class="alert alert-danger">{{ $message }}</div> @enderror
                                 @foreach($items as $item)
-                                    <div class="row" style="margin-bottom: 2em;">
-                                        <div class="col-sm-2">
-                                            <input type="text" name="quantity[{{$item->type}}]" id="{{$item->name}}" class="form-control" placeholder="0" value="{{old("quantity.{$item->type}")}}"/>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <label for="{{$item->type}}"><h3>{{$item->title}}</h3></label><br/>
-                                            <dl class="dl-horizontal">
-                                                <dt>Bestelhoeveelheid/Prijs</dt><dd>{{$item->verbose_price}} {{ $item->unit }}</dd>
-                                                <dt>Beschrijving</dt><dd>{!! $item->description !!}</dd>
-                                            </dl>
-                                            <a href="{{$item->image()}}" data-fancybox="images"
-                                               data-title="{{$item->title}}">
-                                                <img src="{{$item->image('small')}}" height="100" alt="{{$item->title}}"
-                                                     class=""/>
+                                    <div class="col-sm-4 d-flex align-items-stretch" style="margin-bottom: 2em;">
+                                        <div class="card">
+                                            <a href="{{$item->image()}}" data-fancybox="images" data-title="{{$item->title}}">
+                                                <img src="{{$item->image('small')}}" class="card-img-top" alt="{{$item->title}}" style="max-height: 280px;">
                                             </a>
-
+                                            <div class="card-body">
+                                                <label for="{{$item->type}}"><h5 class="card-title">{{$item->title}}</h5></label>
+                                                <p class="card-text">
+                                                    {!! $item->description !!}
+                                                </p>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">{{$item->verbose_price}} {{ $item->unit }}</li>
+                                                <li class="list-group-item">
+                                                    <label class="control-label" for="item">Aantal stuks *</label>
+                                                    <input type="text" name="quantity[{{$item->type}}]" id="{{$item->name}}" class="form-control" placeholder="0" value="{{old("quantity.{$item->type}")}}"/>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 @endforeach
-                                </div>
-                            </div>
+
+
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-3 control-label" for="for">Ter attentie van</label>

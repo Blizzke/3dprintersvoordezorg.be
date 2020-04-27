@@ -60,7 +60,7 @@
                 vragen". </p>
             <p>Normaal gezien kom je met deze prijzen qua materiaal zeker uit de kosten. Het staat je altijd vrij om
                 minder te vragen of het zelfs gratis aan te bieden,
-                dat is jouw keuze. We willen helpers gewoon niet dwingen hun materiaal zo weeg te moeten geven. Zolang
+                dat is jouw keuze. We willen helpers gewoon niet dwingen hun materiaal zo weg te geven. Zolang
                 jullie maar tot een akkoord komen.</p>
 
             <h4>Facturatie</h4>
@@ -74,33 +74,32 @@
                 (interne) nota toe te voegen waarom, kom desnoods ook wat op de chat zeggen.</p>
 
             <h3>Status</h3>
-            <p>Elke normale bestelling doorloopt 4 statussen: Toegewezen, In produtie, Te leveren, Afgewerkt (Ze begint
+            <p>Elke normale bestelling doorloopt 4 statussen: Toegewezen, In productie, Te leveren, Afgewerkt (Ze begint
                 als "Nieuw" en er is ook nog "Geannuleerd")
                 Het is aan jou om te zorgen dat je voortgang gereflecteerd wordt in deze status. Van zodra je een
                 overeenkomst met de klant hebt en &quot;eraan begint&quot;,
-                zet je de bestelling dus in productie. Dat gebeurd via de detail pagina. We hebben momenteel nog geen
+                zet je de bestelling dus in productie. Dat gebeurt via de detail pagina. We hebben momenteel nog geen
                 email systeem om notificaties uit te sturen, dus de klant heeft momenteel alleen
                 de link naar de bestelpagina om op te volgen.</p>
 
             <h3>Aantal toevoegen</h3>
-            Je kan registeren met hoeveel items je al klaar bent door dit formulier te gebruiken. Meerdere keren mag, de
-            tellers houden de status bij. Zo ziet de klant
-            ook de voortgang. Het is ook mogelijk om met meerderen samen aan een bestelling te werken. De ander mensen
+            <p>Je kan registeren met hoeveel items je al klaar bent door dit formulier te gebruiken. Meerdere keren mag, de
+                tellers houden de status bij. Zo ziet de klant ook de voortgang.</p>
+            <p>Het is ook mogelijk om met meerderen samen aan een bestelling te werken. De andere helpers
             gebruiken dan het postvak icon (<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>, werk
-            toevoegen) van op de overzichtspagina.
+                toevoegen) van op de overzichtspagina.</p>
             <p>Zelfs al heb je alles al, voeg het aantal dan nog altijd toe aan de bestelling, dat behoudt het
-                overzicht</p>
+                overzicht.</p>
 
             <h3>Communicatie</h3>
-            Zowel jijzelf als de klant kan commentaar toevoegen die dan verschijnt in het verloop van de bestelling.
+            Zowel jijzelf als de klant kunt commentaar toevoegen die dan verschijnt omder het &quot;verloop bestelling&quot; deel.
             Helpers hebben de keuze om een commentaar als "intern" te markeren.
             Alleen andere helpers kunnen deze commentaar dan zien. Dit kan je bvb gebruiken voor "Betaling ontvangen" of
             andere nota's waarvan de klant die niet per se moet zien.
 
             <h3>Afgewerkt</h3>
-            Als je een bestelling hebt afgewerkt, vergeet dan niet van deze op klaar te zetten. Ze verdwijnt dan voor
-            iedereen uit de lijst van actieve bestellingen en de tellers op
-            de voorpagina worden ge&euml;pdated.
+            Als je een bestelling hebt afgewerkt, vergeet dan niet deze op klaar te zetten. Ze verdwijnt dan voor
+            iedereen uit de lijst van actieve bestellingen en de tellers op de voorpagina worden ge&euml;pdated.
         </div>
 
         <h2>Printen</h2>
@@ -112,7 +111,7 @@
             <p>De technische info van elk item vermeld welke materialen hiervoor kunnen gebruikt worden. We zijn alleen
                 zeer strikt met het materiaal voor de gelaatsbeschermers.
                 <b>Deze MOETEN IN PETG</b> geprint worden. Als je dit niet wilt/kunt, gelieve ze dan niet via dit
-                platform te leveren.</p>
+                platform te leveren (tenzij de klant hier expliciet zelf om vraagt en zich van de risico's bewust is).</p>
             <p>De reden waarom, afgezien van het feit dat we dit in overeenstemming beslist hebben, is dat PETG op dit
                 moment het enige materiaal is waar we met zekerheid van kunnen zeggen dat het
                 te desinfecteren valt. Dit werd onomstotelijk <a
@@ -128,7 +127,7 @@
                 verschil in kost van 0.1&euro; per masker? </p>
             <p>De kans is redelijk groot dat jouw gelaatsbeschermer het enige gaat zijn dat de persoon in kwestie gaat hebben en
                 kan dragen voor zolang deze crisis nog duurt.</p>
-            <p>Kort gezegd: omdat we het niet weten, willen we in deze tijden geen enkel risico nemen. Dus we kiezen dus voor het
+            <p>Kort gezegd: omdat we het niet weten willen we in deze tijden geen enkel risico nemen. Dus we kiezen dus voor het
                 veiligste pad. (<a href="https://discordapp.com/channels/697806915861741658/697807457313095780/704194899213287504" target="_blank">klik ook eens hier</a> als je meer achtergrond wilt) </p>
             <p>Het is in het kader hiervan ook belangrijk dat je de klant op de hoogte brengt van de (niet)steriliteit
                 van het product en dat hij zelf verantwoordelijkheid neemt hiervoor.

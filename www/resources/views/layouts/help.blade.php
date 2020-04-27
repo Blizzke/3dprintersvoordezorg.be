@@ -28,7 +28,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><strong>Helper Dashboard</strong></a>
+                    <a class="navbar-brand" href="{{route('dashboard')}}"><strong>Helper Dashboard</strong></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->

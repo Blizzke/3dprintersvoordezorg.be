@@ -34,7 +34,7 @@ trait GeoLocationMixin
     public static function getGeoList(array $distance_from = null)
     {
         // Cache::forget(get_called_class() . '_geo_list');
-        $users = Cache::remember(get_called_class() . '_geo_list', 3600, function() {
+        $users = Cache::remember(get_called_class() . '_geo_list', 60, function() {
             $markers = [];
 
             foreach (static::cursor() as $user) {

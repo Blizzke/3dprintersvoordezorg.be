@@ -92,6 +92,11 @@ class HelperController extends Controller
         return view('helpers.dashboard');
     }
 
+    public function howWhatWhere()
+    {
+        return view('helpers.how_what_where');
+    }
+
     public function logout(Request $request)
     {
         $this->guard()->logout();

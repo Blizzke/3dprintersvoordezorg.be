@@ -21,6 +21,7 @@ Route::get('/helper/login', 'HelperController@loginForm')->name('login');
 Route::post('/helper/login', 'HelperController@login');
 Route::get('/helper/logout', 'HelperController@logout')->name('logout');
 Route::get('/helper/dashboard', 'HelperController@dashboard')->name('dashboard');
+Route::get('/helper/how-what-where', 'HelperController@howWhatWhere');
 
 Route::get('/helper/order/{order}/accept', 'OrderController@accept')->name('order-accept');
 Route::get('/helper/order/{order}/release', 'OrderController@release')->name('order-release');

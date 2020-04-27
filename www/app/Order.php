@@ -25,13 +25,20 @@ class Order extends Model
         return array_flip(self::STATUSES)[$status];
     }
 
+
     protected static function booted()
     {
-        self::creating(function ($order) {
-            # Guess probability is low we'll have 2 orders on exactly the same second
-            if (empty($order->identifier)) {
-                $order->identifier = time();
+        static::creating(function ($order) {
+            if (!empty($order->identifier)) {
+                return;
             }
+
+            do {
+                # Unique identifier per customer so they can "login" later to add another request
+                $identifier = random_int(1000000000, 2147483647);
+            } while (self::whereIdentifier($identifier)->exists());
+
+            $order->identifier = $identifier;
         });
         parent::booted();
     }

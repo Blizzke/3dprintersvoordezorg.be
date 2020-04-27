@@ -21,7 +21,8 @@ class ItemSeeder extends Seeder
                 ],
                 'maker_info' => [
                     'STL File' => '<a href="https://www.prusaprinters.org/prints/25857-prusa-face-shield" target="_blank>">enkel</a>, <a href="https://www.prusaprinters.org/prints/27267" target="_blank">stacked/5</a>',
-                    'Materiaal' => 'PETG (PLA enkel indien klant de extra risico\'s begrijpt!)',
+                    'Disclaimer' => '<a href="/files/covid-19.pdf">PDF</a> / <a href="/files/covid-19.docx">DOCX</a>',
+                    'Materiaal' => 'PETG! (Geen PLA! Alleen in extreme gevallen als de klant de extra risico\'s begrijpt of er expliciet naar vraagt!)',
                     'Laagdikte' => '0.2mm - 0.3mm',
                     'Infill' => '20%',
                     'Supports' => 'geen',
@@ -34,7 +35,7 @@ class ItemSeeder extends Seeder
                     'large'=> 'mondmasker_hulp_lg.jpg',
                 ],
                 'maker_info' => [
-                    'STL File' => '<a href="https://www.thingiverse.com/thing:4249113" target="_blank">hier (TV)</a> of <a href="files/earsaver.stl">hier (lokaal)</a>',
+                    'STL File' => '<a href="https://www.thingiverse.com/thing:4249113" target="_blank">hier (TV)</a> of <a href="/files/earsaver.stl">hier (lokaal)</a>',
                     'Materiaal' => 'PLA of PLA flex (PETG indien niet voor 1 persoon)',
                     'Laagdikte' => '0.2mm (0.3mm werkt ook)',
                     'Infill' => '20%',

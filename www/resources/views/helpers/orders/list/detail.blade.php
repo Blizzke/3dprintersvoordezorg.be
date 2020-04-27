@@ -25,7 +25,7 @@ Inhoud aanvraag:
 <div class="well">
     <p>{{ $order->quantity }}&times; {{ $item->name }} ({{$item->verbose_price}} per stuk)</p>
     @if($item->is_max)
-        <p>De vermelde prijs is een maximum prijs. Je kan naar keus minder vragen, maar nooit meer</p>.
+        <p>De vermelde prijs is een maximum prijs. Je kan naar keus minder vragen, maar nooit meer.</p>
     @endif
     <p>Deze prijs is <b>{{ $item->vat_ex ? 'exclusief' : 'inclusief' }}</b> btw!</p>
 </div>

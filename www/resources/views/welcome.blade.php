@@ -16,14 +16,6 @@
         </div>
     </div>
 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center">
-        We hebben een <strong>nieuwe, gebruiksvriendelijkere site</strong> online gezet die we de komende dagen nog wat meer zullen updaten.
-        Je bent wel degelijk op de <strong>juiste plek</strong>!
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
     <div class="site-section section-counter">
         <div class="container">
             <div class="row">

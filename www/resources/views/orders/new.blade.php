@@ -31,7 +31,7 @@
                                 <input type="text" name="customer_id" id="customer_id" class="form-control"
                                        value="{{ old('customer_id') }}"/>
                             </div>
-                            <div class="col-lg-9 offset-sm-3">
+                            <div class="col-lg-9 offset-lg-3">
                                 (indien je het hebt: klantnummer van een vorige bestelling, je mag de rest van de
                                 gegevens/contact leeg laten)
                             </div>
@@ -60,7 +60,7 @@
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div> @enderror
                             </div>
-                            <div class="col-lg-9 offset-sm-3">
+                            <div class="col-lg-9 offset-lg-3">
                                 <p>(Instelling/Bedrijf/Persoon)</p>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
 
                         <div class="form-group row">
                             @foreach($items as $item)
-                                <div class="col-lg-4 d-flex align-items-stretch" style="margin-bottom: 2em;">
+                                <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch" style="margin-bottom: 2em;">
                                     <div class="card">
                                         <a href="{{$item->image()}}" data-fancybox="images" data-title="{{$item->title}}">
                                             <img src="{{$item->image('small')}}" class="card-img-top" alt="{{$item->title}}" style="max-height: 280px;">

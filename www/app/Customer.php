@@ -56,7 +56,13 @@ class Customer extends Model implements AuthenticatableContract
 
     public function getLocationAttribute()
     {
-        return implode(' ', [$this->zip, $this->city]);
+        return array_values(array_filter([$this->city, $this->zip]))[0];
+    }
+
+    public function locationAndDistance(Helper $helper)
+    {
+        $distance = $this->distanceFrom($helper);
+        return $this->location . ($distance ? " ($distance)" : '');
     }
 
     public function getAuthIdentifierName()

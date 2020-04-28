@@ -189,11 +189,11 @@ class Order extends Model
 
     public function closestHelpers($limit = 5): ?array
     {
-        $customer = $this->customer->geo_coordinates;
-        if (!$customer)
-            return null;
+        if (!$this->customer)
+            return [];
 
-        return array_slice(\App\Helper::getGeoList($customer), 0, $limit);
+        $list = \App\Helper::getGeoList($this->customer);
+        return $limit !== false ? array_slice($list, 0, $limit) : $list;
     }
 
 }

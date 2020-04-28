@@ -4,7 +4,7 @@
         @include('helpers.orders.list.start')
     @endif
 
-    @include('helpers.orders.list.row', ['order' => $order, 'loop' => $loop])
+    @include('helpers.orders.list.row', ['order' => $order, 'loop' => $loop, 'show_distance' => true])
 
     @if ($loop->last)
         @include('helpers.orders.list.end')

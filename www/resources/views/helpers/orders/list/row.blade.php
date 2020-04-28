@@ -9,7 +9,11 @@
     <td>{{ $order->pretty_time }}</td>
     <td>{{ $order->customer->sector }}</td>
     <td>{{ $order->customer->name }}</td>
+    @if ($show_distance ?? false)
+    <td>{{ $order->customer->locationAndDistance(Auth::user()) }}</td>
+    @else
     <td>{{ $order->customer->location }}</td>
+    @endif
     <td>{{ $order->quantity }}&times; {{ $order->item->name }}</td>
     @if(isset($show) && in_array('status', $show))
         <td>

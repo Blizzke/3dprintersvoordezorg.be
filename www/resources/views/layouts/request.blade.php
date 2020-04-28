@@ -39,6 +39,9 @@
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/514e72abce.js" crossorigin="anonymous"></script>
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ url('') }}"><img src="{{ url('/images/logo.svg') }}"

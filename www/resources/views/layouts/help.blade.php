@@ -12,6 +12,9 @@
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="//fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/514e72abce.js" crossorigin="anonymous"></script>
+
         <!-- Styles -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         @stack('styles')

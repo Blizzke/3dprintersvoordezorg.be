@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable;
@@ -96,6 +97,14 @@ class Helper extends Model implements AuthenticatableContract
     {
         $feature = Feature::findByIdentifier($featureName);
         $this->features()->detach($feature->id);
+    }
+
+    public static function makesItem(Item $item)
+    {
+        $feature = Feature::findByIdentifier('item', $item->type);
+        return self::whereIn('id', function (Builder $query) use ($feature) {
+            return $query->from('helper_features')->select('helper_id')->whereFeatureId($feature->id);
+        })->get();
     }
 
     public function getAuthIdentifierName()

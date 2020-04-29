@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -160,7 +161,7 @@ class Order extends Model
     /**
      * Create a new order status
      * @param bool $customer If true, associated the customer with the status
-     * @param bool|\App\Helper|null $helper If filled, associate helper with the status. true to use the order $helper
+     * @param bool|Helper|null $helper If filled, associate helper with the status. true to use the order $helper
      * @return OrderStatus
      */
     public function newStatus($customer = false, $helper = null): OrderStatus
@@ -195,8 +196,13 @@ class Order extends Model
         if (!$this->customer)
             return [];
 
-        $list = \App\Helper::getGeoList($this->customer);
-        return $limit !== false ? array_slice($list, 0, $limit) : $list;
+        $list = collect(Helper::getGeoList($this->customer));
+        $helpers = Helper::makesItem($this->item)->map->only('id')->pluck('id');
+        $list = $list->whereIn('id', $helpers);
+        if ($limit !== false)
+            $list = $list->take($limit);
+
+        return $list->toArray();
     }
 
 }

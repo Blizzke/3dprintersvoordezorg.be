@@ -24,21 +24,18 @@
                 <div class="col-md-6 mb-5 mb-md-0">
                     <h2>@yield('title')</h2>
                     <p>Heb je zelf een 3D printer die momenteel stil staat en nog wat extra filament, help ons dan, want
-                        je weet hoe
-                        traag printen gaat => meer printers = meer mensen geholpen</p>
+                        je weet hoe traag printen gaat => meer printers = meer mensen geholpen</p>
 
                     <p>Deze website is enkel om mensen te helpen in deze corona tijden, er worden geen persoonlijke
-                        gegevens aan
-                        derden verstrekt.</p>
+                        gegevens aan derden verstrekt.</p>
 
                     <p>Als je nog steeds wil helpen, registreer jezelf dan hieronder. Je krijgt dan toegang tot de lijst
-                        van
-                        aanvragen.<br><br>
+                        van aanvragen.<br><br>
                         Deze lijst toont het overzicht van iedereen die hulpstukken wilt, hoeveel en welke.
                         Als je een bestelling wilt vervullen kies je er gewoon 1 van de lijst.<br><br>
                         Je kan dan contact nemen met de persoon in kwestie voor de details en afspreken van de prijs en
-                        je werkt de
-                        aanvraag af, zo simpel is het.</p>
+                        je werkt de aanvraag af, zo simpel is het.</p>
+                    <p>Je vindt na je registratie een volledige uitleg onder de "hoe, wat, waar?"-pagina</p>
                 </div>
 
                 <div class="col-md-6 pl-md-5">

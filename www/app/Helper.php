@@ -67,6 +67,37 @@ class Helper extends Model implements AuthenticatableContract
         return $this;
     }
 
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class, 'helper_features');
+    }
+
+    public function hasFeature($featureName)
+    {
+        if (is_numeric($featureName)) {
+            $featureName = Feature::find($featureName)->identifier;
+        }
+        foreach ($this->features as $feature)
+            if ($feature->matches($featureName))
+                return true;
+        return false;
+    }
+
+    public function registerFeature($featureName)
+    {
+        if ($this->hasFeature($featureName))
+            return;
+
+        $feature = Feature::findByIdentifier($featureName);
+        $this->features()->attach($feature->id);
+    }
+
+    public function removeFeature($featureName)
+    {
+        $feature = Feature::findByIdentifier($featureName);
+        $this->features()->detach($feature->id);
+    }
+
     public function getAuthIdentifierName()
     {
         return 'name';

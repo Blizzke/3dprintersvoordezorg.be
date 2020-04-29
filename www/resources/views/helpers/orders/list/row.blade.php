@@ -1,4 +1,4 @@
-<tr @if($loop->odd) class="active" @endif>
+<tr>
     @section('rowVariableAssignmentThingy')
       {{ $status = "{$order->status}" . ($order->helper ? " ({$order->helper->display_name})" : "") }}
       {{ $order_id = "order-{$order->identifier}" }}
@@ -40,12 +40,8 @@
         </td>
     @endif
     <td>
-        <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#{{$order_id}}">
-          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-        </button>
-
         @if($order->is_mine && !$order->is_finished)
-            <a type="button" class="btn btn-default" data-confirm="1" data-toggle="tooltip" data-placement="bottom" title="Vrijgeven voor opvolging door iemand anders" href="{{route('order-release', ['order' => $order->identifier])}}">
+            <a type="button" class="btn btn-default" data-confirm="1" data-toggle="tooltip" data-placement="bottom" title="Vrijgeven (voor opvolging door iemand anders)" href="{{route('order-release', ['order' => $order->identifier])}}">
               <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
             </a>
         @endif
@@ -69,13 +65,8 @@
             </a>
         @endif
 
-        <a type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Ga naar orderpagina" href="{{route('order', ['order' => $order->identifier])}}">
+        <a type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" target="_blank" title="Ga naar orderpagina" href="{{route('order', ['order' => $order->identifier])}}">
           <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
         </a>
-    </td>
-</tr>
-<tr class="collapse @if($loop->odd) active @endif" id="{{ $order_id }}">
-    <td colspan="@if(isset($show) && in_array('status', $show)) 7 @else 6 @endif">
-        @include('helpers.orders.list.detail', ['order' => $order])
     </td>
 </tr>

@@ -38,6 +38,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="{{route('dashboard')}}">Bestellingen</a></li>
+                        <li><a href="{{route('profile')}}">Profiel</a></li>
                         <li><a href="{{url('/helper/how-what-where')}}">Hoe, wat, waar?</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

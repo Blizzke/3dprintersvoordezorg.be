@@ -12,6 +12,7 @@ class OrderStatus extends Model
         'quantity' => 'integer',
         'is_internal' => 'boolean'
     ];
+    protected $with = ['helper', 'customer'];
 
     public function order()
     {

@@ -1,14 +1,26 @@
 @extends('layouts.help')
 @section('title', 'Dashboard')
 @section('content')
-<div class="row justify-content-center">
     @if (session('status'))
-        <div class="col-md-8">
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
             </div>
         </div>
     @endif
+    @if (!Auth::user()->hasFeature('notification:please_add_features'))
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <div class="alert alert-success" role="alert">
+                    Gelieve op je profiel-pagina aan te geven welke items je produceert, zodat de site de weergave op maat kan maken.
+                </div>
+            </div>
+        </div>
+    @endif
+
+<div class="row justify-content-center">
 
     @include('helpers.orders.new')
     @include('helpers.orders.yours')

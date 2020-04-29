@@ -38,6 +38,8 @@
                 Alternatief kan je via de link-button (<span class="glyphicon glyphicon-link"></span>) door klikken naar
                 de bestelling-detail pagina (waar je nog wat meer informatie te zien krijgt) en daar "Ik ga deze
                 uitvoeren" aan te klikken.</p>
+            <p>Eenmaal geaccepteerd krijg je de contactgegevens van de klant te zien. Alleen helpers die het order hebben geaccepteerd
+                krijgen hier inzicht in, in het kader van de privacy. Van zodra je een order weer vrijgeeft of annuleert verlies je deze toegang weer.</p>
 
             <h3>Contacteren</h3>
             Je neemt dan contact op met de vragende partij om de praktische details van de bestelling af te spreken.
@@ -71,8 +73,12 @@
 
             <h4>Geen akkoord?</h4>
             <p>Als je niet tot een akkoord kan komen met de klant kan je de bestelling weer vrij geven (<span
-                    class="glyphicon glyphicon-minus" aria-hidden="true"></span>). Probeer ook in dit geval een
-                (interne) nota toe te voegen waarom, kom desnoods ook wat op de chat zeggen.</p>
+                    class="glyphicon glyphicon-minus" aria-hidden="true"></span>). De bestelling komt dan weer onder "nieuw" terecht.
+                Probeer ook in dit geval een (interne) nota toe te voegen waarom, kom desnoods ook wat op de chat zeggen.</p>
+
+            <h4>Vergissing/Bedenking van de klant?</h4>
+            <p>Als de klant het order om een of ander niet meer wilt kan je de bestelling annuleren (<span
+                class="glyphicon glyphicon-remove" aria-hidden="true"></span>)</p>
 
             <h3>Status</h3>
             <p>Elke normale bestelling doorloopt 4 statussen: Toegewezen, In productie, Te leveren, Afgewerkt (Ze begint
@@ -119,6 +125,23 @@
                     href="https://help.prusa3d.com/en/article/prusa-face-shield-disinfection_125457" target="_blank">aangetoond
                     door Prusa</a>.
             </p>
+            <h3>Faceshields</h3>
+            <h4>Onderdelen</h4>
+            <p>Dit is het enige item dat we maken dat uit verschillende onderdelen bestaat. Je hebt sowieso een vizier nodig, dat
+            de meesten van ons maken met een lamineerhoes (daar heb je natuurlijk wel een lamineermachine voor nodig) of een overheadtransparant (zijn dunner en moeten extra
+            gewassen worden om de "kleefrommel" eraf te krijgen waar je op kan schrijven). Voor de prusa modellen heb je ook nog knoopsgatelastiek of een alternatief nodig
+            om het masker aan te kunnen doen.</p>
+            <p>
+            Niet iedereen kan/wil alle onderdelen doen. Je kan op je profiel ipv het item "Gelaatsscherm" ook een aantal van de "Gedeeltelijk gelaatsscherm" dingen aanvinken.
+                Je krijgt dan geen nieuwe bestellingen voor schermen te zien maar je kan optioneel wel andere helpers bijstaan, dat moet je best via de chat co&ouml;rdineren.
+            </p>
+            <h4>Verstevigingsstuk Vizier</h4>
+            <p>De prusa variant heeft een extra verstevigingsstuk voor onderaan op het vizier, maar ervaring leert dat dit meestal niet nodig is. Ofwel is de plastiek die je gebruikt
+                er te dun voor en moet je het met lijm bevestigen (of het valt eraf): rommelig, ofwel is de plastiek dik genoeg om zonder ook sterk genoeg te zijn. Ik (Steve G) steek er meestal een paar
+                bij elke grotere bestelling (ik lever de shields in onderdelen af omdat ze dan minder plaats innemen/gemakkelijker "proper" te houden zijn) en indien
+                de klant er meer wilt komen ze daar achter vragen. Tot op heden (400+ shields) nog geen enkele vraag gehad.
+            </p>
+            <h4>Waarom PETG?</h4>
             <p>Iederen van ons heeft het argument al geopperd dat ook &quot;PLA te desinfecteren valt&quot; en dat &quot;PLA toch ook
                 gebruikt wordt in vele andere landen en daar wel okay is&quot;: Het kan best zijn
                 dat PLA eenmalig te desinfecteren valt, of misschien 5, 10 of 100x voor het aftakeling begint te
@@ -138,7 +161,7 @@
             <p>Dat gezegd zijnde: Be responsable. Werk - zeker voor gelaatsschermen - zoveel mogelijk met handschoenen en
                 stop met het produceren van materiaal als je enige symptomen hebt!</p>
 
-            <h3>Overzicht</h3>
+            <h3>Overzicht technische info</h3>
             <p>Ter info, dit is de technische info van alle items:</p>
             <ul>
                 @foreach(\App\Item::all() as $item)

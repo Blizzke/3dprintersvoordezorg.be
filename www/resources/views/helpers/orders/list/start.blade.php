@@ -1,5 +1,5 @@
 <div class="well">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
         <tr>
             @if(isset($show) && in_array('id', $show))

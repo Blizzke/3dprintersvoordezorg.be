@@ -1,4 +1,4 @@
-@foreach (\App\Order::yours()->with('customer', 'item', 'statuses', 'helper')->cursor() as $order)
+@foreach (\App\Order::yours()->get() as $order)
     @if($loop->first)
         <h2>Jouw bestellingen</h2>
         @include('helpers.orders.list.start', ['show' => ['status']])

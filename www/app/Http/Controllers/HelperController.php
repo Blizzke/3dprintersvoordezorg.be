@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Feature;
 use App\Helper;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -27,17 +29,22 @@ class HelperController extends Controller
         return view('helpers.register', ['countries' => Helper::COUNTRIES]);
     }
 
-    public function register(Request $request)
+    protected function helperValidationRules($addName = true, $emailExcept = null)
     {
-        $request->validate([
-            'name' => 'required|unique:helpers',
+        $rules = $addName ? ['name' => 'required|unique:helpers'] : [];
+        return $rules + [
             'display_name' => 'required',
             'zip' => 'required',
             'city' => 'required',
-            'email' => 'nullable|email|unique:helpers',
+            'email' => 'nullable|email|unique:helpers,email'. ($emailExcept ? ',' . $emailExcept : ''),
             'phone' => 'required_without:mobile',
             'mobile' => 'required_without:phone',
-        ]);
+        ];
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate($this->helperValidationRules());
 
         $user = Helper::create($request->all());
 
@@ -89,12 +96,38 @@ class HelperController extends Controller
 
     public function dashboard()
     {
-        return view('helpers.dashboard');
+        return view('helpers.dashboard', ['user' => Auth::user()]);
     }
 
     public function howWhatWhere()
     {
         return view('helpers.how_what_where');
+    }
+
+    public function profileForm()
+    {
+        return view('helpers.profile', ['user' => Auth::user()]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        /** @var Helper $user */
+        $user = Auth::user();
+        $user->registerFeature('notification:please_add_features');
+
+        $request->validate($this->helperValidationRules(false, $user->id));
+
+        $user->update($request->all());
+
+        if ($request->has('feature')) {
+            // Fetch pre-existing non-modifiables (so we don't lose them in the sync)
+            $nonModifiables = $user->features()->where('modifiable', 0)
+                ->select('features.id')->get()->map->only('id')->pluck('id');
+            $selected = array_keys(array_filter($request->get('feature', []), function($value) {return $value=='1';}));
+            $user->features()->sync($nonModifiables->merge($selected));
+        }
+
+        return redirect()->route('dashboard');
     }
 
     public function logout(Request $request)

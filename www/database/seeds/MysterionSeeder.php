@@ -8,6 +8,10 @@ use App\OrderStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
+/***
+ * Class MysterionSeeder
+ * Imports a json made from the original database
+ */
 class MysterionSeeder extends Seeder
 {
     public function run()

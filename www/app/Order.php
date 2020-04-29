@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 
 class Order extends Model
 {
@@ -14,6 +15,8 @@ class Order extends Model
         'status_id' => 'integer',
         'quantity' => 'integer',
     ];
+
+    protected $with = ['item', 'customer', 'helper', 'statuses'];
 
     public static function id_to_status($status)
     {
@@ -117,17 +120,17 @@ class Order extends Model
         return self::STATUSES[$this->status_id];
     }
 
-    public function scopeNew($query)
+    public function scopeNew(Builder $query)
     {
         return $query->where('status_id', 0);
     }
 
-    public function scopeInProgress($query)
+    public function scopeInProgress(Builder $query)
     {
         return $query->whereIn('status_id', [1, 2, 3]);
     }
 
-    public function scopeYours($query)
+    public function scopeYours(Builder $query)
     {
         return $query->where('helper_id', Auth::user()->id)->orderBy('status_id');
     }

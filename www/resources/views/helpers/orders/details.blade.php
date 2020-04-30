@@ -1,7 +1,8 @@
 @section('detailsVariableAssignmentThingy')
   {{ $customer = $order->customer }}
   {{ $item = $order->item }}
-  {{ $write_access = ((is_helper() && $order->is_mine) || is_customer()) }}
+  {{ $is_dispatcher = Auth::user()->hasFeature('auth:dispatcher') }}
+  {{ $full_access = ($order->is_mine || $is_dispatcher ) }}
 @endsection
 @extends('layouts.help')
 @section('title', "Bestelling {$order->identifier}")
@@ -15,27 +16,27 @@
     <p>Zijn/haar/hun klantnummer voor volgende bestellingen is {{ $customer->identifier }}.</p>
 </div>
 
-<h2>Uitvoeren:</h2>
+@if ($order->is_mine && $item->make_info)
+<h2>Uitvoering:</h2>
 <div class="well">
-    @if ($order->is_new)
-    <a type="button" class="btn btn-success" href="{{route('order-accept', ['order' => $order->identifier, 'details' => 1])}}">
-        <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Ik ga deze uitvoeren
-    </a>
-    @elseif($item->maker_info)
-        <dl>
-        @foreach($item->maker_info as $name => $value)
-                <dt>{{$name}}</dt><dd>{!! $value !!}</dd>
-        @endforeach
-        </dl>
-    @endif
+    <dl>
+    @foreach($item->maker_info as $name => $value)
+            <dt>{{$name}}</dt><dd>{!! $value !!}</dd>
+    @endforeach
+    </dl>
 </div>
-
-@if(!$order->is_new)
+@endif
 
 @foreach($order->statuses as $status)
     @if($loop->first)
         <h2>Verloop bestelling:</h2>
         <div class="well">
+            @if($is_dispatcher)
+                <dl class="dl-horizontal">
+                    <dt>Order #</dt><dd> {{$order->id}} ({{$order->identifier}})</dd>
+                    <dt>Customer #</dt><dd> {{$order->customer->id}} ({{$order->customer->identifier}})</dd>
+                </dl>
+            @endif
 
             <ul>
                 <li>Hoeveelheid afgewerkt/in stock tot nu toe: {{$order->quantity_done}} / {{ $order->quantity }}</li>
@@ -59,7 +60,7 @@
     @endif
 @endforeach
 
-
+@if ($full_access)
 <h2>Commentaar toevoegen:</h2>
 <div class="well">
     <form method="POST" action="{{route('order-comment', ['order'=>$order->identifier])}}">
@@ -84,11 +85,16 @@
 </div>
 
 <h2>Status aanpassen:</h2>
-<p>
+<div class="well">
 @switch($order->status_id)
+    @case(0)
+        <a type="button" class="btn btn-success" href="{{route('order-accept', ['order' => $order->identifier, 'details' => 1])}}">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Ik ga deze uitvoeren
+        </a> (ik ga het order maken of als order-co&ouml;rdinator optreden)
+        @break
     @case(1)
         <a type="button" class="btn btn-success" href="{{route('order-status', ['order' => $order->identifier, 'status' => 2])}}">
-            <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Start met bestelling
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Start met productie
         </a>
         @break
     @case(2)
@@ -101,8 +107,13 @@
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Opgestuurd/geleverd (afgewerkt)
         </a>
         @break
+    @case(6)
+        <a type="button" class="btn btn-success" href="{{route('order-status', ['order' => $order->identifier, 'status' => 0])}}">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Opgestuurd/geleverd (afgewerkt)
+        </a>
+        @break
 @endswitch
-</p>
+</div>
 
 <h2>Aanvrager:</h2>
 <div class="well">
@@ -134,7 +145,7 @@
 @endif
 </div>
 
-@if ($order->is_new && $order->customer->has_geo_location)
+@if (($order->is_new || $is_dispatcher) && $order->customer->has_geo_location)
     <h2>Kaart:</h2>
     <div class="well">
         <div id="map" style="height: 400px"></div>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
-    public const STATUSES = [0 => 'Nieuw', 1 => 'Toegewezen', 2 => 'In productie', 3 => 'Te leveren', 4 => 'Afgewerkt', 5 => 'Geannuleerd'];
+    public const STATUSES = [0 => 'Nieuw', 1 => 'Toegewezen', 2 => 'In productie', 3 => 'Te leveren', 4 => 'Afgewerkt', 5 => 'Geannuleerd', 6 => 'Te valideren'];
     protected $fillable = ['customer_id', 'for'];
     protected $casts = [
         // Online variant doesn't auto return as correct variable type
@@ -91,7 +91,12 @@ class Order extends Model
 
     public function getIsFinishedAttribute()
     {
-        return $this->status_id >= 4;
+        return $this->status_id >= 4 && $this->status_id !== 6;
+    }
+
+    public function getToValidateAttribute()
+    {
+        return $this->status_id === 6;
     }
 
     public function statuses()

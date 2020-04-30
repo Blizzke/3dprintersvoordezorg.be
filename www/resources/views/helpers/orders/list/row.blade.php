@@ -36,6 +36,9 @@
                 @case(5)
                     <span class="glyphicon glyphicon-remove" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="{{ $status }}"></span>
                     @break
+                @case(6)
+                    <span class="glyphicon glyphicon-user" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="{{ $status }}"></span>
+                    @break
             @endswitch
         </td>
     @endif
@@ -60,7 +63,7 @@
         @endif
 
         @if($order->can_cancel)
-            <a type="button" class="btn btn-default" data-toggle="tooltip" data-confirm="1" data-placement="bottom" title="Annuleren (afsluiten)" href="{{route('order-cancel', ['order' => $order->identifier])}}">
+            <a type="button" class="btn btn-default" data-toggle="tooltip" data-confirm="1" data-placement="bottom" title="Bestelling volledig sluiten (voor iedereen! - ben je zeker dat je niet 'vrijgeven' bedoelt?)" href="{{route('order-cancel', ['order' => $order->identifier])}}">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </a>
         @endif

@@ -1,15 +1,13 @@
 @extends('layouts.help')
-@section('title', 'Dashboard')
+@section('title', 'Hoe, wat, waar?')
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <h1>@yield('title')</h1>
             <div class="well">
-                <p>
-                    Bedankt dat je mee wilt helpen!
-                </p>
-                <p>
-                    Voor vragen, suggesties, opmerkingen (na het lezen van deze mastodont) kan je de Discord chat gebruiken (link rechtsboven).
-                </p>
+                <p>Bedankt dat je mee wilt helpen!</p>
+                @if (!Auth::user()->hasFeature('agreement:who_what_where')) <p>Gelieve deze pagina helemaal en goed door te lezen indien je gebruik wilt maken van deze site. <b>Pas als je onderaan bevestigd dat alles duidelijk is, krijg je de bestellijsten te zien.</b> </p>@endif
+                <p>Voor vragen, suggesties, opmerkingen (na het lezen van deze tekst) kan je de Discord chat gebruiken (link rechtsboven).</p>
             </div>
             <h2>Wat is het opzet?</h2>
             <div class="well">
@@ -19,6 +17,11 @@
                 persoon die het dichtste tegen
                 de aanvrager woont. &quot;We&quot; leggen ook niet echt regels op en gebruik van het platform is
                 vanzelfsprekend gratis, maar we vragen je wel rekening te houden met onderstaande.
+            </div>
+            <h2>Mijn account</h2>
+            <div class="well">
+                <p>Na registratie wordt je gevraagd om op de chat te komen vragen om je account te unlocken. Dit dient om te zorgen dat iedereen minstens een keer gesproken hebben en dat we zeker zijn dat alles duidelijk is.</p>
+                <p>Je kan dan in je profiel instellen welke items je wilt maken, je krijgt alleen nieuwe bestellingen te zien van deze items.</p>
             </div>
             <h2>Hoe verloopt een bestelling?</h2>
             <div class="well">
@@ -30,16 +33,23 @@
                 <p>De site zal een verwittiging posten op discord in het <i>#bestellingen</i> kanaal. Hierin worden de 5
                     dichtsbijzijnde helpers gemeld.</p>
 
+<!--            <h3>Valideren</h3>
+            <p>De bestelling wordt dan opgevolgd door iemand van de site bij de klant. Zorgen dat alles duidelijk is etc.
+            Deze persoon kan de bestelling dan vrijgeven naar "nieuw".</p>
+            <p>Op dat moment zal een verwittiging gepost worden op discord in het <i>#bestellingen</i> kanaal. Hierin worden de 5
+                dichtsbijzijnde helpers gemeld.</p> -->
+
             <h3>Accepteren</h3>
-            <p>Als je een bestelling ziet waarvan je denkt: deze kan ik maken, kan je de bestelling "accepteren"
-                (reserveren voor jezelf).</p>
+            <p>Je accepteert een bestelling om 1 van 2 redenen: Je kan ze zelf volledig produceren of je kan aanspreekpunt spelen
+                en samenwerken met andere vrijwilligers als ze te groot is voor jouw alleen (bekijk dat wel op voorhand in de chat!).
+                In beide gevallen ben jij verantwoordelijk voor de aflevering en het ontvangen van de betaling (en anderen ook betalen).</p>
             <p>Dit kan in het dashboard door op het play icon (<span class="glyphicon glyphicon-play"></span>) te
                 klikken.
                 Alternatief kan je via de link-button (<span class="glyphicon glyphicon-link"></span>) door klikken naar
                 de bestelling-detail pagina (waar je nog wat meer informatie te zien krijgt) en daar "Ik ga deze
                 uitvoeren" aan te klikken.</p>
-            <p>Eenmaal geaccepteerd krijg je de contactgegevens van de klant te zien. Alleen helpers die het order hebben geaccepteerd
-                krijgen hier inzicht in, in het kader van de privacy. Van zodra je een order weer vrijgeeft of annuleert verlies je deze toegang weer.</p>
+            <p>Eenmaal geaccepteerd krijg je de contactgegevens van de klant te zien voor als je eventueel meer informatie nodig hebt.
+                Alleen helpers die het order hebben geaccepteerd krijgen hier inzicht in, in het kader van de privacy. Van zodra je een order weer vrijgeeft of annuleert verlies je deze toegang weer.</p>
 
             <h3>Contacteren</h3>
             Je neemt dan contact op met de vragende partij om de praktische details van de bestelling af te spreken.
@@ -65,6 +75,7 @@
                 minder te vragen of het zelfs gratis aan te bieden,
                 dat is jouw keuze. We willen helpers gewoon niet dwingen hun materiaal zo weg te geven. Zolang
                 jullie maar tot een akkoord komen.</p>
+                <p>Je krijgt het geld <b><u>achteraf</u></b> (bij levering of op factuur). Vraag geen geld op voorhand, dat is NOT DONE.</p>
 
             <h4>Facturatie</h4>
             <p>Sommige klanten vragen/willen een factuur. Als je dit niet kan/wil, leg dat dan gewoon aan de klant uit
@@ -182,6 +193,16 @@
         <div class="well">
             Mondmaskers is een speciaal geval en wordt enkel door de mensen gedaan die hiervan stock hebben. Momenteel gaat het om (discord handles) timmeyvis, Davy Present en Steve G.
         </div>
+        @if (!Auth::user()->hasFeature('agreement:who_what_where'))
+        <div class="well">
+            <form method="post">
+                @csrf
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Ik bevestig alles gelezen en begrepen te hebben.">
+                </div>
+            </form>
+        </div>
+        @endif
     </div>
 
 @endsection

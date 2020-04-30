@@ -3,6 +3,7 @@
 
 use App\Customer;
 use App\Helper;
+use App\LogRecord;
 use Illuminate\Support\Facades\Auth;
 
 function is_helper()
@@ -110,4 +111,21 @@ function haversineGreatCircleDistance($latitudeFrom, $longitudeFrom, $latitudeTo
 
 function input($model, $attribute) {
     return old($attribute) ?? object_get($model, $attribute);
+}
+
+function do_log($subject, $message, $log_level = LOG_INFO)
+{
+    $record = new LogRecord();
+    if ($subject instanceof Helper)
+        $record->helper_id = $subject->id;
+    else if ($subject)
+        $record->customer_id = $subject->id;
+
+    $record->log_level = $log_level;
+    $record->message = $message;
+    try {
+        $record->save();
+    }
+    catch(Throwable $e) {
+    }
 }

@@ -189,6 +189,24 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-danger">
+                                    <p>Beste mensen: dit is <b>geen webshop</b>!</p>
+                                    <p>Elke aanvraag wordt door 1 of meerdere vrijwilligers - zo dicht mogelijk in je buurt - opgepikt.</p>
+                                    <p>We doen <i>onze uiterste best</i> maar kunnen helaas geen garanties bieden over de levertermijn en of er &uuml;berhaupt iemand in je buurt actief is.
+                                        Gelieve hier rekening mee te houden! Je kan het mogelijk sneller krijgen als je bereid bent voor verzending te betalen (dan kunnen verder-wonende vrijwilligers dit ook opnemen), maar bpost rekent toch al snel 6€/pak aan.</p>
+<!--                                    <p>De meeste vrijwilligers <b>kunnen geen factuur opmaken</b>.<br/>
+                                        Als je er toch een wil:<br/>
+                                    <ul>
+                                        <li>Beperkt dit het aantal mensen dat je aanvraag kan opnemen enorm.</li>
+                                        <li>Bij verwerking door meerdere vrijwilligers kan elke vrijwilliger alleen zijn stuk factureren.</li>
+                                        <li>Voor enkele &euro;'s een factuur opmaken is enorm kostinefficient, een boekhouder vraagt meer om dat in te boeken.</li>
+                                        <li>(uitzondering hierop is de IIR maskers, iedereen die deze verdeeld kan hiervoor factuur opmaken)</li>
+                                    </ul>-->
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-lg-12">
                                 <button class="btn btn-success btn-submit" style="width: 100%">Bestel</button>

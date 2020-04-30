@@ -22,6 +22,9 @@
 
 <div class="row justify-content-center">
 
+    @if ($user->hasFeature('auth:dispatcher'))
+        @include('helpers.orders.validate')
+    @endif
     @include('helpers.orders.new')
     @include('helpers.orders.yours')
     @include('helpers.orders.in-progress')

@@ -15,6 +15,12 @@ class FeatureSeeder extends Seeder
     {
         $features = [
             ['type' => 'notification', 'value' => 'please_add_features', 'name' => 'Heeft de "voeg features toe"-notification gezien'],
+            ['type' => 'agreement', 'value' => 'who_what_where', 'name' => 'Beweert de "wie, wat waar?"-pagina gelezen te hebben'],
+            ['type' => 'auth', 'value' => 'dispatcher', 'name' => 'Kan gelockte bestellingen vrijgeven naar de queue'],
+            ['type' => 'auth', 'value' => 'cancel', 'name' => 'Kan bestellingen annuleren'],
+            ['type' => 'auth', 'value' => 'dispatcher', 'name' => 'Kan gelockte bestellingen vrijgeven naar de queue'],
+            ['type' => 'auth', 'value' => 'unlocker', 'name' => 'Kan nieuwe accounts unlocken'],
+            ['type' => 'account', 'value' => 'unlocked', 'name' => 'Account is ge-unlocked en kan bestellingen aanvaarden'],
             ['type' => 'capacity', 'value' => 'shipping', 'name' => 'Ik kan items opsturen', "modifiable" => 1],
             ['type' => 'capacity', 'value' => 'storage', 'name' => 'Ik wil stockeren voor verdere verspreiding (andere helpers komen leveren en halen)', "modifiable" => 1],
             ['type' => 'capacity', 'value' => 'driver', 'name' => 'Ik wil rondrijden om materiaal te bezorgen', "modifiable" => 1],

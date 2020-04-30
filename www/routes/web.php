@@ -22,8 +22,12 @@ Route::post('/helper/login', 'HelperController@login');
 Route::get('/helper/logout', 'HelperController@logout')->name('logout');
 Route::get('/helper/dashboard', 'HelperController@dashboard')->name('dashboard');
 Route::get('/helper/how-what-where', 'HelperController@howWhatWhere');
+Route::post('/helper/how-what-where', 'HelperController@confirmHowWhatWhere');
 Route::get('/helper/profile', 'HelperController@profileForm')->name('profile');
 Route::post('/helper/profile', 'HelperController@updateProfile');
+Route::get('/helper/locked', 'HelperController@locked');
+Route::get('/helper/unlock/{helper}', 'HelperController@unlock');
+Route::post('/helper/unlock/{helper}', 'HelperController@doUnlock');
 
 Route::get('/helper/order/{order}/accept', 'OrderController@accept')->name('order-accept');
 Route::get('/helper/order/{order}/release', 'OrderController@release')->name('order-release');

@@ -70,7 +70,7 @@ class Helper extends Model implements AuthenticatableContract
 
     public function features()
     {
-        return $this->belongsToMany(Feature::class, 'helper_features');
+        return $this->belongsToMany(Feature::class, 'helper_features')->withTimestamps();
     }
 
     public function hasFeature($featureName)
@@ -97,6 +97,11 @@ class Helper extends Model implements AuthenticatableContract
     {
         $feature = Feature::findByIdentifier($featureName);
         $this->features()->detach($feature->id);
+    }
+
+    public function getCanCanAcceptOrdersAttribute()
+    {
+        return $this->hasFeature('account:unlocked') && $this->hasFeature('agreement');
     }
 
     public static function makesItem(Item $item)

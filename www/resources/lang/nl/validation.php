@@ -185,5 +185,6 @@ return [
         'quantity'              => 'hoeveelheid',
         'zip'                   => 'postcode',
         'customer_id'           => 'Klantnummer',
+        'comment'               => 'Commentaar'
     ],
 ];

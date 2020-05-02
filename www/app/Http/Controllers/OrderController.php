@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Item;
 use App\Order;
+use App\OrderHelper;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,24 @@ class OrderController extends Controller
     {
         $order->cancel(Auth::user());
         return redirect()->route('dashboard');
+    }
+
+    public function participate(Order $order)
+    {
+        return view('helpers.orders.participate', ['order' => $order]);
+    }
+
+    public function doParticipate(Order $order, Request $request)
+    {
+        $request->validate(['quantity' => 'required|numeric|min:1', 'comment' => 'required']);
+        $participant = new OrderHelper($request->all());
+        $participant->order()->associate($order);
+        $participant->helper()->associate(Auth::user());
+        // Approve by default to speed up things, since the coordinator asked for help.
+        $participant->approved = true;
+        $participant->saveOrFail();
+
+        return redirect()->route('order', ['order' => $order->identifier]);
     }
 
     public function work(Order $order, Request $request)
@@ -80,6 +99,22 @@ class OrderController extends Controller
         $request->validate(['status' => 'required|numeric']);
         $order->statusUpdateStatus($request->get('status'), false, Auth::user());
         return redirect()->route('order', ['order' => $order->identifier]);
+    }
+
+    public function updateOptions(Order $order, Request $request)
+    {
+        if ($request->get('material') != $order->material) {
+            $order->material = $request->get('material');
+            $order->helperComment('Het materiaal werd aangepast naar "' . Order::MATERIALS[$order->material] . '"', true);
+        }
+
+        $please_help = (bool) ((int)$request->get('please_help', 0));
+        if ($please_help != $order->help_is_welcome) {
+            $order->help_is_welcome = $please_help;
+            $order->helperComment('Hulp gevraag status werd aangepast naar: ' . ($please_help ? 'ja' : 'nee'), true);
+        }
+        $order->save();
+        return redirect()->back();
     }
 
     public function addQuantity(Order $order, Request $request)

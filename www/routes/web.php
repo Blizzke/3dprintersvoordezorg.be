@@ -33,6 +33,8 @@ Route::get('/helper/order/{order}/accept', 'OrderController@accept')->name('orde
 Route::get('/helper/order/{order}/release', 'OrderController@release')->name('order-release');
 Route::get('/helper/order/{order}/cancel', 'OrderController@cancel')->name('order-cancel');
 Route::post('/helper/order/{order}/work', 'OrderController@work')->name('order-work');
+Route::get('/helper/order/{order}/help', 'OrderController@participate')->name('order-help');
+Route::post('/helper/order/{order}/help', 'OrderController@doParticipate');
 
 Route::get('/order/new', 'OrderController@newOrderView');
 Route::post('/order/new', 'OrderController@newOrderForm');
@@ -41,6 +43,7 @@ Route::get('/order/{order}', 'OrderController@view')->name('order');
 Route::get('/order/{order}/map', 'OrderController@viewMap');
 Route::post('/order/{order}/comment', 'OrderController@addComment')->name('order-comment');
 Route::get('/order/{order}/status', 'OrderController@updateStatus')->name('order-status');
+Route::post('/order/{order}/status', 'OrderController@updateOptions')->name('order-options');
 Route::post('/order/{order}/quantity', 'OrderController@addQuantity')->name('order-add-quantity');
 Route::get('/customer/{customer}', 'OrderController@orderOverview')->name('customer');
 Route::get('/customer/{customer}/order/{order}', 'OrderController@customerLogin')->name('order-customer');

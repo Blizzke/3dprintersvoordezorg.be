@@ -68,6 +68,11 @@ class Helper extends Model implements AuthenticatableContract
         return $this;
     }
 
+    public function getLocationAttribute()
+    {
+        return array_values(array_filter([$this->city, $this->zip]))[0];
+    }
+
     public function features()
     {
         return $this->belongsToMany(Feature::class, 'helper_features')->withTimestamps();

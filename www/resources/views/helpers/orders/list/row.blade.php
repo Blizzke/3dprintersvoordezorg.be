@@ -49,10 +49,10 @@
             </a>
         @endif
 
-        @if($order->is_in_production)
-            <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Werk toevoegen" data-work="1" href="{{route('order-work', ['order' => $order->identifier])}}">
-              <span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>
-            </button>
+        @if(!$order->is_mine && !$order->is_registered_helper && $order->is_in_production && $order->help_is_welcome)
+            <a type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Helpen aan bestelling" href="{{route('order-help', ['order' => $order->identifier])}}">
+              <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+            </a>
         @endif
 
         @if($order->is_new)

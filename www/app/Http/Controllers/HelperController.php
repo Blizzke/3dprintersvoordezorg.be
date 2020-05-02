@@ -173,6 +173,7 @@ class HelperController extends Controller
         /** @var Helper $user */
         $user = Auth::user();
         $user->registerFeature('notification:please_add_features');
+        $user->registerFeature('notification:please_add_material');
 
         $request->validate($this->helperValidationRules(false, $user->id));
 

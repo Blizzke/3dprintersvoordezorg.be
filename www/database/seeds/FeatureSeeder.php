@@ -15,6 +15,7 @@ class FeatureSeeder extends Seeder
     {
         $features = [
             ['type' => 'notification', 'value' => 'please_add_features', 'name' => 'Heeft de "voeg features toe"-notification gezien'],
+            ['type' => 'notification', 'value' => 'please_add_material', 'name' => 'Heeft de "selecteer je materialen"-notification gezien'],
             ['type' => 'agreement', 'value' => 'who_what_where', 'name' => 'Beweert de "wie, wat waar?"-pagina gelezen te hebben'],
             ['type' => 'auth', 'value' => 'dispatcher', 'name' => 'Kan gelockte bestellingen vrijgeven naar de queue'],
             ['type' => 'auth', 'value' => 'cancel', 'name' => 'Kan bestellingen annuleren'],
@@ -28,6 +29,8 @@ class FeatureSeeder extends Seeder
             ['type' => 'capacity', 'value' => 'visors', 'name' => 'Gedeeltelijke spatschermen: Ik kan vizieren maken (lamineren, laseren, transparantsheet)', "modifiable" => 1],
             ['type' => 'capacity', 'value' => 'elastic', 'name' => 'Gedeeltelijke spatschermen: Ik kan de elastic straps maken', "modifiable" => 1],
             ['type' => 'capacity', 'value' => 'headband', 'name' => 'Gedeeltelijke spatschermen: Ik kan beugels printen', "modifiable" => 1],
+            ['type' => 'material', 'value' => 'pla', 'name' => 'Ik kan PLA printen', "modifiable" => 1],
+            ['type' => 'material', 'value' => 'petg', 'name' => 'Ik kan PETG printen', "modifiable" => 1],
         ];
 
         // All items are features

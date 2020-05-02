@@ -19,6 +19,15 @@
             </div>
         </div>
     @endif
+    @if (!Auth::user()->hasFeature('notification:please_add_material'))
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <div class="alert alert-success" role="alert">
+                    Gelieve op je profiel-pagina aan te geven welke materiaal je kan printen, zodat de site de weergave op maat kan maken.
+                </div>
+            </div>
+        </div>
+    @endif
 
 <div class="row justify-content-center">
 

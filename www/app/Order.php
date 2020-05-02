@@ -2,19 +2,22 @@
 
 namespace App;
 
+use http\Exception\RuntimeException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
     public const STATUSES = [0 => 'Nieuw', 1 => 'Toegewezen', 2 => 'In productie', 3 => 'Te leveren', 4 => 'Afgewerkt', 5 => 'Geannuleerd', 6 => 'Te valideren'];
+    public const MATERIALS = ['pla' => 'PLA', 'petg' => 'PETG', 'doesntmatter' => 'Maakt niet uit'];
+
     protected $fillable = ['customer_id', 'for'];
     protected $casts = [
         // Online variant doesn't auto return as correct variable type
         'status_id' => 'integer',
         'quantity' => 'integer',
+        'options' => 'array',
     ];
 
     protected $with = ['item', 'customer', 'helper', 'statuses'];
@@ -29,6 +32,43 @@ class Order extends Model
         return array_flip(self::STATUSES)[$status];
     }
 
+    public function getHelpIsWelcomeAttribute()
+    {
+        return $this->options['help_wanted'] ?? false;
+    }
+
+    public function setHelpIsWelcomeAttribute($state)
+    {
+        $this->setOption('help_wanted', (bool) $state);
+    }
+
+    public function getMaterialAttribute()
+    {
+        if (!isset($this->options['material']))
+            return 'doesntmatter';
+
+        return $this->options['material'];
+    }
+
+    public function getMaterialNameAttribute()
+    {
+        return self::MATERIALS[$this->material];
+    }
+
+    public function setMaterialAttribute($material)
+    {
+        if (!array_key_exists($material, self::MATERIALS))
+            return;
+
+        $this->setOption('material', $material);
+    }
+
+    private function setOption($name, $value)
+    {
+        $options = $this->options ?? [];
+        $options[$name] = $value;
+        $this->options = $options;
+    }
 
     protected static function booted()
     {
@@ -74,14 +114,42 @@ class Order extends Model
         return $this->status_id === 0;
     }
 
+    /**
+     * true if the order can still be released back into the pool
+     * @return bool
+     */
     public function getCanReleaseAttribute()
     {
         return $this->is_mine && !$this->is_finished;
     }
 
+    /**
+     * Returns if the logged in person is the executor/coordinator of the order
+     * @return bool
+     */
     public function getIsMineAttribute()
     {
         return $this->helper_id == Auth::user()->id;
+    }
+
+    /**
+     * Returns whether the person is working on the order (gives access to add comments and add quantity)
+     * @return bool
+     */
+    public function getWorkingOnItAttribute()
+    {
+        /** @var Helper $searchedHelper */
+        $searchedHelper = Auth::user();
+        if (!$this->helper)
+            return false;
+
+        if ($this->helper->id === $searchedHelper->id)
+            return true;
+
+        foreach ($this->helpers as $helper)
+            if ($helper->id == $searchedHelper->id)
+                return true;
+        return false;
     }
 
     public function getIsInProductionAttribute()
@@ -102,6 +170,11 @@ class Order extends Model
     public function statuses()
     {
         return $this->hasMany(OrderStatus::class, 'order_id')->orderBy('order_statuses.id');
+    }
+
+    public function helpers()
+    {
+        return $this->hasMany(OrderHelper::class, 'order_id')->orderBy('order_helpers.approved');
     }
 
     public function getQuantityDoneAttribute()
@@ -133,12 +206,16 @@ class Order extends Model
 
     public function scopeInProgress(Builder $query)
     {
-        return $query->whereIn('status_id', [1, 2, 3]);
+        return $query->whereIn('status_id', [1, 2, 3])->orderBy('status_id')->orderBy('updated_at');
     }
 
     public function scopeYours(Builder $query)
     {
-        return $query->where('helper_id', Auth::user()->id)->orderBy('status_id');
+        // You orders are those you pledged help on
+        $myId = Auth::user()->id;
+        $helperOn = OrderHelper::select('order_id')->whereHelperId($myId)->get();
+        // and the ones you coordinate for
+        return $query->where('helper_id', $myId)->orWhereIn('id', $helperOn->pluck('order_id'))->orderBy('status_id');
     }
 
     public function assign(Helper $helper)
@@ -150,6 +227,15 @@ class Order extends Model
     public function helper()
     {
         return $this->belongsTo(Helper::class);
+    }
+
+    public function getIsRegisteredHelperAttribute()
+    {
+        $myId = Auth::user()->id;
+        foreach ($this->helpers as $helper)
+            if ($myId == $helper->id)
+                return true;
+        return false;
     }
 
     public function statusUpdateStatus(int $newStatus, bool $customer = false, Helper $helper = null)
@@ -180,6 +266,14 @@ class Order extends Model
             $order_status->helper()->associate(is_bool($helper) ? $this->helper : $helper);
         }
         return $order_status;
+    }
+
+    public function helperComment(string $comment, bool $is_internal = true)
+    {
+        $status = $this->newStatus(false, Auth::user());
+        $status->is_internal = $is_internal;
+        $status->comment = $comment;
+        return $status->save();
     }
 
     public function release(Helper $helper = null)

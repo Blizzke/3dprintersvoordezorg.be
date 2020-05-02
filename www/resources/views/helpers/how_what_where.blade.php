@@ -20,7 +20,7 @@
             </div>
             <h2>Mijn account</h2>
             <div class="well">
-                <p>Na registratie wordt je gevraagd om op de chat te komen vragen om je account te unlocken. Dit dient om te zorgen dat iedereen minstens een keer gesproken hebben en dat we zeker zijn dat alles duidelijk is.</p>
+                <p>Na registratie word je gevraagd om op de chat te komen vragen om je account te unlocken. Dit dient om te zorgen dat iedereen minstens een keer gesproken hebben en dat we zeker zijn dat alles duidelijk is.</p>
                 <p>Je kan dan in je profiel instellen welke items je wilt maken, je krijgt alleen nieuwe bestellingen te zien van deze items.</p>
             </div>
             <h2>Hoe verloopt een bestelling?</h2>
@@ -31,7 +31,7 @@
                     tegelijk besteld, behandelen we elke type als een aparte bestelling. Zo kan je als helper alleen
                     aannemen wat je effectief wilt/kunt maken.</p>
                 <p>De site zal een verwittiging posten op discord in het <i>#bestellingen</i> kanaal. Hierin worden de 5
-                    dichtsbijzijnde helpers gemeld.</p>
+                    dichtstbijzijnde helpers gemeld.</p>
 
 <!--            <h3>Valideren</h3>
             <p>De bestelling wordt dan opgevolgd door iemand van de site bij de klant. Zorgen dat alles duidelijk is etc.
@@ -43,9 +43,9 @@
             <p>Je accepteert een bestelling om 1 van 2 redenen: Je kan ze zelf volledig produceren of je kan aanspreekpunt spelen
                 en samenwerken met andere vrijwilligers als ze te groot is voor jouw alleen (bekijk dat wel op voorhand in de chat!).
                 In beide gevallen ben jij verantwoordelijk voor de aflevering en het ontvangen van de betaling (en anderen ook betalen).</p>
-            <p>Dit kan in het dashboard door op het play icon (<span class="glyphicon glyphicon-play"></span>) te
+            <p>Dit kan in het dashboard door op het play icon (<a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-play"></span></a>) te
                 klikken.
-                Alternatief kan je via de link-button (<span class="glyphicon glyphicon-link"></span>) door klikken naar
+                Alternatief kan je via de link-button (<a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-link"></span></a>) door klikken naar
                 de bestelling-detail pagina (waar je nog wat meer informatie te zien krijgt) en daar "Ik ga deze
                 uitvoeren" aan te klikken.</p>
             <p>Eenmaal geaccepteerd krijg je de contactgegevens van de klant te zien voor als je eventueel meer informatie nodig hebt.
@@ -83,13 +83,13 @@
                 weet.</p>
 
             <h4>Geen akkoord?</h4>
-            <p>Als je niet tot een akkoord kan komen met de klant kan je de bestelling weer vrij geven (<span
-                    class="glyphicon glyphicon-minus" aria-hidden="true"></span>). De bestelling komt dan weer onder "nieuw" terecht.
+            <p>Als je niet tot een akkoord kan komen met de klant kan je de bestelling weer vrij geven (<a type="button" class="btn btn-default" href="#"><span
+                    class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>). De bestelling komt dan weer onder "nieuw" terecht.
                 Probeer ook in dit geval een (interne) nota toe te voegen waarom, kom desnoods ook wat op de chat zeggen.</p>
 
             <h4>Vergissing/Bedenking van de klant?</h4>
-            <p>Als de klant het order om een of ander niet meer wilt kan je de bestelling annuleren (<span
-                class="glyphicon glyphicon-remove" aria-hidden="true"></span>)</p>
+            <p>Als de klant het order om een of ander niet meer wilt kan je de bestelling annuleren (<a type="button" class="btn btn-default" href="#"><span
+                class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>)</p>
 
             <h3>Status</h3>
             <p>Elke normale bestelling doorloopt 4 statussen: Toegewezen, In productie, Te leveren, Afgewerkt (Ze begint
@@ -103,9 +103,6 @@
             <h3>Aantal toevoegen</h3>
             <p>Je kan registeren met hoeveel items je al klaar bent door dit formulier te gebruiken. Meerdere keren mag, de
                 tellers houden de status bij. Zo ziet de klant ook de voortgang.</p>
-            <p>Het is ook mogelijk om met meerderen samen aan een bestelling te werken. De andere helpers
-            gebruiken dan het postvak icon (<span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>, werk
-                toevoegen) van op de overzichtspagina.</p>
             <p>Zelfs al heb je alles al, voeg het aantal dan nog altijd toe aan de bestelling, dat behoudt het
                 overzicht.</p>
 
@@ -118,6 +115,14 @@
             <h3>Afgewerkt</h3>
             Als je een bestelling hebt afgewerkt, vergeet dan niet deze op klaar te zetten. Ze verdwijnt dan voor
             iedereen uit de lijst van actieve bestellingen en de tellers op de voorpagina worden ge&euml;pdated.
+        </div>
+
+        <h2>Meewerken aan andere bestellingen</h2>
+        <div class="well">
+            <p>Het is mogelijk om met meerderen samen aan een bestelling te werken, bespreek dat wel even op voorhand op de chat.</p>
+            <p>Als je in je bestelling onder "Extra's" het vinkje bij "Ik kan best wel wat hulp gebruiken" aanzet (standaard niet aan), dan verschijnt er in de lijst van orders die in productie zijn een <a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> naast de bestelling.</p>
+            <p>Andere helpers kunnen zich via deze button aanmelden door in het formulier erachter een aantal op te geven en een prijsopgaaf voor je werk.</p>
+            <p>Ze krijgen vanaf dan ook toegang tot de aantallen toevoegen en commentaar functionaliteit voor die bestelling.</p>
         </div>
 
         <h2>Printen</h2>
@@ -169,7 +174,7 @@
                 We helpen mensen wel zoveel we kunnen, maar je wilt duidelijk maken dat aansprakelijkheid bij de klant ligt.
                 Voor de gelaatsmaskers is er een disclaimer met meer informatie die je best altijd goed zichtbaar bijleverd.
             </p>
-            <p>Dat gezegd zijnde: Be responsable. Werk - zeker voor gelaatsschermen - zoveel mogelijk met handschoenen en
+            <p>Dat gezegd zijnde: Be responsible. Werk - zeker voor gelaatsschermen - zoveel mogelijk met handschoenen en
                 stop met het produceren van materiaal als je enige symptomen hebt!</p>
 
             <h3>Overzicht technische info</h3>
@@ -191,7 +196,7 @@
         </div>
         <h2>Mondmaskers</h2>
         <div class="well">
-            Mondmaskers is een speciaal geval en wordt enkel door de mensen gedaan die hiervan stock hebben. Momenteel gaat het om (discord handles) timmeyvis, Davy Present en Steve G.
+            Mondmaskers is een speciaal geval en wordt enkel door de mensen gedaan die hiervan stock hebben. Momenteel gaat het om (discord handles) timmeyvis, BramV, Davy Present en Steve G.
         </div>
         @if (!Auth::user()->hasFeature('agreement:who_what_where'))
         <div class="well">

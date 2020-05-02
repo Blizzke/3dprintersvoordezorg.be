@@ -147,7 +147,7 @@ class Order extends Model
             return true;
 
         foreach ($this->helpers as $helper)
-            if ($helper->id == $searchedHelper->id)
+            if ($helper->helper_id == $searchedHelper->id)
                 return true;
         return false;
     }
@@ -233,7 +233,7 @@ class Order extends Model
     {
         $myId = Auth::user()->id;
         foreach ($this->helpers as $helper)
-            if ($myId == $helper->id)
+            if ($myId == $helper->helper_id)
                 return true;
         return false;
     }

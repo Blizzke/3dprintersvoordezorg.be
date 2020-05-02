@@ -1,8 +1,7 @@
 @section('detailsVariableAssignmentThingy')
   {{ $customer = $order->customer }}
   {{ $item = $order->item }}
-{{--  {{ $is_dispatcher = Auth::user()->hasFeature('auth:dispatcher') }} --}}
-  {{ $is_dispatcher = false }}
+  {{ $is_dispatcher = Auth::user()->hasFeature('auth:dispatcher') }}
   {{ $full_access = ($order->is_mine || $is_dispatcher ) }}
 @endsection
 @extends('layouts.help')

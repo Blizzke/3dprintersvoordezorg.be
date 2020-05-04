@@ -56,12 +56,13 @@
             customer = L.marker({!! $order->customer->geo_coordinates_string !!}, {icon: greenIcon}).addTo(map)
                 .bindPopup('{{$order->customer->title}}') @if(is_helper()) .openPopup() @endif;
 
-            @if($order->is_new)
-                @foreach($order->closestHelpers(false) as $helper)
-                L.marker({!! $helper['location_string'] !!}, {icon: @if($helper['id'] == Auth::user()->id) goldIcon @else blueIcon @endif}).addTo(map)
-                    .bindPopup('{{$helper['name']}} ({{$helper['distance']}})');
-                @endforeach
-            @else
+            @if (is_helper() && ($order->working_on_it || is_dispatcher()))
+                    @foreach($order->closestHelpers(false) as $helper)
+                    L.marker({!! $helper['location_string'] !!}, {icon: @if($helper['id'] == Auth::user()->id) goldIcon @else blueIcon @endif}).addTo(map)
+                        .bindPopup('{{$helper['name']}} ({{$helper['distance']}})');
+                    @endforeach
+            @endif
+            @if(!$order->is_new)
                 maker = L.marker({!! $order->helper->geo_coordinates_string !!}, {icon: goldIcon}).addTo(map)
                     .bindPopup('{{$order->helper->title}}') @if(is_customer()) .openPopup() @endif;
 

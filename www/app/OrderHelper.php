@@ -34,11 +34,7 @@ class OrderHelper extends Model
 
     public function getContributedAttribute()
     {
-        return OrderStatus::select('quantity')
-                ->whereOrderId($this->order->id)
-                ->whereHelperId($this->helper->id)
-                ->whereType('quantity')
-                ->sum('quantity');
+        return OrderStatus::contributed($this->order, $this->helper);
     }
 
 }

@@ -16,6 +16,11 @@ function is_customer()
     return Auth::user() instanceof Customer;
 }
 
+function is_dispatcher()
+{
+    return Auth::user()->hasFeature('auth:dispatcher');
+}
+
 function pretty_time($time)
 {
     if ($time instanceof DateTime) {

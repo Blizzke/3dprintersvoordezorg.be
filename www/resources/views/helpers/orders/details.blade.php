@@ -1,8 +1,7 @@
 @section('detailsVariableAssignmentThingy')
   {{ $customer = $order->customer }}
   {{ $item = $order->item }}
-  {{ $is_dispatcher = Auth::user()->hasFeature('auth:dispatcher') }}
-  {{ $full_access = ($order->is_mine || $is_dispatcher ) }}
+  {{ $full_access = ($order->is_mine || is_dispatcher() ) }}
 @endsection
 @extends('layouts.help')
 @section('title', "Bestelling {$order->identifier}")
@@ -33,7 +32,7 @@
     @if($loop->first)
         <h2>Verloop bestelling:</h2>
         <div class="well">
-            @if($is_dispatcher)
+            @if(is_dispatcher())
                 <dl class="dl-horizontal">
                     <dt>Order #</dt><dd> {{$order->id}} ({{$order->identifier}})</dd>
                     <dt>Customer #</dt><dd> {{$order->customer->id}} ({{$order->customer->identifier}})</dd>
@@ -139,6 +138,7 @@
         @if ($order->helpers)
             <h3>Helpers</h3>
             <ul>
+            <li>{{\App\OrderStatus::contributed($order, $order->helper)}} item(s) door {{$order->helper->display_name}}<br /></li>
             @foreach($order->helpers as $helper)
                 <li>{{$helper->contributed}} / {{$helper->quantity}} item(s) door {{$helper->display_name}}<br />
                     {!! nl2br($helper->comment) !!}
@@ -181,7 +181,7 @@
 @endif
 </div>
 
-@if (($order->is_new || $is_dispatcher) && $order->customer->has_geo_location)
+@if (($order->is_new || is_dispatcher()) && $order->customer->has_geo_location)
     <h2>Kaart:</h2>
     <div class="well">
         <div id="map" style="height: 400px"></div>

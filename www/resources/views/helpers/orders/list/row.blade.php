@@ -43,6 +43,7 @@
         </td>
     @endif
     <td>
+    @if ($readonly ?? true)
         @if($order->is_mine && !$order->is_finished)
             <a type="button" class="btn btn-default" data-confirm="1" data-toggle="tooltip" data-placement="bottom" title="Vrijgeven (voor opvolging door iemand anders)" href="{{route('order-release', ['order' => $order->identifier])}}">
               <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
@@ -71,5 +72,8 @@
         <a type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" target="_blank" title="Ga naar orderpagina" href="{{route('order', ['order' => $order->identifier])}}">
           <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
         </a>
+    @else
+        &nbsp;
+    @endif
     </td>
 </tr>

@@ -1,5 +1,5 @@
 @extends('layouts.help')
-@section('title', 'Hoe, wat, waar?')
+@section('title', 'Code of Conduct')
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -41,13 +41,12 @@
 
             <h3>Accepteren</h3>
             <p>Je accepteert een bestelling om 1 van 2 redenen: Je kan ze zelf volledig produceren of je kan aanspreekpunt spelen
-                en samenwerken met andere vrijwilligers als ze te groot is voor jouw alleen (bekijk dat wel op voorhand in de chat!).
-                In beide gevallen ben jij verantwoordelijk voor de aflevering en het ontvangen van de betaling (en anderen ook betalen).</p>
-            <p>Dit kan in het dashboard door op het play icon (<a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-play"></span></a>) te
+                en samenwerken met andere vrijwilligers als ze te groot is voor jou alleen (bespreek dat wel op voorhand in de chat!).
+                In beide gevallen ben jij verantwoordelijk voor de aflevering en het ontvangen van de betaling (en anderen ook te betalen).</p>
+            <p>Aanvaarden kan in het dashboard door op het play icon (<a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-play"></span></a>) te
                 klikken.
-                Alternatief kan je via de link-button (<a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-link"></span></a>) door klikken naar
-                de bestelling-detail pagina (waar je nog wat meer informatie te zien krijgt) en daar "Ik ga deze
-                uitvoeren" aan te klikken.</p>
+                Alternatief kan je via de link-button (<a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-link"></span></a>) doorklikken naar
+                de bestelling-detail pagina (waar je nog wat meer informatie te zien krijgt) en daar "Ik ga deze uitvoeren" aan klikken.</p>
             <p>Eenmaal geaccepteerd krijg je de contactgegevens van de klant te zien voor als je eventueel meer informatie nodig hebt.
                 Alleen helpers die het order hebben geaccepteerd krijgen hier inzicht in, in het kader van de privacy. Van zodra je een order weer vrijgeeft of annuleert verlies je deze toegang weer.</p>
 
@@ -60,11 +59,10 @@
                 bestelling te komen halen.</p>
             <p>Dat kan natuurlijk alleen maar als jullie niet te ver uit elkaar wonen. Om hierin bij te staan is er op
                 de detailpagina ook een overzichtskaart zichtbaar voor een nieuwe bestelling.</p>
-            <p>Opsturen wordt meestal niet gedaan omdat je dan snel over 5&euro; spreekt, wat in veel gevallen meer is
+            <p>Opsturen wordt meestal niet gedaan omdat je dan snel over 5.7&euro; spreekt, wat in veel gevallen meer is
                 dan de rest van de bestelling.
                 Het kan natuurlijk altijd in overeenkomst met de klant.</p>
-            <p>Het staat je natuurlijk ook vrij om zelf te gaan leveren, dat is jouw beslissing. Zorg gewoon voor goede
-                afspraken.</p>
+            <p>Het staat je ook vrij om zelf te gaan leveren, dat is jouw beslissing. Zorg gewoon voor goede afspraken.</p>
 
             <h4>Prijs</h4>
             <p>Ook af te spreken is de prijs. De site vermeld voor de meeste items (m.u.v de gezichtsmaskers) de maximum
@@ -73,32 +71,32 @@
                 vragen". </p>
             <p>Normaal gezien kom je met deze prijzen qua materiaal zeker uit de kosten. Het staat je altijd vrij om
                 minder te vragen of het zelfs gratis aan te bieden,
-                dat is jouw keuze. We willen helpers gewoon niet dwingen hun materiaal zo weg te geven. Zolang
+                dat is jouw keuze. We willen helpers gewoon niet dwingen hun materiaal zo weg te geven. Nogmaals: Zolang
                 jullie maar tot een akkoord komen.</p>
-                <p>Je krijgt het geld <b><u>achteraf</u></b> (bij levering of op factuur). Vraag geen geld op voorhand, dat is NOT DONE.</p>
+                <p>Je krijgt het geld <b><u>achteraf</u></b> (bij levering of op factuur) of bij ophaling. Alleen als de klant wilt dat je
+                    de bestelling opstuurt kan je de betaling vragen wanneer de bestelling klaar is om ze te verzenden.</p>
 
             <h4>Facturatie</h4>
-            <p>Sommige klanten vragen/willen een factuur. Als je dit niet kan/wil, leg dat dan gewoon aan de klant uit
-                en dan kan je de bestelling terug vrijgeven. Voeg dan wel een (interne) nota toe zodat de rest hiervan
+            <p>Sommige klanten vragen/willen een factuur. Als je dit niet kan/wil, leg dat dan gewoon aan de klant uit.
+                Als de klant niet wilt zonder kan je de bestelling terug vrijgeven. Voeg dan wel een (interne) nota toe zodat de rest hiervan
                 weet.</p>
 
             <h4>Geen akkoord?</h4>
             <p>Als je niet tot een akkoord kan komen met de klant kan je de bestelling weer vrij geven (<a type="button" class="btn btn-default" href="#"><span
-                    class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>). De bestelling komt dan weer onder "nieuw" terecht.
+                    class="glyphicon glyphicon-minus" aria-hidden="true"></span></a>). De bestelling komt dan terug onder "nieuw" terecht.
                 Probeer ook in dit geval een (interne) nota toe te voegen waarom, kom desnoods ook wat op de chat zeggen.</p>
 
             <h4>Vergissing/Bedenking van de klant?</h4>
-            <p>Als de klant het order om een of ander niet meer wilt kan je de bestelling annuleren (<a type="button" class="btn btn-default" href="#"><span
-                class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>)</p>
+                <p>Als de klant het order om een of andere reden niet meer wilt moet de bestelling geannuleerd worden.</p>
+                <p>Dit doe je door in het kanaal #logistiek (onder Bestellingen) te komen laten weten waarom en dan zal iemand het voor je in orde brengen</p>
 
             <h3>Status</h3>
             <p>Elke normale bestelling doorloopt 4 statussen: Toegewezen, In productie, Te leveren, Afgewerkt (Ze begint
                 als "Nieuw" en er is ook nog "Geannuleerd")
                 Het is aan jou om te zorgen dat je voortgang gereflecteerd wordt in deze status. Van zodra je een
-                overeenkomst met de klant hebt en &quot;eraan begint&quot;,
-                zet je de bestelling dus in productie. Dat gebeurt via de detail pagina. We hebben momenteel nog geen
-                email systeem om notificaties uit te sturen, dus de klant heeft momenteel alleen
-                de link naar de bestelpagina om op te volgen.</p>
+                overeenkomst met de klant hebt en &quot;eraan begint&quot;, zet je de bestelling dus in productie. Dat gebeurt via de detail pagina. We hebben momenteel nog geen
+                email systeem om notificaties uit te sturen, dus de klant heeft momenteel alleen de link naar de bestelpagina om op te volgen.</p>
+            <p>Zet als je klaar bent de bestelling zeker op afgewerkt, zie ook lager!</p>
 
             <h3>Aantal toevoegen</h3>
             <p>Je kan registeren met hoeveel items je al klaar bent door dit formulier te gebruiken. Meerdere keren mag, de
@@ -119,7 +117,10 @@
 
         <h2>Meewerken aan andere bestellingen</h2>
         <div class="well">
-            <p>Het is mogelijk om met meerderen samen aan een bestelling te werken, bespreek dat wel even op voorhand op de chat.</p>
+            <h3>Helpen</h3>
+            <p>Het is mogelijk om met meerderen samen aan een bestelling te werken, daarvoor is er een aparte sectie op het dashboard.</p>
+            <p>Bespreek het wel even op voorhand op de chat met de co&ouml;rdinator van het order. Ook dit mag in het #logistiek kanaal.</p>
+            <h3>Help vragen</h3>
             <p>Als je in je bestelling onder "Extra's" het vinkje bij "Ik kan best wel wat hulp gebruiken" aanzet (standaard niet aan), dan verschijnt er in de lijst van orders die in productie zijn een <a type="button" class="btn btn-default" href="#"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span></a> naast de bestelling.</p>
             <p>Andere helpers kunnen zich via deze button aanmelden door in het formulier erachter een aantal op te geven en een prijsopgaaf voor je werk.</p>
             <p>Ze krijgen vanaf dan ook toegang tot de aantallen toevoegen en commentaar functionaliteit voor die bestelling.</p>

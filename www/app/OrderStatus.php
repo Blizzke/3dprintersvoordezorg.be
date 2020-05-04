@@ -63,4 +63,13 @@ class OrderStatus extends Model
         $this->attributes['status_id'] = (int)$value;
         $this->type = 'status';
     }
+
+    public static function contributed(Order $order, Helper $helper)
+    {
+        return self::select('quantity')
+                ->whereOrderId($order->id)
+                ->whereHelperId($helper->id)
+                ->whereType('quantity')
+                ->sum('quantity');
+    }
 }

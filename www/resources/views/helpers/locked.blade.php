@@ -1,9 +1,9 @@
 @extends('layouts.help')
-@section('title', 'Nieuwe account - vergrendeld')
+@section('title', 'Nieuwe account - gedesactiveerd')
 @section('content')
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <h1>@yield('title')</h1>
+            <h1>Lees onderstaande tekst voor activatie van je account</h1>
             <div class="alert alert-danger">
                 <p>Omwille van een aantal spijtige misverstanden tussen klanten, bestellingen en vrijwilligers,
                     zien we ons genoodzaakt aanwezigheid op de discord chat (link: rechtsboven) als eis in te voeren.<p>

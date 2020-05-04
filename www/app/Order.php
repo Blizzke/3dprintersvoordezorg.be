@@ -104,9 +104,9 @@ class Order extends Model
 
     public function getCanCancelAttribute()
     {
-        // Can cancel new orders or ones that are assigned to you and not finished
-        return $this->status_id === 0 or
-            ($this->is_mine && $this->status_id < 3);
+        /** @var Helper $user */
+        $user = Auth::user();
+        return $user->hasFeature('auth:dispatcher') && $this->status_id < 3;
     }
 
     public function getIsNewAttribute()
@@ -296,12 +296,17 @@ class Order extends Model
             return [];
 
         $list = collect(Helper::getGeoList($this->customer));
-        $helpers = Helper::makesItem($this->item)->map->only('id')->pluck('id');
+        if ($this->is_new) {
+            $helpers = Helper::makesItem($this->item)->map->only('id')->pluck('id');
+        }
+        else {
+            // Not new order, select coordinator and possible helpers
+            $helpers = array_merge([$this->helper->id], $this->helpers()->select('helper_id')->pluck('helper_id')->toArray());
+        }
         $list = $list->whereIn('id', $helpers);
         if ($limit !== false)
             $list = $list->take($limit);
 
         return $list->toArray();
     }
-
 }

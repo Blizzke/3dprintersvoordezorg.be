@@ -31,12 +31,15 @@
 
 <div class="row justify-content-center">
 
-    @if ($user->hasFeature('auth:dispatcher'))
+    @if (is_dispatcher())
         @include('helpers.orders.validate')
     @endif
     @include('helpers.orders.new')
     @include('helpers.orders.yours')
-    @include('helpers.orders.in-progress')
+    @include('helpers.orders.help-wanted')
+    @if (is_dispatcher())
+        @include('helpers.orders.cancelled')
+    @endif
 
 </div>
 <script type="text/javascript">

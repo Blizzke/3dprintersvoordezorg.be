@@ -1,8 +1,7 @@
 @section('detailsVariableAssignmentThingy')
   {{ $customer = $order->customer }}
   {{ $item = $order->item }}
-  {{ $is_dispatcher = Auth::user()->hasFeature('auth:dispatcher') }}
-  {{ $full_access = ($order->is_mine || $is_dispatcher ) }}
+  {{ $full_access = ($order->is_mine || is_dispatcher() ) }}
 @endsection
 @extends('layouts.help')
 @section('title', "Bestelling {$order->identifier} - Meehelpen")
@@ -33,7 +32,7 @@
             je vraagprijs ok is voor hem/haar</p>
         @csrf
         <div class="form-group">
-            <label for="quantity">Hoeveelheid:</label>
+            <label for="quantity">Aantal dat ik kan maken:</label>
             <input id="quantity" name="quantity" type="text"
                    class="form-control @error('quantity') is-invalid @enderror"
                    value=""/>
